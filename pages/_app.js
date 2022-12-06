@@ -1,7 +1,18 @@
 import "../styles/globals.css"
+import PropTypes from "prop-types"
+// import "antd/dist/antd.min.css"
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function App({ Component, pageProps }) {
+  return (
+    <>
+      <div>공통메뉴</div>
+      <Component {...pageProps} />
+    </>
+  )
 }
 
-export default MyApp
+App.prototypes = {
+  Component: PropTypes.elementType.isRequired,
+}
+
+export default App
