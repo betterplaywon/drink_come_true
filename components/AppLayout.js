@@ -1,11 +1,18 @@
-import React, { useState } from "react"
-import Link from "next/link"
-import { Menu, Input, Row, Col } from "antd"
-import PropTypes from "prop-types"
-import styled from "styled-components"
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { Menu, Input, Row, Col } from 'antd'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+import UserProfile from './UserProfile'
+import LoginForm from './LoginForm'
 
 const AppLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  const SearchInput = styled(Input.Search)`
+    verticalalign: 'middle';
+  `
 
   return (
     <div>
@@ -20,12 +27,14 @@ const AppLayout = ({ children }) => {
           <Link href="/signup">회원가입</Link>
         </Menu.Item>
         <Menu.Item key="mail">
-          <SearchInput enterButton style={{ verticalAlign: "middle" }} />
+          <SearchInput enterButton />
         </Menu.Item>
       </Menu>
 
       <Row gutter={8}>
-        <Col xs={24} md={6}></Col>
+        <Col xs={24} md={6}>
+          {isLoggedIn ? <UserProfile setIsLoggedIn={setIsLoggedIn} /> : <LoginForm setIsLoggedIn={setIsLoggedIn} />}
+        </Col>
         <Col xs={24} md={12}>
           {children}
         </Col>
@@ -39,9 +48,5 @@ const AppLayout = ({ children }) => {
 AppLayout.propTypes = {
   children: PropTypes.node.isRequired,
 }
-
-const SearchInput = styled(Input.Search)`
-  verticalalign: "middle";
-`
 
 export default AppLayout
