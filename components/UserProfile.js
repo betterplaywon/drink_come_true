@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Avatar, Card, Button } from 'antd'
 
 const UserProfile = ({ setIsLoggedIn }) => {
   const { Meta } = Card
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     setIsLoggedIn(false)
-  }
+  }, [])
 
   return (
     <Card
@@ -14,9 +14,18 @@ const UserProfile = ({ setIsLoggedIn }) => {
       cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
       //   actions={[<SettingOutlined key="setting" />, <EditOutlined key="edit" />, <EllipsisOutlined key="ellipsis" />]}
       actions={[
-        <div key="like">좋아요 수 </div>,
-        <div key="post">포스팅 수: 0</div>,
-        <div key="notice">공지사항 수0</div>,
+        <div key="twit">
+          좋아요
+          <br /> 0
+        </div>,
+        <div key="followers">
+          팔로워
+          <br /> 0
+        </div>,
+        <div key="followings">
+          팔로잉
+          <br /> 0
+        </div>,
       ]}
     >
       <Meta
