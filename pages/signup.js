@@ -1,17 +1,17 @@
-import React, { useState, useCallback } from 'react'
-import Head from 'next/head'
-import AppLayout from '../components/AppLayout'
-import { AppleOutlined } from '@ant-design/icons'
-import { Form, Button } from 'antd'
-import useInput from '../hooks/useInput'
+import React, { useState, useCallback } from 'react';
+import Head from 'next/head';
+import AppLayout from '../components/AppLayout';
+import { AppleOutlined } from '@ant-design/icons';
+import { Form, Button } from 'antd';
+import useInput from '../hooks/useInput';
 
 const signup = () => {
-  const [id, handleChangeId] = useInput('')
-  const [password, handleChangePassword] = useInput('')
+  const [id, handleChangeId] = useInput('');
+  const [password, handleChangePassword] = useInput('');
 
   const onSubmit = useCallback(() => {
-    console.log(id, password)
-  }, [id, password])
+    console.log(id, password);
+  }, [id, password]);
 
   return (
     <AppLayout>
@@ -37,6 +37,6 @@ const signup = () => {
         </div>
       </Form>
     </AppLayout>
-  )
-}
-export default signup
+  );
+};
+export default signup;

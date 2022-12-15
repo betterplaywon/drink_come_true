@@ -1,18 +1,20 @@
-import React, { useCallback } from 'react'
-import { Avatar, Card, Button } from 'antd'
+import React, { useCallback } from 'react';
+import { Avatar, Card, Button } from 'antd';
+import { useDispatch } from 'react-redux';
+import { logOutAction } from '../reducers';
 
-const UserProfile = ({ setIsLoggedIn }) => {
-  const { Meta } = Card
+const UserProfile = () => {
+  const { Meta } = Card;
+  const dispatch = useDispatch();
 
   const handleLogout = useCallback(() => {
-    setIsLoggedIn(false)
-  }, [])
+    dispatch(logOutAction());
+  }, []);
 
   return (
     <Card
       style={{ width: 300 }}
       cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
-      //   actions={[<SettingOutlined key="setting" />, <EditOutlined key="edit" />, <EllipsisOutlined key="ellipsis" />]}
       actions={[
         <div key="twit">
           좋아요
@@ -35,7 +37,7 @@ const UserProfile = ({ setIsLoggedIn }) => {
       />
       <Button onClick={handleLogout}>로그아웃</Button>
     </Card>
-  )
-}
+  );
+};
 
-export default UserProfile
+export default UserProfile;

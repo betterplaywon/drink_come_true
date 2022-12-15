@@ -1,22 +1,22 @@
-import React, { useState, useCallback } from 'react'
-import { Form, Button, Input } from 'antd'
-import Link from 'next/link'
-import styled from 'styled-components'
-import propTypes from 'prop-types'
-import useInput from '../hooks/useInput'
+import React, { useState, useCallback } from 'react';
+import { Form, Button, Input } from 'antd';
+import Link from 'next/link';
+import styled from 'styled-components';
+import propTypes from 'prop-types';
+import useInput from '../hooks/useInput';
 
-const LoginForm = ({ setIsLoggedIn }) => {
-  const [id, handleChangeId] = useInput('')
-  const [password, handleChangePassword] = useInput('')
+import { useDispatch } from 'react-redux';
+
+const LoginForm = () => {
+  const [id, handleChangeId] = useInput('');
+  const [password, handleChangePassword] = useInput('');
+
+  const dispatch = useDispatch();
 
   const handleSubmitForm = useCallback(() => {
-    console.log({ id, password })
-    setIsLoggedIn(true)
-  }, [id, password])
-
-  const ButtonContainer = styled.div`
-    margin-top: 10px;
-  `
+    console.log({ id, password });
+    dispatch(logInAction(true));
+  }, [id, password]);
 
   return (
     <>
@@ -41,11 +41,15 @@ const LoginForm = ({ setIsLoggedIn }) => {
         </ButtonContainer>
       </Form>
     </>
-  )
-}
+  );
+};
 
-LoginForm.propTypes = {
-  setIsLoggedIn: propTypes.func.isRequiered,
-}
+// LoginForm.propTypes = {
+//   setIsLoggedIn: propTypes.func.isRequiered,
+// }
 
-export default LoginForm
+const ButtonContainer = styled.div`
+  margin-top: 10px;
+`;
+
+export default LoginForm;
