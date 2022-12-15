@@ -12,7 +12,7 @@ const AppLayout = ({ children }) => {
   const menuStyle = useMemo(() => ({ padding: '15px' }), []);
 
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
-
+  console.log(isLoggedIn);
   return (
     <div>
       <Menu mode="horizontal" style={menuStyle}>
@@ -26,7 +26,7 @@ const AppLayout = ({ children }) => {
           <Link href="/signup">회원가입</Link>
         </Menu.Item>
         <Menu.Item key="mail">
-          <SearchInput enterButton />
+          <SearchInput />
         </Menu.Item>
       </Menu>
 

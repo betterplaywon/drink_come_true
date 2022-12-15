@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Form, Button, Input } from 'antd';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 import useInput from '../hooks/useInput';
 
 import { useDispatch } from 'react-redux';
+import { logInAction } from '../reducers';
 
 const LoginForm = () => {
   const [id, handleChangeId] = useInput('');
@@ -14,8 +15,8 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmitForm = useCallback(() => {
-    console.log({ id, password });
-    dispatch(logInAction(true));
+    // console.log({ id, password });
+    dispatch(logInAction(id, password));
   }, [id, password]);
 
   return (
