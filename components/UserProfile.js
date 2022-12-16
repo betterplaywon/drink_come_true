@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Avatar, Card, Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { logOutAction } from '../reducers';
+import { logOutAction } from '../reducers/user';
 
 const UserProfile = () => {
   const { Meta } = Card;

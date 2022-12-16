@@ -6,7 +6,7 @@ import propTypes from 'prop-types';
 import useInput from '../hooks/useInput';
 
 import { useDispatch } from 'react-redux';
-import { logInAction } from '../reducers';
+import { logInAction } from '../reducers/user';
 
 const LoginForm = () => {
   const [id, handleChangeId] = useInput('');
@@ -15,7 +15,6 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmitForm = useCallback(() => {
-    // console.log({ id, password });
     dispatch(logInAction(id, password));
   }, [id, password]);
 

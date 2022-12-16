@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Menu, Input, Row, Col, Search } from 'antd';
+import { Menu, Input, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -11,8 +11,8 @@ import { useSelector } from 'react-redux';
 const AppLayout = ({ children }) => {
   const menuStyle = useMemo(() => ({ padding: '15px' }), []);
 
-  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
-  console.log(isLoggedIn);
+  const { isLoggedIn } = useSelector(state => state.user);
+
   return (
     <div>
       <Menu mode="horizontal" style={menuStyle}>
