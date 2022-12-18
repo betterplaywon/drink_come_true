@@ -2,22 +2,22 @@ export const initialState = {
   mainPosts: [
     {
       id: 1,
-      user: {
+      User: {
         id: 1,
-        nickname: 'kkk',
+        name: 'kkk',
       },
       content: '술술술',
-      Images: [{}],
+      Images: [{ src: '' }, { src: '' }, { src: '' }],
       Comments: [
         {
           User: {
-            nickname: 'qwerasdf',
+            name: 'qwerasdf',
           },
           content: '이모 여기 소주 한병 추가요',
         },
         {
           User: {
-            nickname: '궁온이요',
+            name: '궁온이요',
           },
           content: '밀크시슬 복용 필요',
         },
@@ -36,12 +36,12 @@ export const addPost = {
 
 const dummyPost = {
   id: 2,
-  user: {
+  User: {
     id: 1,
-    nickname: 'kkk',
+    name: 'kkk',
   },
   content: '꼴꼴꼴꼴꼴꼴꼴',
-  Images: [{}],
+  Images: [{ src: '' }, { src: '' }, { src: '' }],
   Comments: [],
   postSuccess: false,
   imagePaths: [],

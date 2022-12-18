@@ -3,10 +3,13 @@ export const initialState = {
   user: null,
   signupData: {},
   loginData: {},
+  drinkCount: 0,
 };
 
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
+export const DRINK_COUNT_UP = 'DRINK_COUNT_UP';
+export const DRINK_COUNT_DOWN = 'DRINK_COUNT_DOWN';
 
 export const logInAction = data => {
   return {
@@ -18,6 +21,20 @@ export const logInAction = data => {
 export const logOutAction = data => {
   return {
     type: LOG_OUT,
+    data,
+  };
+};
+
+export const drinkCoiuntUpAction = data => {
+  return {
+    type: DRINK_COUNT_UP,
+    data,
+  };
+};
+
+export const drinkCoiuntDownAction = data => {
+  return {
+    type: DRINK_COUNT_DOWN,
     data,
   };
 };
