@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Menu, Input, Row, Col } from 'antd';
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 
 import UserProfile from './UserProfile';
