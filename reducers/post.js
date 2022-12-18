@@ -30,8 +30,8 @@ export const initialState = {
 
 const ADD_POST = 'ADD_POST';
 
-export const addPost = data => {
-  type: ADD_POST, data;
+export const addPost = {
+  type: ADD_POST,
 };
 
 const dummyPost = {

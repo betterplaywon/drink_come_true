@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import PostForm from '../components/PostForm';
 import PostCard from '../components/PostCard';
 
-export default function Home() {
+const Home = () => {
   const { isLoggedIn } = useSelector(state => state.user);
   const { mainPosts } = useSelector(state => state.post);
   console.log(isLoggedIn);
@@ -23,4 +23,6 @@ export default function Home() {
       ))}
     </AppLayout>
   );
-}
+};
+
+export default Home;

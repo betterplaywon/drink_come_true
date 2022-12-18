@@ -1,8 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Button, Form, Input } from 'antd';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addPost } from '../reducers/post';
 
 const PostForm = () => {
+  const dispatch = useDispatch();
+  const imageInput = useRef();
   const [input, setInput] = useState();
 
   const { TextArea } = Input;
@@ -10,11 +13,20 @@ const PostForm = () => {
 
   const handleInput = useCallback(e => {
     const value = e.target.value;
-    console.log(value);
+    setInput(value);
   }, []);
 
+  const handleSubmit = useCallback(() => {
+    dispatch(addPost);
+    setInput('');
+  }, []);
+
+  const handleImage = useCallback(() => {
+    imageInput.current.click();
+  }, [imageInput.current]);
+
   return (
-    <Form>
+    <Form style={{ margin: '10px 0 20px' }}>
       <TextArea
         value={input}
         onChange={handleInput}
@@ -24,9 +36,12 @@ const PostForm = () => {
 
       <div>
         <label>
-          <input type="file" />
+          <input type="file" multiple ref={imageInput} />
+          <Button onClick={handleImage}>이미지 업로드 테스트 버튼</Button>
         </label>
-        <Button type="primary">작성</Button>
+        <Button type="primary" onClick={handleSubmit} style={{ float: 'right' }}>
+          작성
+        </Button>
       </div>
 
       <div>
