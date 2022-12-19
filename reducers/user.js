@@ -6,6 +6,14 @@ export const initialState = {
   drinkCount: 0,
 };
 
+const dummyUser = {
+  id: 1,
+  nickname: '삼성동소주통',
+  Posts: [],
+  Followings: [],
+  Followers: [],
+};
+
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const DRINK_COUNT_UP = 'DRINK_COUNT_UP';

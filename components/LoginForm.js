@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { Form, Button, Input } from 'antd';
 import Link from 'next/link';
-import styled from 'styled-components';
 
 import useInput from '../hooks/useInput';
 import { useDispatch } from 'react-redux';
@@ -30,21 +29,17 @@ const LoginForm = () => {
           <br />
           <Input name="user-password" type="password" value={password} onChange={handleChangePassword} required />
         </div>
-        <ButtonContainer>
+        <div style={{ marginTop: '10px' }}>
           <Button type="primary" htmlType="submit" loading={false}>
             로그인
           </Button>
           <Link href="signup">
             <Button>회원가입</Button>
           </Link>
-        </ButtonContainer>
+        </div>
       </Form>
     </>
   );
 };
-
-const ButtonContainer = styled.div`
-  margin-top: 10px;
-`;
 
 export default LoginForm;

@@ -12,6 +12,7 @@ const AppLayout = ({ children }) => {
   const menuStyle = useMemo(() => ({ padding: '15px' }), []);
 
   const { isLoggedIn } = useSelector(state => state.user);
+  const { Search } = Input;
 
   return (
     <div>
@@ -26,7 +27,7 @@ const AppLayout = ({ children }) => {
           <Link href="/signup">회원가입</Link>
         </Menu.Item>
         <Menu.Item key="mail">
-          <SearchInput />
+          <Search style={{ verticalalign: 'middle' }} />
         </Menu.Item>
       </Menu>
 
@@ -47,9 +48,5 @@ const AppLayout = ({ children }) => {
 AppLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-const SearchInput = styled(Input.Search)`
-  verticalalign: 'middle';
-`;
 
 export default AppLayout;

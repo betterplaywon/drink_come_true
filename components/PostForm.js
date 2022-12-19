@@ -36,7 +36,7 @@ const PostForm = () => {
 
       <div>
         <label>
-          <input type="file" multiple visibility="hidden" ref={imageInput} />
+          <input type="file" multiple hidden ref={imageInput} />
           <Button onClick={handleImage}>이미지 업로드 테스트 버튼</Button>
           <Button type="primary" onClick={handleSubmit} style={{ float: 'right' }}>
             작성

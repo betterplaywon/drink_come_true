@@ -30,12 +30,7 @@ const UserProfile = () => {
         </div>,
       ]}
     >
-      <Meta
-        avatar={<Avatar src="" />}
-        title="술은 이루어진다"
-        description="show your drink"
-        style={{ marginBottom: '10px' }}
-      />
+      <Meta title="술은 이루어진다" description="show your drink" style={{ marginBottom: '10px' }} />
       <Button onClick={handleLogout}>로그아웃</Button>
     </Card>
   );

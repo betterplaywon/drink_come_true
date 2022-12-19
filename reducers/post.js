@@ -7,7 +7,7 @@ export const initialState = {
         name: 'kkk',
       },
       content: '술술술',
-      Images: [{ src: '' }, { src: '' }, { src: '' }],
+      Images: [],
       Comments: [
         {
           User: {
@@ -40,9 +40,22 @@ const dummyPost = {
     id: 1,
     name: 'kkk',
   },
-  content: '꼴꼴꼴꼴꼴꼴꼴',
-  Images: [{ src: '' }, { src: '' }, { src: '' }],
-  Comments: [],
+  content: '술 좀 그만마셔',
+  Images: [],
+  Comments: [
+    {
+      User: {
+        name: 'poiu',
+      },
+      content: '이모 여기 소주 한병 추가요',
+    },
+    {
+      User: {
+        name: 'lkjh',
+      },
+      content: '오늘 집 못가',
+    },
+  ],
   postSuccess: false,
   imagePaths: [],
 };
