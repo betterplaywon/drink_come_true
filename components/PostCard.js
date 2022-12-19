@@ -1,24 +1,36 @@
-import React from 'react';
-import { Card, Button, Popover, Avatar } from 'antd';
-import { LikeOutlined, MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
+import React, { useState, useCallback } from 'react';
+import { Card, Button, Popover, List, Avatar, Comment } from 'antd';
+import { HeartTwoTone, HeartOutlined, MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { PropTypes } from 'prop-types';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import useToggle from '../hooks/useToggle';
+import Link from 'next/link';
 
 import PostImages from './PostImages';
+import CommentForm from './CommentForm';
 
 const PostCard = ({ post }) => {
   const { user } = useSelector(state => state.user);
   const { Meta } = Card;
   const id = user?.id;
 
+  const [liked, onToggleLike] = useToggle(false);
+
+  const [isCommentFormOpend, onToggleCommentFormOpen] = useToggle(false);
+
   return (
     <div style={{ marginBottom: '10px' }}>
       <Card
         cover={post?.Images[0] && <PostImages images={post.Images} />}
         actions={[
-          <LikeOutlined key="like" />,
-          <MessageOutlined key="comment" />,
+          <>
+            {liked ? (
+              <HeartTwoTone twoToneColor="#eb2f96" onClick={onToggleLike} />
+            ) : (
+              <HeartOutlined key="like" onClick={onToggleLike} />
+            )}
+          </>,
+          <MessageOutlined key="comment" onClick={onToggleCommentFormOpen} />,
           <Popover
             key="more"
             content={
@@ -40,16 +52,24 @@ const PostCard = ({ post }) => {
         <Meta title={post.User.name} description={post.content} />
       </Card>
 
-      <div>
-        <CommentForm />
-        <Comments />
-      </div>
+      {isCommentFormOpend && (
+        <div>
+          <CommentForm post={post} />
+          <List
+            itemLayout="horizontal"
+            header={`${post.Comments.length}개의 댓글`}
+            dataSource={post.Comments}
+            renderItem={item => (
+              <li>
+                <Comment author={item.User.name} content={item.content} />
+              </li>
+            )}
+          />
+        </div>
+      )}
     </div>
   );
 };
-
-const CommentForm = styled.form``;
-const Comments = styled.div``;
 
 PostCard.propTypes = {
   post: PropTypes.object.isRequired,
