@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Menu, Input, Row, Col } from 'antd';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import UserProfile from './UserProfile';
@@ -18,7 +18,7 @@ const AppLayout = ({ children }) => {
     <div>
       <Menu mode="horizontal" style={menuStyle}>
         <Menu.Item key="home">
-          <Link href="/">Drink Come True</Link>
+          <Link href="/">DRINK CHECK</Link>
         </Menu.Item>
         <Menu.Item key="profile">
           <Link href="/profile">프로필</Link>

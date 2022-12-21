@@ -1,13 +1,14 @@
 import React, { useState, useCallback } from 'react';
 import { Card, Button, Popover, List, Avatar, Comment } from 'antd';
 import { HeartTwoTone, HeartOutlined, MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import useToggle from '../hooks/useToggle';
 import Link from 'next/link';
 
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
+import PostCardContent from './PostCardContent';
 
 const PostCard = ({ post }) => {
   const { user } = useSelector(state => state.user);
@@ -48,8 +49,11 @@ const PostCard = ({ post }) => {
           </Popover>,
         ]}
       >
-        <img src={post.Images} />
-        <Meta title={post.User.name} description={post.content} />
+        <Meta
+          avatar={<Avatar>{post.User.name[0]}</Avatar>}
+          title={post.User.name}
+          description={<PostCardContent postContent={post.content} />}
+        />
       </Card>
 
       {isCommentFormOpend && (

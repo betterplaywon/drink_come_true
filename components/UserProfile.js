@@ -30,7 +30,11 @@ const UserProfile = () => {
         </div>,
       ]}
     >
-      <Meta title="술은 이루어진다" description="show your drink" style={{ marginBottom: '10px' }} />
+      <Meta
+        title="술 마신 후 기록하는 재미"
+        description="오늘은 술을 얼마나 마셨나요"
+        style={{ marginBottom: '10px' }}
+      />
       <Button onClick={handleLogout}>로그아웃</Button>
     </Card>
   );
