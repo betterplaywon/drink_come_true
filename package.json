@@ -14,7 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
-    "antd": "^5.0.4",
+    "antd": "^4.24.5",
+    "lightbox.js-react": "^0.2.7",
     "next": "^9.5.4",
     "next-redux-wrapper": "^6.0.2",
     "prop-types": "^15.8.1",
@@ -23,7 +24,8 @@
     "react-redux": "^7.2.9",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "swiper": "^6.8.4"
   },
   "devDependencies": {
     "eslint": "^8.29.0",

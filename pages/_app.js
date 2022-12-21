@@ -1,7 +1,6 @@
 import '../styles/globals.css';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-// import "antd/dist/antd.min.css"
 import 'antd/dist/antd.css';
 import wrapper from '../store/configureStore';
 
