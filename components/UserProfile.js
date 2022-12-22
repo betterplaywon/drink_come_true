@@ -1,16 +1,17 @@
 import React, { useCallback } from 'react';
 import { Avatar, Card, Button } from 'antd';
-import { useDispatch } from 'react-redux';
-import { logOutAction } from '../reducers/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutRequestAction } from '../reducers/user';
 
 const UserProfile = () => {
   const { Meta } = Card;
+  const { user, isLoggingOut } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const handleLogout = useCallback(() => {
-    dispatch(logOutAction());
+    dispatch(logoutRequestAction());
   }, []);
-
+  console.log(user);
   return (
     <Card
       style={{ width: 300 }}
@@ -31,11 +32,14 @@ const UserProfile = () => {
       ]}
     >
       <Meta
-        title="술 마신 후 기록하는 재미"
+        // avatar={<Avatar>{user.nickname[0]}</Avatar>}
+        // title={user.nickname[0]}
         description="오늘은 술을 얼마나 마셨나요"
         style={{ marginBottom: '10px' }}
       />
-      <Button onClick={handleLogout}>로그아웃</Button>
+      <Button onClick={handleLogout} loading={isLoggingOut}>
+        로그아웃
+      </Button>
     </Card>
   );
 };
