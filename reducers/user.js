@@ -1,31 +1,43 @@
+import {
+  LOG_IN_REQUEST,
+  LOG_IN_SUCCESS,
+  LOG_IN_FAILURE,
+  LOG_OUT_REQUEST,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURE,
+  SIGN_UP_REQUEST,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE,
+  DRINK_COUNT_UP,
+  DRINK_COUNT_DOWN,
+} from '../actionType';
+
 export const initialState = {
-  isLoggingIn: false,
-  isLoggedIn: false,
-  isLoggingOut: false,
+  logInLoading: false,
+  logInDone: false,
+  logInError: null,
+  logOutLoading: false,
+  logOutDone: false,
+  logOutError: null,
+
+  signupLoading: false,
+  signupDone: false,
+  signupError: null,
+
   user: null,
   signupData: {},
   loginData: {},
   drinkCount: 0,
 };
 
-const dummyUser = {
+const dummyUser = data => ({
+  ...data,
   id: 1,
   nickname: '삼성동소주통',
   Posts: [],
   Followings: [],
   Followers: [],
-};
-
-export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
-export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
-export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
-
-export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
-export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
-export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
-
-export const DRINK_COUNT_UP = 'DRINK_COUNT_UP';
-export const DRINK_COUNT_DOWN = 'DRINK_COUNT_DOWN';
+});
 
 export const loginRequestAction = data => {
   return {
@@ -37,6 +49,13 @@ export const loginRequestAction = data => {
 export const logoutRequestAction = data => {
   return {
     type: LOG_OUT_REQUEST,
+    data,
+  };
+};
+
+export const signupRequestAction = data => {
+  return {
+    type: SIGN_UP_REQUEST,
     data,
   };
 };
@@ -57,19 +76,31 @@ export const drinkCoiuntDownAction = data => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOG_IN_REQUEST':
+    case LOG_IN_REQUEST:
       console.log('reducer login');
-      return { ...state, isLoggingIn: true };
-    case 'LOG_IN_SUCCESS':
-      return { ...state, isLoggingIn: false, isLoggedIn: true, user: { ...action.data, nickname: '위스키한잔' } };
-    case 'LOG_IN_FAILURE':
-      return { ...state, isLoggingIn: false, isLoggedIn: true, user: action.data };
-    case 'LOG_OUT_REQUEST':
-      return { ...state, isLoggingOut: true };
-    case 'LOG_OUT_SUCCESS':
-      return { ...state, isLoggingOut: false, isLoggedIn: false, user: null };
-    case 'LOG_OUT_FAILURE':
-      return { ...state, isLoggingOut: false, isLoggedIn: false, user: null };
+      return { ...state, logInLoading: true, logInDone: false, logInError: null };
+    case LOG_IN_SUCCESS:
+      return {
+        ...state,
+        logInLoading: false,
+        logInDone: true,
+        user: dummyUser(action.data),
+      };
+    case LOG_IN_FAILURE:
+      return { ...state, logInLoading: false, logInError: action.error };
+    case LOG_OUT_REQUEST:
+      console.log('reducer logout');
+      return { ...state, logOutLoading: true, logOutDone: false, logOutError: null };
+    case LOG_OUT_SUCCESS:
+      return { ...state, logOutLoading: false, logOutDone: true };
+    case LOG_OUT_FAILURE:
+      return { ...state, logOutLoading: false, logOutError: true };
+    case SIGN_UP_REQUEST:
+      return { ...state, signupLoading: true, signupDone: false, signupError: null };
+    case SIGN_UP_SUCCESS:
+      return { ...state, signupLoading: false, signupDone: true };
+    case SIGN_UP_FAILURE:
+      return { ...state, signupLoading: false, signupError: true };
     default:
       return {
         ...state,

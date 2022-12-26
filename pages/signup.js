@@ -4,14 +4,19 @@ import AppLayout from '../components/AppLayout';
 import { AppleOutlined } from '@ant-design/icons';
 import { Form, Button } from 'antd';
 import useInput from '../hooks/useInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { SIGN_UP_REQUEST } from '../actionType';
 
 const signup = () => {
-  const [id, handleChangeId] = useInput('');
+  const dispatch = useDispatch();
+  const { signupLoading } = useSelector(state => state.user);
+  const [email, handleChangeEmail] = useInput('');
   const [password, handleChangePassword] = useInput('');
 
   const onSubmit = useCallback(() => {
-    console.log(id, password);
-  }, [id, password]);
+    console.log(email, password);
+    dispatch({ type: SIGN_UP_REQUEST, data: { email, password } });
+  }, [email, password]);
 
   return (
     <AppLayout>
@@ -20,9 +25,9 @@ const signup = () => {
       </Head>
       <Form onFinish={onSubmit}>
         <div>
-          <label htmlFor="user-id">계정</label>
+          <label htmlFor="user-email">계정</label>
           <br />
-          <input name="user-id" value={id} onChange={handleChangeId} />
+          <input name="user-email" type="email " value={email} onChange={handleChangeEmail} />
         </div>
 
         <div>
@@ -31,8 +36,8 @@ const signup = () => {
           <input name="user=password" value={password} onChange={handleChangePassword} />
         </div>
         <div style={{ marginTop: '15px' }}>
-          <Button type="primary" htmlType="submit">
-            가입 완료
+          <Button type="primary" htmlType="submit" loading={signupLoading}>
+            가입하기
           </Button>
         </div>
       </Form>

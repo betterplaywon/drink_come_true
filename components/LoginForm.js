@@ -4,26 +4,29 @@ import Link from 'next/link';
 
 import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginRequestAction } from '../reducers/user';
+import { LOG_IN_REQUEST } from '../actionType';
 
 const LoginForm = () => {
-  const [id, handleChangeId] = useInput('');
+  const [email, handleChangeEmail] = useInput('');
   const [password, handleChangePassword] = useInput('');
 
   const dispatch = useDispatch();
-  const { isLoggingIn } = useSelector(state => state.user);
+  const { logInLoading } = useSelector(state => state.user);
 
   const handleSubmitForm = useCallback(() => {
-    dispatch(loginRequestAction({ id, password }));
-  }, [id, password]);
+    dispatch({
+      type: LOG_IN_REQUEST,
+      data: { email, password },
+    });
+  }, [email, password]);
 
   return (
     <>
       <Form onFinish={handleSubmitForm}>
         <div>
-          <label htmlFor="user-id">userId</label>
+          <label htmlFor="user-email">userEmail</label>
           <br />
-          <Input name="user-id" value={id} onChange={handleChangeId} required />
+          <Input name="user-email" type="email" value={email} onChange={handleChangeEmail} required />
         </div>
         <div>
           <label htmlFor="user-password">password</label>
@@ -31,7 +34,7 @@ const LoginForm = () => {
           <Input name="user-password" type="password" value={password} onChange={handleChangePassword} required />
         </div>
         <div style={{ marginTop: '10px' }}>
-          <Button type="primary" htmlType="submit" loading={isLoggingIn}>
+          <Button type="primary" htmlType="submit" loading={logInLoading}>
             로그인
           </Button>
           <Link href="signup">

@@ -16,7 +16,6 @@ const PostCard = ({ post }) => {
   const id = user?.id;
 
   const [liked, onToggleLike] = useToggle(false);
-
   const [isCommentFormOpend, onToggleCommentFormOpen] = useToggle(false);
 
   return (

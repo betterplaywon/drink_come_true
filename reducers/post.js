@@ -6,7 +6,7 @@ export const initialState = {
         id: 1,
         name: 'kkk',
       },
-      content: '술술술 #소주 #맥주 #알딸딸',
+      content: 'asd',
       Images: [
         {
           src: 'http://cdn.shopify.com/s/files/1/0455/4725/8023/products/HKB_1200x1200.png?v=1655701347',
@@ -27,12 +27,6 @@ export const initialState = {
       Comments: [
         {
           User: {
-            name: 'qwerasdf',
-          },
-          content: '불러온 데이터 1',
-        },
-        {
-          User: {
             name: '궁온이요',
           },
           content: '불러온 데이터 2',
@@ -42,45 +36,78 @@ export const initialState = {
   ],
   postSuccess: false,
   imagePaths: [],
+
+  addPostLoading: false,
+  addPostDone: false,
+  addPostError: null,
+
+  addCommentLoading: false,
+  addCommentDone: false,
+  addCommentError: null,
 };
 
-const ADD_POST = 'ADD_POST';
+export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
+export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
+export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 
-export const addPost = {
-  type: ADD_POST,
-};
+export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
+export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
+export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
-const dummyPost = {
-  id: 2,
+export const addPost = data => ({
+  type: ADD_POST_REQUEST,
+  data,
+});
+
+export const addComment = data => ({
+  type: ADD_COMMENT_REQUEST,
+  data,
+});
+
+const dummyPost = data => ({
+  id: data.id,
+  content: data,
   User: {
     id: 1,
-    name: 'kkk',
+    name: '소주소주소주수조소주',
   },
-  content: '술 좀 그만마셔',
   Images: [],
-  Comments: [
-    {
-      User: {
-        name: 'poiu',
-      },
-      content: '이모 여기 소주 한병 추가요',
-    },
-    {
-      User: {
-        name: 'lkjh',
-      },
-      content: '오늘 집 못가',
-    },
-  ],
-  postSuccess: false,
-  imagePaths: [],
-};
+  Comments: [],
+});
+
+const dummyComment = data => ({
+  id: 1,
+  content: data,
+  User: {
+    id: 1,
+    name: '그라가스',
+  },
+});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
-      return { ...state, mainPosts: [dummyPost, ...state.mainPosts] };
-
+    case ADD_POST_REQUEST:
+      return { ...state, addPostLoading: true, addPostDone: false, addPostError: null };
+    case ADD_POST_SUCCESS:
+      return {
+        ...state,
+        addPostLoading: false,
+        addPostDone: true,
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
+      };
+    case ADD_POST_FAILURE:
+      return { ...state, addPostLoading: false, addPostError: action.error };
+    case ADD_COMMENT_REQUEST:
+      return { ...state, addCommentLoading: true, addCommentDone: false, addCommentError: null };
+    case ADD_COMMENT_SUCCESS:
+      const postIdx = state.mainPosts.findIndex(x => x.id === action.data.postId);
+      const post = { ...state.mainPosts[postIdx] };
+      post.Comments = [dummyComment(action.data.content), ...post.Comments];
+      const mainPosts = [...state.mainPosts];
+      mainPosts[postIdx] = post;
+      return { ...state, mainPosts, addCommentLoading: false, addCommentDone: true };
+    case ADD_COMMENT_FAILURE:
+      return { ...state, addCommentLoading: false, addCommentError: action.error };
     default:
       return state;
   }
