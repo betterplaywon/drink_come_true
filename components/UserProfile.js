@@ -1,17 +1,17 @@
 import React, { useCallback } from 'react';
 import { Avatar, Card, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutRequestAction } from '../reducers/user';
+import { LOG_OUT_REQUEST } from '../actionType';
 
 const UserProfile = () => {
   const { Meta } = Card;
-  const { user, isLoggingOut } = useSelector(state => state.user);
+  const { user, logOutLoading } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const handleLogout = useCallback(() => {
-    dispatch(logoutRequestAction());
+    dispatch({ type: LOG_OUT_REQUEST });
   }, []);
-  console.log(user);
+
   return (
     <Card
       style={{ width: 300 }}
@@ -19,15 +19,15 @@ const UserProfile = () => {
       actions={[
         <div key="twit">
           좋아요
-          <br /> 0
+          <br /> {user.Posts.length}
         </div>,
         <div key="followers">
           팔로워
-          <br /> 0
+          <br /> {user.Followers.length}
         </div>,
         <div key="followings">
           팔로잉
-          <br /> 0
+          <br /> {user.Followings.length}
         </div>,
       ]}
     >
@@ -37,7 +37,7 @@ const UserProfile = () => {
         description="오늘은 술을 얼마나 마셨나요"
         style={{ marginBottom: '10px' }}
       />
-      <Button onClick={handleLogout} loading={isLoggingOut}>
+      <Button onClick={handleLogout} loading={logOutLoading}>
         로그아웃
       </Button>
     </Card>

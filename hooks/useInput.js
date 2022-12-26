@@ -7,5 +7,5 @@ export default (initValue = null) => {
     setUserInfo(e.target.value);
   }, []);
 
-  return [userInfo, handleUserInfo];
+  return [userInfo, handleUserInfo, setUserInfo];
 };
