@@ -18,7 +18,7 @@ const UserProfile = () => {
       cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
       actions={[
         <div key="twit">
-          좋아요
+          게시글
           <br /> {user.Posts.length}
         </div>,
         <div key="followers">
