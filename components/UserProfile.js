@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LOG_OUT_REQUEST } from '../actionType';
 
 const UserProfile = () => {
+  const dispatch = useDispatch();
   const { Meta } = Card;
   const { user, logOutLoading } = useSelector(state => state.user);
-  const dispatch = useDispatch();
 
   const handleLogout = useCallback(() => {
     dispatch({ type: LOG_OUT_REQUEST });
   }, []);
+
+  console.log(user.Posts);
 
   return (
     <Card
@@ -33,7 +35,7 @@ const UserProfile = () => {
     >
       <Meta
         // avatar={<Avatar>{user.nickname[0]}</Avatar>}
-        // title={user.nickname[0]}
+        title={user.name}
         description="오늘은 술을 얼마나 마셨나요"
         style={{ marginBottom: '10px' }}
       />

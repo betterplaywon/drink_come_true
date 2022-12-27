@@ -1,52 +1,26 @@
 import shortId from 'shortid';
 import produce from 'immer';
-import { REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE } from '../actionType';
+import faker from 'faker';
+
+import {
+  REMOVE_POST_REQUEST,
+  REMOVE_POST_SUCCESS,
+  REMOVE_POST_FAILURE,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_SUCCESS,
+  ADD_COMMENT_FAILURE,
+  ADD_POST_REQUEST,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAILURE,
+} from '../actionType';
 
 export const initialState = {
-  mainPosts: [
-    {
-      id: 1,
-      User: {
-        id: shortId.generate(),
-        name: 'kkk',
-      },
-      content: 'asd',
-      Images: [
-        {
-          id: shortId.generate(),
-          src: 'http://cdn.shopify.com/s/files/1/0455/4725/8023/products/HKB_1200x1200.png?v=1655701347',
-        },
-        {
-          id: shortId.generate(),
-          src: 'https://cdn.shopify.com/s/files/1/0271/6401/6717/products/mosa_grape_web1_1080x.jpg?v=1650656256',
-        },
-        {
-          id: shortId.generate(),
-          src: 'https://cdn.shopify.com/s/files/1/0630/7627/0299/articles/Real_English_Product_Crops_8_1445x.jpg?v=1655198323',
-        },
-        {
-          id: shortId.generate(),
-          src: 'https://sc04.alicdn.com/kf/A9aa6dea3c8c54b2d930e94c2388be3b1p.jpeg',
-        },
-        {
-          id: shortId.generate(),
-          src: 'https://beerhunter.co.uk/wp-content/uploads/2020/04/ERDINGER-500ml.png',
-        },
-      ],
-      Comments: [
-        {
-          id: shortId.generate(),
-          User: {
-            id: shortId.generate(),
-            name: '궁온이요',
-          },
-          content: '불러온 데이터 2',
-        },
-      ],
-    },
-  ],
-  postSuccess: false,
+  mainPosts: [],
   imagePaths: [],
+
+  loadPostLoading: false,
+  loadPostDone: false,
+  loadPostError: null,
 
   addPostLoading: false,
   addPostDone: false,
@@ -61,13 +35,32 @@ export const initialState = {
   addCommentError: null,
 };
 
-export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
-export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
-export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
-
-export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
-export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
-export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
+initialState.mainPosts = initialState.mainPosts.concat(
+  Array(5)
+    .fill()
+    .map(() => ({
+      id: shortId.generate(),
+      User: {
+        id: shortId.generate(),
+        name: faker.name.findName(),
+      },
+      content: faker.lorem.paragraph(),
+      Images: [
+        {
+          src: faker.image.sports(),
+        },
+      ],
+      Comments: [
+        {
+          User: {
+            id: shortId.generate(),
+            name: faker.name.findName(),
+          },
+          content: faker.lorem.sentence(),
+        },
+      ],
+    })),
+);
 
 export const addPost = data => ({
   type: ADD_POST_REQUEST,
@@ -92,7 +85,7 @@ const dummyPost = data => ({
 
 const dummyComment = data => ({
   id: shortId.generate(),
-  content: data.content,
+  content: data,
   User: {
     id: 1,
     name: '그라가스',
@@ -135,13 +128,13 @@ const reducer = (state = initialState, action) => {
         draft.addCommentDone = false;
         draft.addCommentError = null;
         break;
-      case ADD_COMMENT_SUCCESS:
-        const post = draft.mainPosts.findIndex(x => x.id === action.data.postId);
-        post.Comments = post.unshift(dummyComment(action.data.content));
+      case ADD_COMMENT_SUCCESS: {
+        const post = draft.mainPosts.find(x => x.id === action.data.postId);
+        post.Comments.unshift(dummyComment(action.data.content));
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
         break;
-
+      }
       case ADD_COMMENT_FAILURE:
         draft.addCommentLoading = false;
         draft.addCommentError = action.error;

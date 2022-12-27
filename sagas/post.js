@@ -71,6 +71,7 @@ function addCommentAPI(data) {
 }
 
 function* addComment(action) {
+  console.log(action);
   //   const result = yield call(addaddCommentAPIAPI, action.data);
   try {
     yield delay(1000);

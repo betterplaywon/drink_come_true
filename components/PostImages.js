@@ -12,7 +12,7 @@ const PostImages = ({ images }) => {
     return (
       <>
         <img
-          style={{ width: '100%', display: 'inline-block' }}
+          style={{ width: '25%', display: 'inline-block' }}
           role="presentation"
           src={images[0].src}
           alt={images[0].src}

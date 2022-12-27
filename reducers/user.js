@@ -105,7 +105,7 @@ const reducer = (state = initialState, action) => {
         draft.user.Posts.unshift({ id: action.data });
         break;
       case REMOVE_POST_TO_ME:
-        user.Posts = draft.user.Posts.filter(f => f.id === action.data);
+        user.Posts = draft.user.Posts.filter(f => f.id !== action.data);
         break;
       default:
         break;
