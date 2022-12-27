@@ -1,4 +1,3 @@
-import shortId from 'shortid';
 import produce from 'immer';
 
 import {
@@ -30,7 +29,6 @@ export const initialState = {
   user: null,
   signupData: {},
   loginData: {},
-  drinkCount: 0,
 };
 
 export const loginRequestAction = data => ({
@@ -50,7 +48,7 @@ export const signupRequestAction = data => ({
 const dummyUser = data => ({
   ...data,
   id: 1,
-  nickname: '삼성동소주통',
+  name: '삼성동소주통',
   Posts: [{ id: 1 }],
   Followings: [{ nickname: '오늘의 술' }, { nickname: '혼술족' }, { nickname: '족발에 소주 딱임' }],
   Followers: [{ nickname: '팔로워 첫번째' }, { nickname: '팔로워 두번째' }, { nickname: '팔로워 세번째' }],

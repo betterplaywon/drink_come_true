@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 const AppLayout = ({ children }) => {
   const menuStyle = useMemo(() => ({ padding: '15px' }), []);
 
-  const { logInDone } = useSelector(state => state.user);
+  const { user } = useSelector(state => state.user);
   const { Search } = Input;
 
   return (
@@ -33,7 +33,7 @@ const AppLayout = ({ children }) => {
 
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {logInDone ? <UserProfile /> : <LoginForm />}
+          {user ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
