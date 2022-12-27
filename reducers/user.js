@@ -11,7 +11,7 @@ import {
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
   ADD_POST_TO_ME,
-  REMOVE_POST_TO_ME,
+  REMOVE_POST_OF_ME,
 } from '../actionType';
 
 export const initialState = {
@@ -54,8 +54,8 @@ const dummyUser = data => ({
   Followers: [{ nickname: '팔로워 첫번째' }, { nickname: '팔로워 두번째' }, { nickname: '팔로워 세번째' }],
 });
 
-const reducer = (state = initialState, action) => {
-  return produce(state, draft => {
+const reducer = (state = initialState, action) =>
+  produce(state, draft => {
     switch (action.type) {
       case LOG_IN_REQUEST:
         console.log('reducer login');
@@ -104,13 +104,12 @@ const reducer = (state = initialState, action) => {
       case ADD_POST_TO_ME:
         draft.user.Posts.unshift({ id: action.data });
         break;
-      case REMOVE_POST_TO_ME:
-        user.Posts = draft.user.Posts.filter(f => f.id !== action.data);
+      case REMOVE_POST_OF_ME:
+        draft.user.Posts = draft.user.Posts.filter(f => f.id !== action.data);
         break;
       default:
         break;
     }
   });
-};
 
 export default reducer;
