@@ -1,3 +1,4 @@
+import shortId from 'shortid';
 import {
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
@@ -8,8 +9,8 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
-  DRINK_COUNT_UP,
-  DRINK_COUNT_DOWN,
+  ADD_POST_TO_ME,
+  REMOVE_POST_TO_ME,
 } from '../actionType';
 
 export const initialState = {
@@ -29,15 +30,6 @@ export const initialState = {
   loginData: {},
   drinkCount: 0,
 };
-
-const dummyUser = data => ({
-  ...data,
-  id: 1,
-  nickname: '삼성동소주통',
-  Posts: [],
-  Followings: [],
-  Followers: [],
-});
 
 export const loginRequestAction = data => {
   return {
@@ -60,19 +52,14 @@ export const signupRequestAction = data => {
   };
 };
 
-export const drinkCoiuntUpAction = data => {
-  return {
-    type: DRINK_COUNT_UP,
-    data,
-  };
-};
-
-export const drinkCoiuntDownAction = data => {
-  return {
-    type: DRINK_COUNT_DOWN,
-    data,
-  };
-};
+const dummyUser = data => ({
+  ...data,
+  id: 1,
+  nickname: '삼성동소주통',
+  Posts: [{ id: 1 }],
+  Followings: [{ nickname: '오늘의 술' }, { nickname: '혼술족' }, { nickname: '족발에 소주 딱임' }],
+  Followers: [{ nickname: '팔로워 첫번째' }, { nickname: '팔로워 두번째' }, { nickname: '팔로워 세번째' }],
+});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -101,6 +88,19 @@ const reducer = (state = initialState, action) => {
       return { ...state, signupLoading: false, signupDone: true };
     case SIGN_UP_FAILURE:
       return { ...state, signupLoading: false, signupError: true };
+    case ADD_POST_TO_ME:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          Posts: [{ id: action.data }, ...state.user.Posts],
+        },
+      };
+    case REMOVE_POST_TO_ME:
+      return {
+        ...state,
+        Posts: state.user.Posts.filter(f => f.id === action.data),
+      };
     default:
       return {
         ...state,

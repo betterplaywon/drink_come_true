@@ -17,7 +17,7 @@
     "antd": "^4.24.5",
     "axios": "^1.2.1",
     "lightbox.js-react": "^0.2.7",
-    "nanoid": "^4.0.0",
+    "nanoid": "^3.3.4",
     "next": "^9.5.4",
     "next-redux-wrapper": "^6.0.2",
     "prop-types": "^15.8.1",
@@ -27,6 +27,7 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-saga": "^1.2.2",
+    "shortid": "^2.2.16",
     "styled-components": "^5.3.6",
     "swiper": "^6.8.4"
   },
