@@ -79,7 +79,7 @@ function* addComment(action) {
 }
 
 function loadPostAPI() {
-  axios.post(`/api/post/${data.postId}/load`, data);
+  axios.get(`/api/post/load`, data);
 }
 
 function* loadPost(action) {
