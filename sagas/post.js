@@ -7,6 +7,7 @@ import {
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
   ADD_POST_TO_ME,
+  REMOVE_POST_OF_ME,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
   REMOVE_POST_FAILURE,
@@ -71,6 +72,7 @@ function addCommentAPI(data) {
 }
 
 function* addComment(action) {
+  console.log(action);
   //   const result = yield call(addaddCommentAPIAPI, action.data);
   try {
     yield delay(1000);

@@ -1,4 +1,3 @@
-import shortId from 'shortid';
 import produce from 'immer';
 
 import {
@@ -12,7 +11,7 @@ import {
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
   ADD_POST_TO_ME,
-  REMOVE_POST_TO_ME,
+  REMOVE_POST_OF_ME,
 } from '../actionType';
 
 export const initialState = {
@@ -30,7 +29,6 @@ export const initialState = {
   user: null,
   signupData: {},
   loginData: {},
-  drinkCount: 0,
 };
 
 export const loginRequestAction = data => ({
@@ -50,14 +48,14 @@ export const signupRequestAction = data => ({
 const dummyUser = data => ({
   ...data,
   id: 1,
-  nickname: '삼성동소주통',
+  name: '삼성동소주통',
   Posts: [{ id: 1 }],
   Followings: [{ nickname: '오늘의 술' }, { nickname: '혼술족' }, { nickname: '족발에 소주 딱임' }],
   Followers: [{ nickname: '팔로워 첫번째' }, { nickname: '팔로워 두번째' }, { nickname: '팔로워 세번째' }],
 });
 
-const reducer = (state = initialState, action) => {
-  return produce(state, draft => {
+const reducer = (state = initialState, action) =>
+  produce(state, draft => {
     switch (action.type) {
       case LOG_IN_REQUEST:
         console.log('reducer login');
@@ -106,13 +104,12 @@ const reducer = (state = initialState, action) => {
       case ADD_POST_TO_ME:
         draft.user.Posts.unshift({ id: action.data });
         break;
-      case REMOVE_POST_TO_ME:
-        user.Posts = draft.user.Posts.filter(f => f.id === action.data);
+      case REMOVE_POST_OF_ME:
+        draft.user.Posts = draft.user.Posts.filter(f => f.id !== action.data);
         break;
       default:
         break;
     }
   });
-};
 
 export default reducer;
