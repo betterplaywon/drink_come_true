@@ -1,15 +1,5 @@
 import { put, all, fork, takeLatest, delay } from 'redux-saga/effects';
-import {
-  LOG_IN_REQUEST,
-  LOG_IN_SUCCESS,
-  LOG_IN_FAILURE,
-  LOG_OUT_REQUEST,
-  LOG_OUT_SUCCESS,
-  LOG_OUT_FAILURE,
-  SIGN_UP_REQUEST,
-  SIGN_UP_SUCCESS,
-  SIGN_UP_FAILURE,
-} from '../actionType';
+import * as AT from '../actionType';
 
 function loginAPI(data) {
   axios.post('/api/login/test', data);
@@ -21,12 +11,12 @@ function* login(action) {
     //   const result = yield call(loginAPI, action.data);
     yield delay(1000);
     yield put({
-      type: LOG_IN_SUCCESS,
+      type: AT.LOG_IN_SUCCESS,
       data: action.data,
     });
   } catch (error) {
     yield put({
-      type: LOG_IN_FAILURE,
+      type: AT.LOG_IN_FAILURE,
       error: error.response,
     });
   }
@@ -41,11 +31,11 @@ function* logout() {
   yield delay(1000);
   try {
     yield put({
-      type: LOG_OUT_SUCCESS,
+      type: AT.LOG_OUT_SUCCESS,
     });
   } catch (error) {
     yield put({
-      type: LOG_OUT_FAILURE,
+      type: AT.LOG_OUT_FAILURE,
       error: error.response,
     });
   }
@@ -61,27 +51,27 @@ function* signup() {
 
   try {
     yield put({
-      type: SIGN_UP_SUCCESS,
+      type: AT.SIGN_UP_SUCCESS,
       data: action.data,
     });
   } catch (error) {
     yield put({
-      type: SIGN_UP_FAILURE,
+      type: AT.SIGN_UP_FAILURE,
       error: error.response,
     });
   }
 }
 
 function* watchLogin() {
-  yield takeLatest(LOG_IN_REQUEST, login);
+  yield takeLatest(AT.LOG_IN_REQUEST, login);
 }
 
 function* watchLogout() {
-  yield takeLatest(LOG_OUT_REQUEST, logout);
+  yield takeLatest(AT.LOG_OUT_REQUEST, logout);
 }
 
 function* watchSignup() {
-  yield takeLatest(SIGN_UP_REQUEST, signup);
+  yield takeLatest(AT.SIGN_UP_REQUEST, signup);
 }
 
 export default function* userSaga() {
