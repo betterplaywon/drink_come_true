@@ -9,7 +9,7 @@ const CommentForm = ({ post }) => {
   const dispatch = useDispatch();
   const { addCommentLoading, addCommentDone } = useSelector(state => state.post);
   const [commentText, handleCommentText, setCommentText] = useInput('');
-  const id = useSelector(state => state.user.id);
+  const id = useSelector(state => state.user.user.id);
 
   useEffect(() => {
     if (addCommentDone) {
@@ -21,10 +21,10 @@ const CommentForm = ({ post }) => {
     console.log(post.id, commentText); // id 사용해 게시글 아래에 댓글 달기
     dispatch({
       type: ADD_COMMENT_REQUEST,
-      data: { content: commentText, postId: post.Id, userId: id },
+      data: { content: commentText, postId: post.id, userId: id },
     });
   }, [commentText, id]);
-
+  console.log({ post });
   return (
     <Form onFinish={handleSubmitComment}>
       <Form.Item>
