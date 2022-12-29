@@ -14,6 +14,14 @@ export const initialState = {
   signupDone: false,
   signupError: null,
 
+  followLoading: false,
+  followDone: false,
+  followError: null,
+
+  unfollowLoading: false,
+  unfollowDone: false,
+  unfollowError: null,
+
   user: null,
   signupData: {},
   loginData: {},
@@ -95,6 +103,39 @@ const reducer = (state = initialState, action) =>
       case AT.REMOVE_POST_OF_ME:
         draft.user.Posts = draft.user.Posts.filter(f => f.id !== action.data);
         break;
+
+      //  ------------------- FOLLOW REDUCER -------------------
+
+      case AT.FOLLOW_REQUEST:
+        draft.followLoading = true;
+        draft.followDone = false;
+        draft.followError = null;
+        break;
+      case AT.FOLLOW_SUCCESS:
+        draft.followLoading = false;
+        draft.followDone = true;
+        draft.user.Followings.push({ id: action.data });
+        break;
+      case AT.FOLLOW_FAILURE:
+        draft.followLoading = false;
+        draft.followError = action.error;
+        break;
+
+      case AT.UNFOLLOW_REQUEST:
+        draft.unfollowLoading = true;
+        draft.unfollowDone = false;
+        draft.unfollowError = null;
+        break;
+      case AT.UNFOLLOW_SUCCESS:
+        draft.unfollowLoading = false;
+        draft.unfollowDone = true;
+        draft.user.Followings = draft.user.Followings.filter(m => m.id !== action.data);
+        break;
+      case AT.UNFOLLOW_FAILURE:
+        draft.unfollowLoading = false;
+        draft.unfollowError = action.error;
+        break;
+
       default:
         break;
     }

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Card, Button, Popover, List, Avatar, Comment } from 'antd';
+import { Card, Button, Popover, List, Avatar, Comment, Space } from 'antd';
 import { HeartTwoTone, HeartOutlined, MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
 import { REMOVE_POST_REQUEST } from '../actionType';
+import FollowButton from './FollowButton';
 
 const PostCard = ({ post }) => {
   const { user } = useSelector(state => state.user);
@@ -58,6 +59,7 @@ const PostCard = ({ post }) => {
             <EllipsisOutlined />
           </Popover>,
         ]}
+        extra={id && <FollowButton post={post} />}
       >
         <Meta
           avatar={<Avatar>{post.User.name[0]}</Avatar>}

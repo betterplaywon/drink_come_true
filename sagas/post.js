@@ -64,11 +64,10 @@ function* addComment(action) {
   console.log(action);
   //   const result = yield call(addCommentAPI, action.data);
   try {
-    const id = shortId.generate();
     yield delay(1000);
     yield put({
       type: AT.ADD_COMMENT_SUCCESS,
-      data: generateDummyPost(10),
+      data: action.data,
     });
   } catch (error) {
     yield put({
@@ -79,7 +78,7 @@ function* addComment(action) {
 }
 
 function loadPostAPI() {
-  axios.post(`/api/post/${data.postId}/load`, data);
+  axios.get(`/api/post/load`, data);
 }
 
 function* loadPost(action) {
