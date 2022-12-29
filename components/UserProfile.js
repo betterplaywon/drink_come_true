@@ -12,8 +12,6 @@ const UserProfile = () => {
     dispatch({ type: LOG_OUT_REQUEST });
   }, []);
 
-  console.log(user.Posts);
-
   return (
     <Card
       style={{ width: 300 }}
