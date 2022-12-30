@@ -44,7 +44,8 @@ export const signupRequestAction = data => ({
 const dummyUser = data => ({
   ...data,
   id: 1,
-  name: '삼성동소주통',
+  name: 'Mcgrady',
+  nickname: '삼성동그라가스',
   Posts: [{ id: 1 }],
   Followings: [{ nickname: '오늘의 술' }, { nickname: '혼술족' }, { nickname: '족발에 소주 딱임' }],
   Followers: [{ nickname: '팔로워 첫번째' }, { nickname: '팔로워 두번째' }, { nickname: '팔로워 세번째' }],
@@ -86,7 +87,7 @@ const reducer = (state = initialState, action) =>
         break;
       case AT.SIGN_UP_REQUEST:
         draft.signupLoading = true;
-        drat.signupDone = false;
+        draft.signupDone = false;
         draft.signupError = null;
         break;
       case AT.SIGN_UP_SUCCESS:

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Head from 'next/head';
 import AppLayout from '../components/AppLayout';
 import { AppleOutlined } from '@ant-design/icons';
@@ -9,14 +9,33 @@ import { SIGN_UP_REQUEST } from '../actionType';
 
 const signup = () => {
   const dispatch = useDispatch();
-  const { signupLoading } = useSelector(state => state.user);
+  const { signupLoading, signUpDone, signUpError, user } = useSelector(state => state.user);
   const [email, handleChangeEmail] = useInput('');
+  const [nickname, handleChangeNickname] = useInput('');
   const [password, handleChangePassword] = useInput('');
 
+  useEffect(() => {
+    if (user && user.id) {
+      Router.replace('/');
+    }
+  }, [user && user.id]);
+
+  useEffect(() => {
+    if (signUpDone) {
+      Router.replace('/');
+    }
+  }, [signUpDone]);
+
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError);
+    }
+  }, [signUpError]);
+
   const onSubmit = useCallback(() => {
-    console.log(email, password);
-    dispatch({ type: SIGN_UP_REQUEST, data: { email, password } });
-  }, [email, password]);
+    console.log(email, nickname, password);
+    dispatch({ type: SIGN_UP_REQUEST, data: { email, nickname, password } });
+  }, [email, nickname, password]);
 
   return (
     <AppLayout>
@@ -31,9 +50,15 @@ const signup = () => {
         </div>
 
         <div>
+          <label htmlFor="user=password">닉네임</label>
+          <br />
+          <input name="user=password" value={nickname} onChange={handleChangeNickname} />
+        </div>
+
+        <div>
           <label htmlFor="user=password">비밀번호</label>
           <br />
-          <input name="user=password" value={password} onChange={handleChangePassword} />
+          <input name="user=password" value={password} onChange={handleChangePassword} maxLength={13} />
         </div>
         <div style={{ marginTop: '15px' }}>
           <Button type="primary" htmlType="submit" loading={signupLoading}>
