@@ -15,7 +15,7 @@ const profile = () => {
       </Head>
       <AppLayout>
         <NicknameForm />
-        <FollowList header="팔로잉목록" data={user.Floowings} />
+        <FollowList header="팔로잉목록" data={user.Followings} />
         <FollowList header="팔로워목록" data={user.Followers} />
       </AppLayout>
     </>
