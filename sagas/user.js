@@ -3,17 +3,15 @@ import * as AT from '../actionType';
 import axios from 'axios';
 
 function loginAPI(data) {
-  axios.post('/api/login/test', data);
+  axios.post('/login', data);
 }
 
 function* login(action) {
   try {
-    console.log('saga login');
-    //   const result = yield call(loginAPI, action.data);
-    yield delay(1000);
+    const result = yield call(loginAPI, action.data);
     yield put({
       type: AT.LOG_IN_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     yield put({
@@ -24,7 +22,7 @@ function* login(action) {
 }
 
 function logoutAPI() {
-  axios.post('/api/logout/test');
+  axios.post('/logout');
 }
 
 function* logout() {
@@ -43,7 +41,7 @@ function* logout() {
 }
 
 function signupAPI(data) {
-  axios.post('http://localhost:3065/user', data);
+  axios.post('/user', data);
 }
 
 function* signup(action) {
@@ -62,7 +60,7 @@ function* signup(action) {
 }
 
 function followAPI() {
-  axios.post('/api/follow');
+  axios.post('/follow');
 }
 
 function* follow(action) {
