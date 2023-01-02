@@ -6,10 +6,11 @@ import { Form, Button } from 'antd';
 import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { SIGN_UP_REQUEST } from '../actionType';
+import Router from 'next/router';
 
 const signup = () => {
   const dispatch = useDispatch();
-  const { signupLoading, signUpDone, signUpError, user } = useSelector(state => state.user);
+  const { signupLoading, signupDone, signupError, user } = useSelector(state => state.user);
   const [email, handleChangeEmail] = useInput('');
   const [nickname, handleChangeNickname] = useInput('');
   const [password, handleChangePassword] = useInput('');
@@ -21,16 +22,16 @@ const signup = () => {
   }, [user && user.id]);
 
   useEffect(() => {
-    if (signUpDone) {
+    if (signupDone) {
       Router.replace('/');
     }
-  }, [signUpDone]);
+  }, [signupDone]);
 
   useEffect(() => {
-    if (signUpError) {
-      alert(signUpError);
+    if (signupError) {
+      alert(signupError);
     }
-  }, [signUpError]);
+  }, [signupError]);
 
   const onSubmit = useCallback(() => {
     console.log(email, nickname, password);

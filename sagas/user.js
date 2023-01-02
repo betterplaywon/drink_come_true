@@ -3,7 +3,7 @@ import * as AT from '../actionType';
 import axios from 'axios';
 
 function loginAPI(data) {
-  axios.post('/login', data);
+  return axios.post('/user/login', data);
 }
 
 function* login(action) {
@@ -16,32 +16,31 @@ function* login(action) {
   } catch (error) {
     yield put({
       type: AT.LOG_IN_FAILURE,
-      error: error.response,
+      error: error.response.data,
     });
   }
 }
 
 function logoutAPI() {
-  axios.post('/logout');
+  return axios.post('/user/logout');
 }
 
 function* logout() {
-  //   const result = yield call(logoutAPI);
-  yield delay(1000);
   try {
+    yield call(logoutAPI);
     yield put({
       type: AT.LOG_OUT_SUCCESS,
     });
   } catch (error) {
     yield put({
       type: AT.LOG_OUT_FAILURE,
-      error: error.response,
+      error: error.response.data,
     });
   }
 }
 
 function signupAPI(data) {
-  axios.post('/user', data);
+  return axios.post('/user', data);
 }
 
 function* signup(action) {
@@ -59,8 +58,8 @@ function* signup(action) {
   }
 }
 
-function followAPI() {
-  axios.post('/follow');
+function followAPI(data) {
+  return axios.post(`/user/${data}/follow`);
 }
 
 function* follow(action) {
@@ -80,7 +79,7 @@ function* follow(action) {
 }
 
 function unfollowAPI() {
-  axios.post('/api/unfollow');
+  return axios.post('/api/unfollow');
 }
 
 function* unfollow(action) {
