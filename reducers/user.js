@@ -55,7 +55,6 @@ const reducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case AT.LOG_IN_REQUEST:
-        console.log('reducer login');
         draft.logInLoading = true;
         draft.logInDone = false;
         draft.logInError = null;
@@ -63,14 +62,13 @@ const reducer = (state = initialState, action) =>
       case AT.LOG_IN_SUCCESS:
         draft.logInLoading = false;
         draft.logInDone = true;
-        draft.user = dummyUser(action.data);
+        draft.user = action.data;
         break;
       case AT.LOG_IN_FAILURE:
         draft.logInLoading = false;
         draft.logInError = action.error;
         break;
       case AT.LOG_OUT_REQUEST:
-        console.log('reducer logout');
         draft.logOutLoading = true;
         draft.logOutDone = false;
         draft.logOutError = null;
