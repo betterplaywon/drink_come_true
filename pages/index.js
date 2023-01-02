@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PostForm from '../components/PostForm';
 import PostCard from '../components/PostCard';
 import { LOAD_POST_REQUEST } from '../actionType';
+import { LOAD_MY_INFO_REQUEST } from '../actionType';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Home = () => {
   const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
 
   useEffect(() => {
-    dispatch({ type: LOAD_POST_REQUEST });
+    dispatch({ type: LOAD_MY_INFO_REQUEST });
   }, []);
 
   useEffect(() => {

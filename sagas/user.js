@@ -73,7 +73,7 @@ function* follow(action) {
   } catch (error) {
     yield put({
       type: AT.FOLLOW_FAILURE,
-      error: error.response,
+      error: error.response.data,
     });
   }
 }
@@ -94,7 +94,26 @@ function* unfollow(action) {
   } catch (error) {
     yield put({
       type: AT.UNFOLLOW_FAILURE,
-      error: error.response,
+      error: error.response.data,
+    });
+  }
+}
+
+function loadUserAPI() {
+  return axios.get('/user');
+}
+
+function* loadUser(action) {
+  try {
+    const result = yield call(loadUserAPI, action.data);
+    yield put({
+      type: AT.LOAD_MY_INFO_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: AT.LOAD_MY_INFO_FAILURE,
+      error: error.response.data,
     });
   }
 }
@@ -119,6 +138,17 @@ function* watchUnfollow() {
   yield takeLatest(AT.UNFOLLOW_REQUEST, unfollow);
 }
 
+function* watchLoadUser() {
+  yield takeLatest(AT.LOAD_MY_INFO_REQUEST, loadUser);
+}
+
 export default function* userSaga() {
-  yield all([fork(watchLogin), fork(watchLogout), fork(watchSignup), fork(watchFollow), fork(watchUnfollow)]);
+  yield all([
+    fork(watchLogin),
+    fork(watchLogout),
+    fork(watchSignup),
+    fork(watchFollow),
+    fork(watchUnfollow),
+    fork(watchLoadUser),
+  ]);
 }
