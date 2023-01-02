@@ -22,6 +22,10 @@ export const initialState = {
   unfollowDone: false,
   unfollowError: null,
 
+  loadUserLoading: false,
+  loadUserDone: false,
+  loadUserError: null,
+
   user: null,
   signupData: {},
   loginData: {},
@@ -133,6 +137,22 @@ const reducer = (state = initialState, action) =>
       case AT.UNFOLLOW_FAILURE:
         draft.unfollowLoading = false;
         draft.unfollowError = action.error;
+        break;
+
+      // 유저 정보 불러오기
+      case AT.LOAD_MY_INFO_REQUEST:
+        draft.loadUserLoading = true;
+        draft.loadUserDone = false;
+        draft.loadUserError = null;
+        break;
+      case AT.LOAD_MY_INFO_SUCCESS:
+        draft.loadUserLoading = false;
+        draft.loadUserDone = true;
+        draft.user = action.data;
+        break;
+      case AT.LOAD_MY_INFO_FAILURE:
+        draft.loadUserLoading = false;
+        draft.loadUserError = action.error;
         break;
 
       default:
