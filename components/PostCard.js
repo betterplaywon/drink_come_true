@@ -9,21 +9,41 @@ import Link from 'next/link';
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
-import { REMOVE_POST_REQUEST } from '../actionType';
+import * as AT from '../actionType';
 import FollowButton from './FollowButton';
 
 const PostCard = ({ post }) => {
-  const { user } = useSelector(state => state.user);
-  const { Meta } = Card;
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user?.user);
+  const { Meta } = Card;
   const id = user?.id;
+  const liked = post.Likers.find(m => m.id === id);
 
-  const [liked, onToggleLike] = useToggle(false);
-  const [isCommentFormOpend, onToggleCommentFormOpen] = useToggle(false);
+  const [isCommentFormOpen, onToggleCommentFormOpen] = useToggle(false);
+
+  const activeLiked = useCallback(() => {
+    if (!id) {
+      return alert('로그인 후 이용해주세요');
+    }
+    return dispatch({
+      type: AT.LIKE_POST_REQUEST,
+      data: post.id,
+    });
+  }, [id]);
+
+  const inActiveLiked = useCallback(() => {
+    if (!id) {
+      return alert('로그인 후 이용해주세요');
+    }
+    return dispatch({
+      type: AT.UNLIKE_POST_REQUEST,
+      data: post.id,
+    });
+  }, [id]);
 
   const onRemovePost = useCallback(() => {
     dispatch({
-      type: REMOVE_POST_REQUEST,
+      type: AT.REMOVE_POST_REQUEST,
       data: post.id,
     });
   }, []);
@@ -33,13 +53,12 @@ const PostCard = ({ post }) => {
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
-          <>
-            {liked ? (
-              <HeartTwoTone twoToneColor="#eb2f96" onClick={onToggleLike} />
-            ) : (
-              <HeartOutlined key="like" onClick={onToggleLike} />
-            )}
-          </>,
+          liked ? (
+            <HeartTwoTone twoToneColor="#eb2f96" key="like" onClick={inActiveLiked} />
+          ) : (
+            <HeartOutlined key="like" onClick={activeLiked} />
+          ),
+
           <MessageOutlined key="comment" onClick={onToggleCommentFormOpen} />,
           <Popover
             key="more"
@@ -62,13 +81,13 @@ const PostCard = ({ post }) => {
         extra={id && <FollowButton post={post} />}
       >
         <Meta
-          avatar={<Avatar>{post.User.name[0]}</Avatar>}
+          avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
           title={post.User.name}
           description={<PostCardContent postContent={post.content} />}
         />
       </Card>
 
-      {isCommentFormOpend && (
+      {isCommentFormOpen && (
         <div>
           <CommentForm post={post} />
           <List
@@ -77,7 +96,7 @@ const PostCard = ({ post }) => {
             dataSource={post.Comments}
             renderItem={item => (
               <li>
-                <Comment author={item.User.name} content={item.content} />
+                <Comment author={item.User.nickname} content={item.content} />
               </li>
             )}
           />
@@ -88,7 +107,15 @@ const PostCard = ({ post }) => {
 };
 
 PostCard.propTypes = {
-  post: PropTypes.object.isRequired,
+  post: PropTypes.shape({
+    id: PropTypes.number,
+    User: PropTypes.object,
+    content: PropTypes.string,
+    createdAt: PropTypes.string,
+    Comments: PropTypes.arrayOf(PropTypes.object),
+    Images: PropTypes.arrayOf(PropTypes.object),
+    Likers: PropTypes.arrayOf(PropTypes.object),
+  }),
 };
 
 export default PostCard;

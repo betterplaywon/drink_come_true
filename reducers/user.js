@@ -26,6 +26,10 @@ export const initialState = {
   loadUserDone: false,
   loadUserError: null,
 
+  changeNicknameLoading: false,
+  changeNicknameDone: false,
+  changeNicknameError: null,
+
   user: null,
   signupData: {},
   loginData: {},
@@ -153,6 +157,22 @@ const reducer = (state = initialState, action) =>
       case AT.LOAD_MY_INFO_FAILURE:
         draft.loadUserLoading = false;
         draft.loadUserError = action.error;
+        break;
+
+      // CHANGE NICKNAME
+      case AT.CHANGE_NICKNAME_REQUEST:
+        draft.changeNicknameLoading = true;
+        draft.changeNicknameDone = false;
+        draft.changeNicknameError = null;
+        break;
+      case AT.CHANGE_NICKNAME_SUCCESS:
+        draft.changeNicknameLoading = false;
+        draft.changeNicknameDone = true;
+        draft.user.nickname = action.data.nickname;
+        break;
+      case AT.CHANGE_NICKNAME_FAILURE:
+        draft.changeNicknameLoading = false;
+        draft.changeNicknameError = action.error;
         break;
 
       default:
