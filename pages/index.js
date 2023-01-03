@@ -16,6 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch({ type: LOAD_MY_INFO_REQUEST });
+    dispatch({ type: LOAD_POST_REQUEST });
   }, []);
 
   useEffect(() => {
