@@ -32,8 +32,8 @@ const UserProfile = () => {
       ]}
     >
       <Meta
-        // avatar={<Avatar>{user.nickname[0]}</Avatar>}
-        title={user.name}
+        avatar={<Avatar>{user.nickname[0]}</Avatar>}
+        title={user.nickname}
         description="오늘은 술을 얼마나 마셨나요"
         style={{ marginBottom: '10px' }}
       />

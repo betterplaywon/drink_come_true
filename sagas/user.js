@@ -118,6 +118,25 @@ function* loadUser(action) {
   }
 }
 
+function changeNicknameAPI(data) {
+  return axios.patch('/user/nickname', { nickname: data });
+}
+
+function* changeNickname(action) {
+  try {
+    const result = yield call(changeNicknameAPI, action.data);
+    yield put({
+      type: AT.CHANGE_NICKNAME_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: AT.CHANGE_NICKNAME_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function* watchLogin() {
   yield takeLatest(AT.LOG_IN_REQUEST, login);
 }
@@ -142,6 +161,10 @@ function* watchLoadUser() {
   yield takeLatest(AT.LOAD_MY_INFO_REQUEST, loadUser);
 }
 
+function* watchChangeNickname() {
+  yield takeLatest(AT.CHANGE_NICKNAME_REQUEST, changeNickname);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogin),
@@ -150,5 +173,6 @@ export default function* userSaga() {
     fork(watchFollow),
     fork(watchUnfollow),
     fork(watchLoadUser),
+    fork(watchChangeNickname),
   ]);
 }
