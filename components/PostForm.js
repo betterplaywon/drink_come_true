@@ -57,7 +57,7 @@ const PostForm = () => {
   );
 
   return (
-    <Form style={{ margin: '10px 0 20px' }} onFinish={handleSubmit} encType="multipart/form-data">
+    <Form style={{ margin: '10px 0 20px' }} encType="multipart/form-data">
       <TextArea
         value={text}
         onChange={handleText}
@@ -69,7 +69,13 @@ const PostForm = () => {
         <label>
           <input type="file" name="image" multiple hidden ref={imageInput} onChange={onChangeImages} />
           <Button onClick={handleImageUpload}>이미지 업로드</Button>
-          <Button type="primary" style={{ float: 'right', width: '25%' }} loading={addPostLoading}>
+          <Button
+            type="primary"
+            style={{ float: 'right', width: '25%' }}
+            htmlType="submit"
+            onClick={handleSubmit}
+            loading={addPostLoading}
+          >
             작성
           </Button>
         </label>

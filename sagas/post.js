@@ -22,9 +22,10 @@ function* addPost(action) {
       data: result.data.id,
     });
   } catch (error) {
+    console.log(error);
     yield put({
       type: AT.ADD_POST_FAILURE,
-      data: error.response,
+      data: error.response.data,
     });
   }
 }
