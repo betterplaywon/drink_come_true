@@ -25,7 +25,11 @@ const ImagesZoom = ({ images, toggleZoom }) => {
           return (
             <SwiperSlide key={idx}>
               <div>
-                <img style={{ width: '50%', display: 'inline-block' }} src={drinkImage.src} alt={drinkImage.src} />
+                <img
+                  style={{ width: '50%', display: 'inline-block' }}
+                  src={`http://localhost:3065/${drinkImage.src}`}
+                  alt={`http://localhost:3065/${drinkImage.src}`}
+                />
               </div>
             </SwiperSlide>
           );

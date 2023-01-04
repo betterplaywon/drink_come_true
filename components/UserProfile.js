@@ -14,8 +14,7 @@ const UserProfile = () => {
 
   return (
     <Card
-      style={{ width: 300 }}
-      cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
+      cover={<img alt="drinkGroup" src="https://platum.kr/wp-content/uploads/2017/11/thebooth2-1024x683.jpg" />}
       actions={[
         <div key="twit">
           게시글
