@@ -1,11 +1,28 @@
-import React, { useMemo } from 'react'
-import { Form, Input, List, Card, Button } from 'antd'
-import PropTypes from 'prop-types'
-import { StopOutlined } from '@ant-design/icons'
+import React, { useCallback, useMemo } from 'react';
+import { Form, Input, List, Card, Button } from 'antd';
+import PropTypes from 'prop-types';
+import { StopOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import * as AT from '../actionType';
 
 const FollowList = ({ data, header }) => {
-  const style = useMemo(() => ({ marginBottom: '20px', border: '1px solid #d9d9d9', padding: '15px' }), [])
-  const { Meta } = Card
+  const dispatch = useDispatch();
+  const style = useMemo(() => ({ marginBottom: '20px', border: '1px solid #d9d9d9', padding: '15px' }), []);
+  const { Meta } = Card;
+
+  const handleUnfollow = userId => () => {
+    if (header === '팔로잉') {
+      dispatch({
+        type: AT.UNFOLLOW_REQUEST,
+        data: userId,
+      });
+    }
+    dispatch({
+      type: AT.REMOVE_FOLLOWER_REQUEST,
+      data: userId,
+    });
+  };
+
   return (
     <List
       style={style}
@@ -18,21 +35,22 @@ const FollowList = ({ data, header }) => {
         </>
       }
       bordered
+      // data = user
       dataSource={data}
       renderItem={item => (
         <List.Item>
-          <Card actions={[<StopOutlined key="stop" />]}>
+          <Card actions={[<StopOutlined key="stop" onClick={handleUnfollow(item.id)} />]}>
             <Meta description={item.nickname} />
           </Card>
         </List.Item>
       )}
     />
-  )
-}
+  );
+};
 
 FollowList.propTypes = {
   header: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
-}
+};
 
-export default FollowList
+export default FollowList;

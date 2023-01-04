@@ -2,11 +2,11 @@ import { all, fork, takeLatest, delay, put, call, throttle } from 'redux-saga/ef
 import * as AT from '../actionType';
 import axios from 'axios';
 
-import shortId from 'shortid';
+// import shortId from 'shortid';
 // import { generateDummyPost } from '../reducers/post';
 
 function addPostAPI(data) {
-  return axios.post('/post', { content: data });
+  return axios.post('/post', data);
 }
 
 function* addPost(action) {
@@ -133,6 +133,26 @@ function* unLikePost(action) {
   }
 }
 
+function imageUploadAPI(data) {
+  return axios.post('/post/images', data);
+}
+
+function* imageUpload(action) {
+  try {
+    const result = yield call(imageUploadAPI, action.data);
+    yield put({
+      type: AT.IMAGE_UPLOAD_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.log(error);
+    yield put({
+      type: AT.IMAGE_UPLOAD_FAILURE,
+      data: error.response.data,
+    });
+  }
+}
+
 function* watchAddPost() {
   yield takeLatest(AT.ADD_POST_REQUEST, addPost);
 }
@@ -157,6 +177,10 @@ function* watchUnLikePost() {
   yield takeLatest(AT.UNLIKE_POST_REQUEST, unLikePost);
 }
 
+function* watchImageUpload() {
+  yield takeLatest(AT.IMAGE_UPLOAD_REQUEST, imageUpload);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchAddPost),
@@ -165,5 +189,6 @@ export default function* postSaga() {
     fork(watchLoadPost),
     fork(watchLikePost),
     fork(watchUnLikePost),
+    fork(watchImageUpload),
   ]);
 }

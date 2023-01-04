@@ -30,6 +30,18 @@ export const initialState = {
   changeNicknameDone: false,
   changeNicknameError: null,
 
+  loadFollowersLoading: false,
+  loadFollowersDone: false,
+  loadFollowersError: null,
+
+  loadFollowingsLoading: false,
+  loadFollowingsDone: false,
+  loadFollowingsError: null,
+
+  removeFollowerLoading: false,
+  removeFollowerDone: false,
+  removeFollowerError: null,
+
   user: null,
   signupData: {},
   loginData: {},
@@ -62,6 +74,7 @@ const dummyUser = data => ({
 const reducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      // ------------------- login / logout -------------------
       case AT.LOG_IN_REQUEST:
         draft.logInLoading = true;
         draft.logInDone = false;
@@ -89,8 +102,8 @@ const reducer = (state = initialState, action) =>
       case AT.LOG_OUT_FAILURE:
         draft.logOutLoading = false;
         draft.logOutError = true;
-
         break;
+      // ------------------- signup -------------------
       case AT.SIGN_UP_REQUEST:
         draft.signupLoading = true;
         draft.signupDone = false;
@@ -121,7 +134,7 @@ const reducer = (state = initialState, action) =>
       case AT.FOLLOW_SUCCESS:
         draft.followLoading = false;
         draft.followDone = true;
-        draft.user.Followings.push({ id: action.data });
+        draft.user.Followings.push({ id: action.data.UserId });
         break;
       case AT.FOLLOW_FAILURE:
         draft.followLoading = false;
@@ -136,14 +149,60 @@ const reducer = (state = initialState, action) =>
       case AT.UNFOLLOW_SUCCESS:
         draft.unfollowLoading = false;
         draft.unfollowDone = true;
-        draft.user.Followings = draft.user.Followings.filter(m => m.id !== action.data);
+        draft.user.Followings = draft.user.Followings.filter(m => m.id !== action.data.UserId);
         break;
       case AT.UNFOLLOW_FAILURE:
         draft.unfollowLoading = false;
         draft.unfollowError = action.error;
         break;
 
-      // 유저 정보 불러오기
+      case AT.LOAD_FOLLOWERS_REQUEST:
+        draft.loadFollowersLoading = true;
+        draft.loadFollowersDone = false;
+        draft.loadFollowersError = null;
+        break;
+      case AT.LOAD_FOLLOWERS_SUCCESS:
+        draft.loadFollowersLoading = false;
+        draft.loadFollowersDone = true;
+        draft.user.Followers = action.data;
+        break;
+      case AT.LOAD_FOLLOWERS_FAILURE:
+        draft.loadFollowersLoading = false;
+        draft.loadFollowersError = action.error;
+        break;
+
+      case AT.LOAD_FOLLOWINGS_REQUEST:
+        draft.loadFollowingsLoading = true;
+        draft.loadFollowingsDone = false;
+        draft.loadFollowingsError = null;
+        break;
+      case AT.LOAD_FOLLOWINGS_SUCCESS:
+        draft.loadFollowingsLoading = false;
+        draft.loadFollowingsDone = true;
+        draft.user.Followings = action.data;
+        break;
+      case AT.LOAD_FOLLOWINGS_FAILURE:
+        draft.loadFollowingsLoading = false;
+        draft.loadFollowingsError = action.error;
+        break;
+
+      case AT.REMOVE_FOLLOWER_REQUEST:
+        draft.removeFollowerLoading = true;
+        draft.removeFollowerDone = false;
+        draft.removeFollowerError = null;
+
+        break;
+      case AT.REMOVE_FOLLOWER_SUCCESS:
+        draft.removeFollowerLoading = false;
+        draft.removeFollowerDone = true;
+        draft.user.Followers = draft.user.Followers.filter(m => m.id !== action.data.UserId); // 여기 UserId 추적해보기. 흐름 이해 안되었음
+        break;
+      case AT.REMOVE_FOLLOWER_FAILURE:
+        draft.removeFollowerLoading = false;
+        draft.removeFollowerError = action.error;
+        break;
+
+      // ------------------- User info -------------------
       case AT.LOAD_MY_INFO_REQUEST:
         draft.loadUserLoading = true;
         draft.loadUserDone = false;
@@ -159,7 +218,7 @@ const reducer = (state = initialState, action) =>
         draft.loadUserError = action.error;
         break;
 
-      // CHANGE NICKNAME
+      // ------------------- change nickname -------------------
       case AT.CHANGE_NICKNAME_REQUEST:
         draft.changeNicknameLoading = true;
         draft.changeNicknameDone = false;

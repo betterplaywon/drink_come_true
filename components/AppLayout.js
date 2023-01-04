@@ -27,7 +27,7 @@ const AppLayout = ({ children }) => {
           <Link href="/signup">회원가입</Link>
         </Menu.Item>
         <Menu.Item key="mail">
-          <Search style={{ verticalalign: 'middle' }} />
+          <Search />
         </Menu.Item>
       </Menu>
 

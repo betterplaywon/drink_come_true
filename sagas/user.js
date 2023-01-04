@@ -59,16 +59,15 @@ function* signup(action) {
 }
 
 function followAPI(data) {
-  return axios.post(`/user/${data}/follow`);
+  return axios.patch(`/user/${data}/follow`);
 }
 
 function* follow(action) {
-  // const result = yield call(followAPI);
   try {
-    yield delay(1000);
+    const result = yield call(followAPI, action.data);
     yield put({
       type: AT.FOLLOW_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     yield put({
@@ -78,23 +77,59 @@ function* follow(action) {
   }
 }
 
-function unfollowAPI() {
-  return axios.post('/api/unfollow');
+function unfollowAPI(data) {
+  return axios.delete(`/user/${data}/follow`);
 }
 
 function* unfollow(action) {
-  // const result = yield call(unfollowAPI);
-
   try {
-    yield delay(1000);
+    const result = yield call(unfollowAPI, action.data);
     yield put({
       type: AT.UNFOLLOW_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     yield put({
       type: AT.UNFOLLOW_FAILURE,
       error: error.response.data,
+    });
+  }
+}
+
+function loadFollowersAPI(data) {
+  return axios.get(`/user/followers`);
+}
+
+function* loadFollowers(action) {
+  try {
+    const result = yield call(loadFollowersAPI, action.data);
+    yield put({
+      type: AT.LOAD_FOLLOWERS_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.log(error);
+    yield put({
+      type: AT.LOAD_FOLLOWERS_FAILURE,
+    });
+  }
+}
+
+function loadFollowingsAPI(data) {
+  return axios.get(`/user/followings`);
+}
+
+function* loadFollowings(action) {
+  try {
+    const result = yield call(loadFollowingsAPI, action.data);
+    yield put({
+      type: AT.LOAD_FOLLOWINGS_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.log(error);
+    yield put({
+      type: AT.LOAD_FOLLOWINGS_FAILURE,
     });
   }
 }
@@ -137,6 +172,24 @@ function* changeNickname(action) {
   }
 }
 
+function removeFollowerAPI(data) {
+  return axios.delete(`/user/follower/${data}`);
+}
+
+function* removeFollowers(action) {
+  try {
+    const result = yield call(removeFollowerAPI, action.data);
+    yield put({
+      type: AT.REMOVE_FOLLOWER_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: AT.REMOVE_FOLLOWER_FAILURE,
+    });
+  }
+}
+
 function* watchLogin() {
   yield takeLatest(AT.LOG_IN_REQUEST, login);
 }
@@ -165,6 +218,19 @@ function* watchChangeNickname() {
   yield takeLatest(AT.CHANGE_NICKNAME_REQUEST, changeNickname);
 }
 
+function* watchLoadFollowers() {
+  yield takeLatest(AT.LOAD_FOLLOWERS_REQUEST, loadFollowers);
+}
+
+function* watchLoadFollowings() {
+  yield takeLatest(AT.LOAD_FOLLOWINGS_REQUEST, loadFollowings);
+}
+
+function* watchRemoveFollowers() {
+  yield takeLatest(AT.REMOVE_FOLLOWER_REQUEST, removeFollowers);
+}
+1;
+
 export default function* userSaga() {
   yield all([
     fork(watchLogin),
@@ -174,5 +240,8 @@ export default function* userSaga() {
     fork(watchUnfollow),
     fork(watchLoadUser),
     fork(watchChangeNickname),
+    fork(watchLoadFollowers),
+    fork(watchLoadFollowings),
+    fork(watchRemoveFollowers),
   ]);
 }

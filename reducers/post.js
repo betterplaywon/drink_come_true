@@ -33,6 +33,10 @@ export const initialState = {
   unlikePostLoading: false,
   unlikePostDone: false,
   unlikePostError: null,
+
+  imageUploadLoading: false,
+  imageUploadDone: false,
+  imageUploadError: null,
 };
 
 // export const generateDummyPost = number =>
@@ -103,6 +107,7 @@ const reducer = (state = initialState, action) =>
         draft.addPostLoading = false;
         draft.addPostDone = true;
         draft.mainPosts.unshift(action.data);
+        draft.imagePaths = [];
         break;
       case AT.ADD_POST_FAILURE:
         draft.addPostLoading = false;
@@ -185,6 +190,27 @@ const reducer = (state = initialState, action) =>
       case AT.UNLIKE_POST_FAILURE:
         draft.unlikePostLoading = false;
         draft.unlikePostError = action.error;
+        break;
+
+      case AT.IMAGE_UPLOAD_REQUEST:
+        draft.imageUploadLoading = false;
+        draft.imageUploadDone = false;
+        draft.imageUploadError = null;
+
+        break;
+      case AT.IMAGE_UPLOAD_SUCCESS: {
+        draft.imageUploadLoading = false;
+        draft.imageUploadDone = true;
+        draft.imagePaths = action.data;
+        break;
+      }
+      case AT.IMAGE_UPLOAD_FAILURE:
+        draft.imageUploadLoading = false;
+        draft.imageUploadError = action.error;
+        break;
+
+      case AT.IMAGE_REMOVE:
+        draft.imagePaths = draft.imagePaths.filter((m, idx) => idx !== action.data);
         break;
 
       default:
