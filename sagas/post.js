@@ -74,8 +74,8 @@ function* addComment(action) {
   }
 }
 
-function loadPostAPI() {
-  return axios.get(`/posts`);
+function loadPostAPI(endId) {
+  return axios.get(`/post/${data}`);
 }
 
 function* loadPost(action) {
@@ -90,6 +90,26 @@ function* loadPost(action) {
     yield put({
       type: AT.LOAD_POST_FAILURE,
       data: error.response.data,
+    });
+  }
+}
+
+function loadPostsAPI(endId) {
+  return axios.get(`/posts?endId=${endId || 0}`);
+}
+
+function* loadPosts(action) {
+  try {
+    const result = yield call(loadPostsAPI, action.endId);
+    yield put({
+      type: AT.LOAD_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AT.LOAD_POSTS_FAILURE,
+      error: err.response.data,
     });
   }
 }
@@ -167,7 +187,11 @@ function* watchRemovePost() {
 }
 
 function* watchLoadPost() {
-  yield throttle(5000, AT.LOAD_POST_REQUEST, loadPost);
+  yield takeLatest(AT.LOAD_POST_REQUEST, loadPost);
+}
+
+function* watchLoadPosts() {
+  yield throttle(5000, AT.LOAD_POSTS_REQUEST, loadPosts);
 }
 
 function* watchLikePost() {
@@ -188,6 +212,7 @@ export default function* postSaga() {
     fork(watchAddComment),
     fork(watchRemovePost),
     fork(watchLoadPost),
+    fork(watchLoadPosts),
     fork(watchLikePost),
     fork(watchUnLikePost),
     fork(watchImageUpload),

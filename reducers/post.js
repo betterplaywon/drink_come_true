@@ -6,6 +6,7 @@ import * as AT from '../actionType';
 
 export const initialState = {
   mainPosts: [],
+  singlePost: null,
   imagePaths: [],
 
   isMorePosts: true,
@@ -13,6 +14,10 @@ export const initialState = {
   loadPostLoading: false,
   loadPostDone: false,
   loadPostError: null,
+
+  loadPostsLoading: false,
+  loadPostsDone: false,
+  loadPostsError: null,
 
   addPostLoading: false,
   addPostDone: false,
@@ -121,12 +126,26 @@ const reducer = (state = initialState, action) =>
       case AT.LOAD_POST_SUCCESS:
         draft.loadPostLoading = false;
         draft.loadPostDone = true;
-        draft.mainPosts = action.data.concat(draft.mainPosts);
-        draft.isMorePosts = draft.mainPosts.length < 40;
+        draft.singlePost = action.data;
         break;
       case AT.LOAD_POST_FAILURE:
         draft.loadPostLoading = false;
-        loadPostError = action.error;
+        draft.loadPostError = action.error;
+        break;
+      case AT.LOAD_POSTS_REQUEST:
+        draft.loadPostsLoading = true;
+        draft.loadPostsDone = false;
+        draft.loadPostsError = null;
+        break;
+      case AT.LOAD_POSTS_SUCCESS:
+        draft.loadPostsLoading = false;
+        draft.loadPostsDone = true;
+        draft.mainPosts = draft.mainPosts.concat(action.data);
+        draft.isMorePosts = action.data.length === 10;
+        break;
+      case AT.LOAD_POSTS_FAILURE:
+        draft.loadPostsLoading = false;
+        draft.loadPostsError = action.error;
         break;
       case AT.REMOVE_POST_REQUEST:
         draft.removePostLoading = true;
