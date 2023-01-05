@@ -14,22 +14,16 @@ const AppLayout = ({ children }) => {
   const { user } = useSelector(state => state.user);
   const { Search } = Input;
 
+  const menuItems = [
+    { label: <Link href="/">DRINK CHECK</Link>, key: 'home' },
+    { label: <Link href="/profile">프로필</Link>, key: 'profile' },
+    { label: <Link href="/signup">회원가입</Link>, key: 'signup' },
+    { label: <Search />, key: 'mail' },
+  ];
+
   return (
     <div>
-      <Menu mode="horizontal" style={menuStyle}>
-        <Menu.Item key="home">
-          <Link href="/">DRINK CHECK</Link>
-        </Menu.Item>
-        <Menu.Item key="profile">
-          <Link href="/profile">프로필</Link>
-        </Menu.Item>
-        <Menu.Item key="signup">
-          <Link href="/signup">회원가입</Link>
-        </Menu.Item>
-        <Menu.Item key="mail">
-          <Search />
-        </Menu.Item>
-      </Menu>
+      <Menu mode="horizontal" style={menuStyle} items={menuItems} />
 
       <Row gutter={8}>
         <Col xs={24} md={6}>

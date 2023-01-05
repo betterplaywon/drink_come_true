@@ -6,8 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import PostForm from '../components/PostForm';
 import PostCard from '../components/PostCard';
-import { LOAD_POST_REQUEST } from '../actionType';
-import { LOAD_MY_INFO_REQUEST } from '../actionType';
+import * as AT from '../actionType';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -15,15 +14,16 @@ const Home = () => {
   const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
 
   useEffect(() => {
-    dispatch({ type: LOAD_MY_INFO_REQUEST });
-    dispatch({ type: LOAD_POST_REQUEST });
+    dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+    dispatch({ type: AT.LOAD_POSTS_REQUEST });
   }, []);
 
   useEffect(() => {
     function onScroll() {
       if (window.scrollY + document.documentElement.clientHeight === document.documentElement.scrollHeight) {
         if (isMorePosts && !loadPostLoading) {
-          dispatch({ type: LOAD_POST_REQUEST });
+          const endId = mainPosts[mainPosts.length - 1]?.id;
+          dispatch({ type: AT.LOAD_POSTS_REQUEST, endId });
         }
       }
     }
