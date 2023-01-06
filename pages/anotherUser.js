@@ -23,17 +23,17 @@ const introduce = () => {
         <Card
           actions={[
             <div>
-              정적임
+              getStaticProps은 정적임
               <br />
               {anotherUser.Posts}
             </div>,
             <div key="following">
-              팔로잉
+              변경사항이 없는 페이지가 딱임
               <br />
               {anotherUser.Followings}
             </div>,
             <div key="follower">
-              팔로워
+              근데 그런 페이지가 있을까
               <br />
               {anotherUser.Followers}
             </div>,
@@ -42,7 +42,7 @@ const introduce = () => {
           <Card.Meta
             avatar={<Avatar>{anotherUser.nickname[0]}</Avatar>}
             title={anotherUser.nickname}
-            description="노드버드 매니아"
+            description="getStaticProps 테스트"
           />
         </Card>
       ) : null}
