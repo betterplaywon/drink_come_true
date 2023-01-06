@@ -14,7 +14,7 @@ const configureStore = () => {
       ? compose(applyMiddleware(...middlewares))
       : composeWithDevTools(applyMiddleware(...middlewares));
   const store = createStore(reducer, enhancer);
-  store.sagaTast = SagaMiddleware.run(rootSaga);
+  store.sagaTask = SagaMiddleware.run(rootSaga);
   return store;
 };
 

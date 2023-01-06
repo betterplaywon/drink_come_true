@@ -153,6 +153,25 @@ function* loadUser(action) {
   }
 }
 
+function loadAnotherUSerInfoAPI(data) {
+  return axios.get(`/user/${data}`);
+}
+
+function* loadAnotherUserInfo(action) {
+  try {
+    const result = yield call(loadAnotherUSerInfoAPI, action.data);
+    yield put({
+      type: AT.LOAD_ANOTHER_USER_INFO_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: AT.LOAD_ANOTHER_USER_INFO_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function changeNicknameAPI(data) {
   return axios.patch('/user/nickname', { nickname: data });
 }
@@ -214,6 +233,10 @@ function* watchLoadUser() {
   yield takeLatest(AT.LOAD_MY_INFO_REQUEST, loadUser);
 }
 
+function* watchLoadAnotherUserInfo() {
+  yield takeLatest(AT.LOAD_ANOTHER_USER_INFO_REQUEST, loadAnotherUserInfo);
+}
+
 function* watchChangeNickname() {
   yield takeLatest(AT.CHANGE_NICKNAME_REQUEST, changeNickname);
 }
@@ -239,6 +262,7 @@ export default function* userSaga() {
     fork(watchFollow),
     fork(watchUnfollow),
     fork(watchLoadUser),
+    fork(watchLoadAnotherUserInfo),
     fork(watchChangeNickname),
     fork(watchLoadFollowers),
     fork(watchLoadFollowings),
