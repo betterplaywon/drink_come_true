@@ -22,6 +22,10 @@ export const initialState = {
   unfollowDone: false,
   unfollowError: null,
 
+  loadAnotherUserInfoLoading: false,
+  loadAnotherUserInfoDone: false,
+  loadAnotherUserInfoError: null,
+
   loadUserLoading: false,
   loadUserDone: false,
   loadUserError: null,
@@ -43,6 +47,7 @@ export const initialState = {
   removeFollowerError: null,
 
   user: null,
+  anotherUser: null,
   signupData: {},
   loginData: {},
 };
@@ -216,6 +221,21 @@ const reducer = (state = initialState, action) =>
       case AT.LOAD_MY_INFO_FAILURE:
         draft.loadUserLoading = false;
         draft.loadUserError = action.error;
+        break;
+
+      case AT.LOAD_ANOTHER_USER_INFO_REQUEST:
+        draft.loadAnotherUserInfoLoading = true;
+        draft.loadAnotherUserInfoDone = false;
+        draft.loadAnotherUserInfoError = null;
+        break;
+      case AT.LOAD_ANOTHER_USER_INFO_SUCCESS:
+        draft.loadAnotherUserInfoLoading = false;
+        draft.loadAnotherUserInfoDone = true;
+        draft.anotherUser = action.data;
+        break;
+      case AT.LOAD_ANOTHER_USER_INFO_FAILURE:
+        draft.loadAnotherUserInfoLoading = false;
+        draft.loadAnotherUserInfoError = action.error;
         break;
 
       // ------------------- change nickname -------------------
