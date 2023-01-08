@@ -8,6 +8,7 @@ import * as AT from '../actionType';
 
 import wrapper from '../store/configureStore';
 import axios from 'axios';
+import { END } from 'redux-saga';
 
 const profile = () => {
   const dispatch = useDispatch();
