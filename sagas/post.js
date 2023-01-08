@@ -74,7 +74,7 @@ function* addComment(action) {
   }
 }
 
-function loadPostAPI(endId) {
+function loadPostAPI(data) {
   return axios.get(`/post/${data}`);
 }
 

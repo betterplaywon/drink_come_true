@@ -5,11 +5,12 @@ import { AppleOutlined } from '@ant-design/icons';
 import { Form, Button } from 'antd';
 import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { SIGN_UP_REQUEST } from '../actionType';
+import * as AT from '../actionType';
 import Router from 'next/router';
 
 import wrapper from '../store/configureStore';
 import axios from 'axios';
+import { END } from 'redux-saga';
 
 const signup = () => {
   const dispatch = useDispatch();
