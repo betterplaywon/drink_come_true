@@ -114,6 +114,46 @@ function* loadPosts(action) {
   }
 }
 
+function loadHashtagPostsAPI(data, endId) {
+  return axios.get(`/hashtag/${data}?endId=${endId || 0}`);
+}
+
+function* loadHashtagPosts(action) {
+  try {
+    const result = yield call(loadHashtagPostsAPI, action.data, action.endId);
+    yield put({
+      type: AT.LOAD_HASTAG_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AT.LOAD_HASTAG_POSTS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadUserPostsAPI(data, endId) {
+  return axios.get(`/user/${data}/posts/?endId=${endId || 0}`);
+}
+
+function* loadUserPosts(action) {
+  try {
+    const result = yield call(loadUserPostsAPI, action.data, action.endId);
+    yield put({
+      type: AT.LOAD_USER_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AT.LOAD_USER_POSTS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function likePostAPI(data) {
   return axios.patch(`/post/${data}/like`);
 }
@@ -185,13 +225,21 @@ function* watchAddComment() {
 function* watchRemovePost() {
   yield takeLatest(AT.REMOVE_POST_REQUEST, removePost);
 }
-
+// ---------------------- 게시글 하나 ----------------------
 function* watchLoadPost() {
   yield takeLatest(AT.LOAD_POST_REQUEST, loadPost);
 }
-
+// ---------------------- 게시글 여러개 ----------------------
 function* watchLoadPosts() {
   yield throttle(5000, AT.LOAD_POSTS_REQUEST, loadPosts);
+}
+// ---------------------- 게시글의 해시태그 ----------------------
+function* watchLoadHashtagPosts() {
+  yield throttle(5000, AT.LOAD_HASTAG_POSTS_REQUEST, loadHashtagPosts);
+}
+// ---------------------- 다른 유저의 게시글 ----------------------
+function* watchLoadUserPosts() {
+  yield throttle(5000, AT.LOAD_USER_POSTS_REQUEST, loadUserPosts);
 }
 
 function* watchLikePost() {
@@ -216,5 +264,7 @@ export default function* postSaga() {
     fork(watchLikePost),
     fork(watchUnLikePost),
     fork(watchImageUpload),
+    fork(watchLoadHashtagPosts),
+    fork(watchLoadUserPosts),
   ]);
 }
