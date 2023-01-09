@@ -115,7 +115,7 @@ function* loadPosts(action) {
 }
 
 function loadHashtagPostsAPI(data, endId) {
-  return axios.get(`/hashtag/${data}?endId=${endId || 0}`);
+  return axios.get(`/hashtag/${encodeURIComponent(data)}?endId=${endId || 0}`);
 }
 
 function* loadHashtagPosts(action) {
