@@ -5,7 +5,7 @@ import { StopOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import * as AT from '../actionType';
 
-const FollowList = ({ data, header }) => {
+const FollowList = ({ data, header, handleMoreView, loading }) => {
   const dispatch = useDispatch();
   const style = useMemo(() => ({ marginBottom: '20px', border: '1px solid #d9d9d9', padding: '15px' }), []);
   const { Meta } = Card;
@@ -31,7 +31,9 @@ const FollowList = ({ data, header }) => {
       header={<div>{header}</div>}
       loadMore={
         <>
-          <Button>더보기</Button>
+          <Button onClick={handleMoreView} loading={loading}>
+            더보기
+          </Button>
         </>
       }
       bordered
@@ -51,6 +53,8 @@ const FollowList = ({ data, header }) => {
 FollowList.propTypes = {
   header: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
+  handleMoreView: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default FollowList;

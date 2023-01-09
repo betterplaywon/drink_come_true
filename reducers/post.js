@@ -11,14 +11,6 @@ export const initialState = {
 
   isMorePosts: true,
 
-  // loadUserPostsLoading: false,
-  // loadUserPostsDone: false,
-  // loadUserPostsError: null,
-
-  // loadHashtagLoading: false,
-  // loadHashtagDone: false,
-  // loadHashtagError: null,
-
   loadPostLoading: false,
   loadPostDone: false,
   loadPostError: null,
