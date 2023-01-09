@@ -11,6 +11,14 @@ export const initialState = {
 
   isMorePosts: true,
 
+  // loadUserPostsLoading: false,
+  // loadUserPostsDone: false,
+  // loadUserPostsError: null,
+
+  // loadHashtagLoading: false,
+  // loadHashtagDone: false,
+  // loadHashtagError: null,
+
   loadPostLoading: false,
   loadPostDone: false,
   loadPostError: null,
@@ -132,21 +140,29 @@ const reducer = (state = initialState, action) =>
         draft.loadPostLoading = false;
         draft.loadPostError = action.error;
         break;
+
+      case AT.LOAD_USER_POSTS_REQUEST:
+      case AT.LOAD_HASTAG_POSTS_REQUEST:
       case AT.LOAD_POSTS_REQUEST:
         draft.loadPostsLoading = true;
         draft.loadPostsDone = false;
         draft.loadPostsError = null;
         break;
+      case AT.LOAD_USER_POSTS_SUCCESS:
+      case AT.LOAD_HASTAG_POSTS_SUCCESS:
       case AT.LOAD_POSTS_SUCCESS:
         draft.loadPostsLoading = false;
         draft.loadPostsDone = true;
         draft.mainPosts = draft.mainPosts.concat(action.data);
         draft.isMorePosts = action.data.length === 10;
         break;
+      case AT.LOAD_USER_POSTS_FAILURE:
+      case AT.LOAD_HASTAG_POSTS_FAILURE:
       case AT.LOAD_POSTS_FAILURE:
         draft.loadPostsLoading = false;
         draft.loadPostsError = action.error;
         break;
+
       case AT.REMOVE_POST_REQUEST:
         draft.removePostLoading = true;
         draft.removePostDone = false;
