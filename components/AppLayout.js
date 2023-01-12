@@ -1,24 +1,32 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { Menu, Input, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import UserProfile from './UserProfile';
 import LoginForm from './LoginForm';
 import { useSelector } from 'react-redux';
+import useInput from '../hooks/useInput';
+import Router from 'next/router';
 
 const AppLayout = ({ children }) => {
   const menuStyle = useMemo(() => ({ padding: '15px' }), []);
-
   const { user } = useSelector(state => state.user);
   const { Search } = Input;
+  const [searchInput, onChangeSearchInput] = useInput('');
+
+  const onSearch = useCallback(() => {
+    Router.push(`/hashtag/${searchInput}`);
+  }, [searchInput]);
 
   const menuItems = [
     { label: <Link href="/">DRINK CHECK</Link>, key: 'home' },
     { label: <Link href="/profile">프로필</Link>, key: 'profile' },
     { label: <Link href="/signup">회원가입</Link>, key: 'signup' },
-    { label: <Search />, key: 'mail' },
+    {
+      label: <Search value={searchInput} onChange={onChangeSearchInput} onSearch={onSearch} enterButton />,
+      key: 'mail',
+    },
   ];
 
   return (
