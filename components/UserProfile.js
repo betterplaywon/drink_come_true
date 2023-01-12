@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { Avatar, Card, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_OUT_REQUEST } from '../actionType';
+import Link from 'next/link';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -21,12 +22,20 @@ const UserProfile = () => {
           <br /> {user.Posts.length}
         </div>,
         <div key="followers">
-          팔로워
-          <br /> {user.Followers.length}
+          <Link href="/profile">
+            <a>
+              팔로워
+              <br /> {user.Followers.length}
+            </a>
+          </Link>
         </div>,
         <div key="followings">
-          팔로잉
-          <br /> {user.Followings.length}
+          <Link href="/profile">
+            <a>
+              팔로잉
+              <br /> {user.Followings.length}
+            </a>
+          </Link>
         </div>,
       ]}
     >
