@@ -21,6 +21,8 @@ const AppLayout = ({ children }) => {
 
   const menuItems = [
     { label: <Link href="/">DRINK CHECK</Link>, key: 'home' },
+    { label: <Link href="/cycle">음주 주기 체크</Link>, key: 'cycle' },
+    { label: <Link href="/community">커뮤니티</Link>, key: 'community' },
     { label: <Link href="/profile">프로필</Link>, key: 'profile' },
     { label: <Link href="/signup">회원가입</Link>, key: 'signup' },
     {
