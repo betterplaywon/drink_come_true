@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import useToggle from '../hooks/useToggle';
 import Link from 'next/link';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+dayjs.locale('ko');
 
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
@@ -80,6 +83,7 @@ const PostCard = ({ post }) => {
         ]}
         extra={id && <FollowButton post={post} />}
       >
+        <div style={{ float: 'right' }}>{dayjs(post.createdAt).format('YYYY.MM.DD.dddd.HH:mm')}</div>
         <Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
           title={post.User.nickname}
