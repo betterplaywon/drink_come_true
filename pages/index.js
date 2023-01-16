@@ -16,37 +16,14 @@ const Home = () => {
   const { user } = useSelector(state => state.user);
   const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
 
-  // useEffect(() => {
-  //   dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  //   dispatch({ type: AT.LOAD_POSTS_REQUEST });
-  // }, []);
-
-  useEffect(() => {
-    function onScroll() {
-      if (window.scrollY + document.documentElement.clientHeight === document.documentElement.scrollHeight) {
-        if (isMorePosts && !loadPostLoading) {
-          const endId = mainPosts[mainPosts.length - 1]?.id;
-          dispatch({ type: AT.LOAD_POSTS_REQUEST, endId });
-        }
-      }
-    }
-
-    window.addEventListener('scroll', onScroll);
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [isMorePosts, loadPostLoading, mainPosts]);
-
   return (
     <AppLayout>
       <Head>
         <title> DRINK COME TRUE</title>
       </Head>
-      {user && <PostForm />}
-      {mainPosts.map(post => (
-        <PostCard key={post.id} post={post} />
-      ))}
+      <div>메인 페이지</div>
+      <div>메인페이지 내용 2</div>
+      <div>메인페이지 내용 3</div>
     </AppLayout>
   );
 };
@@ -63,4 +40,5 @@ export const getServerSideProps = wrapper.getServerSideProps(async context => {
   context.store.dispatch(END);
   await context.store.sagaTask.toPromise();
 });
+
 export default Home;
