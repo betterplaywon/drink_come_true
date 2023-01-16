@@ -1,12 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import AppLayout from './AppLayout';
 import { useSelector, useDispatch } from 'react-redux';
 import * as AT from '../actionType';
-
-import wrapper from '../store/configureStore';
-import axios from 'axios';
-import { END } from 'redux-saga';
-import Router from 'next/router';
 
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
@@ -52,21 +46,14 @@ const DrinkChart = () => {
     labels: UserData.map(data => data.year),
     datasets: [
       {
-        label: 'Users Gained',
+        label: '술, 얼마나 자주 마시는걸까',
         data: UserData.map(data => data.userGain),
         backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#50AF95', '#f3ba2f', '#2a71d0'],
-        borderColor: 'black',
+        borderColor: 'green',
         borderWidth: 2,
       },
     ],
   });
-
-  useEffect(() => {
-    if (!(user && user.id)) {
-      Router.push('/');
-    }
-  }),
-    [user && user.id];
 
   return (
     <div style={{ width: 700 }}>
