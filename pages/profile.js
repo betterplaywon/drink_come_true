@@ -12,11 +12,15 @@ import { END } from 'redux-saga';
 import Router from 'next/router';
 import useSWR from 'swr';
 
+import { useSession } from 'next-auth/react';
+
 const profile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
   const [followersLimit, setFollowersLimit] = useState(3);
   const [followingsLimit, setFollowingsLimit] = useState(3);
+
+  const { data } = useSession();
 
   const fetcher = url => axios.get(url, { withCredentials: true }).then(result => result.data);
 
@@ -39,11 +43,11 @@ const profile = () => {
   }, []);
 
   useEffect(() => {
-    if (!(user && user.id)) {
+    if (!(user && user.id && data)) {
       Router.push('/');
     }
   }),
-    [user && user.id];
+    [user && user.id, data];
 
   const moreViewFollowings = useCallback(() => {
     setFollowingsLimit(prev => prev + 3);
@@ -58,30 +62,38 @@ const profile = () => {
   //   return <div>following or folllower error</div>;
   // }
 
-  if (!user) {
+  if (!user || !data) {
     return <div>'LOADING'</div>;
   }
-  console.log('유저 정보: ', user);
+
+  console.log({ data });
+
   return (
     <>
       <Head>
         <title>프로필 타이틀</title>
       </Head>
-      <AppLayout>
-        <NicknameForm />
-        <FollowList
-          header="팔로잉"
-          data={followingsData}
-          handleMoreView={moreViewFollowings}
-          loading={!followingsData && !followingsError}
-        />
-        <FollowList
-          header="팔로워"
-          data={followersData}
-          handleMoreView={moreViewFollowers}
-          loading={!followersData && !followersError}
-        />
-      </AppLayout>
+      {user && !data ? (
+        <AppLayout>
+          <NicknameForm />
+          <FollowList
+            header="팔로잉"
+            data={followingsData}
+            handleMoreView={moreViewFollowings}
+            loading={!followingsData && !followingsError}
+          />
+          <FollowList
+            header="팔로워"
+            data={followersData}
+            handleMoreView={moreViewFollowers}
+            loading={!followersData && !followersError}
+          />
+        </AppLayout>
+      ) : (
+        <AppLayout>
+          <div>소셜 로그인 프로필</div>
+        </AppLayout>
+      )}
     </>
   );
 };

@@ -10,10 +10,12 @@ import * as AT from '../actionType';
 import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 const community = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
+  const { data } = useSession();
   const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const community = () => {
       window.removeEventListener('scroll', onScroll);
     };
   }, [isMorePosts, loadPostLoading, mainPosts]);
-
+  console.log('커뮤니티 구글 데이터: ', data);
   return (
     <AppLayout>
       <Head>
