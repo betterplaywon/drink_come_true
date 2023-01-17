@@ -25,6 +25,7 @@
     "lightbox.js-react": "^0.2.7",
     "nanoid": "^3.3.4",
     "next": "^9.5.4",
+    "next-auth": "^4.18.8",
     "next-redux-wrapper": "^6.0.2",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",

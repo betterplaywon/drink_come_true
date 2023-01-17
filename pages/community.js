@@ -16,11 +16,6 @@ const community = () => {
   const { user } = useSelector(state => state.user);
   const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
 
-  // useEffect(() => {
-  //   dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  //   dispatch({ type: AT.LOAD_POSTS_REQUEST });
-  // }, []);
-
   useEffect(() => {
     function onScroll() {
       if (window.scrollY + document.documentElement.clientHeight === document.documentElement.scrollHeight) {
