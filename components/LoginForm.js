@@ -5,6 +5,7 @@ import Link from 'next/link';
 import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_REQUEST } from '../actionType';
+import GoogleLogInButton from './GoogleLogInButton';
 
 const LoginForm = () => {
   const [email, handleChangeEmail] = useInput('');
@@ -46,6 +47,7 @@ const LoginForm = () => {
           </Link>
         </div>
       </Form>
+      <GoogleLogInButton />
     </>
   );
 };

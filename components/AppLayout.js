@@ -8,11 +8,13 @@ import LoginForm from './LoginForm';
 import { useSelector } from 'react-redux';
 import useInput from '../hooks/useInput';
 import Router from 'next/router';
+import { useSession, signOut } from 'next-auth/react';
 
 const AppLayout = ({ children }) => {
   const menuStyle = useMemo(() => ({ padding: '15px' }), []);
   const { user } = useSelector(state => state.user);
   const { Search } = Input;
+  const { data, status } = useSession();
   const [searchInput, onChangeSearchInput] = useInput('');
 
   const onSearch = useCallback(() => {
@@ -37,7 +39,7 @@ const AppLayout = ({ children }) => {
 
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {user ? <UserProfile /> : <LoginForm />}
+          {user || data ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}

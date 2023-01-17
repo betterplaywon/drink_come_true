@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import 'antd/dist/antd.css';
 import wrapper from '../store/configureStore';
+import { SessionProvider } from 'next-auth/react';
 
 function DrinkComeTrue({ Component, pageProps }) {
   return (
@@ -11,7 +12,9 @@ function DrinkComeTrue({ Component, pageProps }) {
         <meta charSet="utf-8" />
         <title>DrinkComeTrue</title>
       </Head>
-      <Component {...pageProps} />
+      <SessionProvider session={pageProps.session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </>
   );
 }
