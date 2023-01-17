@@ -16,10 +16,10 @@ const UserProfile = () => {
   const handleLogout = useCallback(() => {
     dispatch({ type: LOG_OUT_REQUEST });
   }, []);
-  console.log(user);
+
   return (
     <>
-      {user ? (
+      {user && !data ? (
         <Card
           cover={<img alt="drinkGroup" src="https://platum.kr/wp-content/uploads/2017/11/thebooth2-1024x683.jpg" />}
           actions={[

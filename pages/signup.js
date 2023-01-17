@@ -11,6 +11,7 @@ import Router from 'next/router';
 import wrapper from '../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
+import { useSession } from 'next-auth/react';
 
 const signup = () => {
   const dispatch = useDispatch();
@@ -18,9 +19,11 @@ const signup = () => {
   const [email, handleChangeEmail] = useInput('');
   const [nickname, handleChangeNickname] = useInput('');
   const [password, handleChangePassword] = useInput('');
+  const { data } = useSession();
 
   useEffect(() => {
-    if (user && user.id) {
+    if ((user && user.id) || data) {
+      alert('이미 가입하셨습니다');
       Router.replace('/');
     }
   }, [user && user.id]);
