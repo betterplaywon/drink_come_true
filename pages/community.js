@@ -34,11 +34,11 @@ const community = () => {
       window.removeEventListener('scroll', onScroll);
     };
   }, [isMorePosts, loadPostLoading, mainPosts]);
-  console.log('커뮤니티 구글 데이터: ', data);
+
   return (
     <AppLayout>
       <Head>
-        <title> DRINK COME TRUE</title>
+        <title>Drink Come True - Community</title>
       </Head>
       {user && <PostForm />}
       {mainPosts.map(post => (

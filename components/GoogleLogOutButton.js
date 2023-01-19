@@ -2,8 +2,8 @@ import React from 'react';
 import { useSession, signOut } from 'next-auth/react';
 
 const GoogleLogOutButton = () => {
-  const { data, status } = useSession();
-  console.log('로그 아웃에서의 구글데이터: ', data);
+  const { data } = useSession();
+
   return (
     <>
       Signed in as {data.user.email} <br />
