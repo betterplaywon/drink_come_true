@@ -12,17 +12,20 @@ import { END } from 'redux-saga';
 import Router from 'next/router';
 import useSWR from 'swr';
 import DrinkChart from '../components/DrinkChart';
+import { useSession } from 'next-auth/react';
+import { Avatar, Card, Button } from 'antd';
 
 const cycle = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
+  const { data } = useSession();
 
   return (
     <>
       <Head>
-        <title>음주 주기 확인</title>
+        <title>Drink Come True - Drink Cycle</title>
       </Head>
-      <AppLayout>{user ? <DrinkChart /> : <p>'로그인 후 이용 가능합니다'</p>}</AppLayout>
+      <AppLayout>{user || data ? <DrinkChart /> : <p>'로그인 후 이용 가능합니다'</p>}</AppLayout>
     </>
   );
 };
@@ -35,7 +38,6 @@ export const getServerSideProps = wrapper.getServerSideProps(async context => {
     axios.defaults.headers.Cookie = cookie;
   }
   context.store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  // context.store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
   context.store.dispatch(END);
   await context.store.sagaTask.toPromise();
 });
