@@ -22,17 +22,17 @@ const signup = () => {
   const { data } = useSession();
 
   useEffect(() => {
-    if ((user && user.id) || data) {
+    if ((user && user.id) || data || signupDone) {
       alert('이미 가입하셨습니다');
       Router.replace('/');
     }
-  }, [user && user.id]);
+  }, [user && user.id, signupDone]);
 
-  useEffect(() => {
-    if (signupDone) {
-      Router.replace('/');
-    }
-  }, [signupDone]);
+  // useEffect(() => {
+  //   if (signupDone) {
+  //     Router.replace('/');
+  //   }
+  // }, [signupDone]);
 
   useEffect(() => {
     if (signupError) {
@@ -48,7 +48,7 @@ const signup = () => {
   return (
     <AppLayout>
       <Head>
-        <title>회원가입</title>
+        <title>Drink Come True - Sign Up</title>
       </Head>
       <Form onFinish={onSubmit}>
         <div>
