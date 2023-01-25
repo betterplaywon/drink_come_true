@@ -1,14 +1,15 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { Menu, Input, Row, Col, Layout, Breadcrumb } from 'antd';
 import PropTypes from 'prop-types';
 
 import UserProfile from './UserProfile';
 import LoginForm from './LoginForm';
+import MiniProfile from './MiniProfile';
 import { useSelector } from 'react-redux';
 import useInput from '../hooks/useInput';
 import Router from 'next/router';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
@@ -17,7 +18,7 @@ const AppLayout = ({ children }) => {
   const router = useRouter();
   const { user } = useSelector(state => state.user);
   const { Search } = Input;
-  const { Header, Content, Footer } = Layout;
+  const { Content, Footer } = Layout;
 
   const [searchInput, onChangeSearchInput] = useInput('');
 
@@ -79,30 +80,31 @@ const AppLayout = ({ children }) => {
       ),
       key: 'profile',
     },
-    {
-      label: <Search value={searchInput} onChange={onChangeSearchInput} onSearch={onSearch} enterButton />,
+    path === 'Community' && {
+      label: (
+        <Search
+          value={searchInput}
+          onChange={onChangeSearchInput}
+          onSearch={onSearch}
+          enterButton
+          style={{ marginTop: '8px', background: 'green' }}
+        />
+      ),
       key: 'mail',
     },
-    {
+    !(user || data) && {
       label: (
-        <Link href="/signup">
-          <span style={menuFontColor}>회원가입</span>
+        <Link href="/usersign">
+          <span style={menuFontColor}>회원가입 / 로그인</span>
         </Link>
       ),
-      key: 'signup',
+      key: 'usersign',
     },
-    {
-      label: (
-        <Link href="/signin">
-          <span style={menuFontColor}>로그인</span>
-        </Link>
-      ),
-      key: 'signin',
+    (user || data) && {
+      label: <MiniProfile />,
+      key: 'miniprofile',
     },
   ];
-
-  console.log(path);
-  console.log(router);
 
   return (
     <div>
@@ -113,7 +115,6 @@ const AppLayout = ({ children }) => {
         <Content
           style={{
             padding: '0 50px',
-            // marginBottom: '9px',
             minHeight: '100%',
           }}
         >
@@ -129,17 +130,19 @@ const AppLayout = ({ children }) => {
 
           <SiteLayoutContent>
             <Row gutter={25}>
-              <Col xs={24} md={6}>
+              {/* <Col xs={24} md={6}>
                 {user || data ? <UserProfile /> : <LoginForm />}
-              </Col>
-              <Col xs={24} md={12}>
+              </Col> */}
+              <Col xs={24} md={4}></Col>
+              <Col xs={24} md={16}>
                 {children}
               </Col>
+              <Col xs={24} md={4}></Col>
             </Row>
           </SiteLayoutContent>
         </Content>
         <Footer style={footerStyle}>
-          <span style={menuFontColor}>금주에 성공해 이 서비스를 이용하지 않는 것이 바람직합니다</span>
+          <span style={menuFontColor}>자신의 술 습관을 아는 그날까지</span>
         </Footer>
       </Layout>
     </div>

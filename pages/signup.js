@@ -13,7 +13,13 @@ import axios from 'axios';
 import { END } from 'redux-saga';
 import { useSession } from 'next-auth/react';
 
-const signup = () => {
+/**
+ * @deprecated
+ * 2023.01.25
+ * userSign 페이지 생성으로 인한 컴포넌트 사용 중지
+ */
+
+const SignUp = () => {
   const dispatch = useDispatch();
   const { signupLoading, signupDone, signupError, user } = useSelector(state => state.user);
   const [email, handleChangeEmail] = useInput('');
@@ -21,12 +27,12 @@ const signup = () => {
   const [password, handleChangePassword] = useInput('');
   const { data } = useSession();
 
-  useEffect(() => {
-    if ((user && user.id) || data || signupDone) {
-      alert('이미 가입하셨습니다');
-      Router.replace('/');
-    }
-  }, [user && user.id, signupDone]);
+  // useEffect(() => {
+  //   if ((user && user.id) || data || signupDone) {
+  //     alert('이미 가입하셨습니다');
+  //     Router.replace('/');
+  //   }
+  // }, [user && user.id, signupDone]);
 
   // useEffect(() => {
   //   if (signupDone) {
@@ -34,61 +40,65 @@ const signup = () => {
   //   }
   // }, [signupDone]);
 
-  useEffect(() => {
-    if (signupError) {
-      alert(signupError);
-    }
-  }, [signupError]);
+  // useEffect(() => {
+  //   if (signupError) {
+  //     alert(signupError);
+  //   }
+  // }, [signupError]);
 
-  const onSubmit = useCallback(() => {
-    console.log(email, nickname, password);
-    dispatch({ type: SIGN_UP_REQUEST, data: { email, nickname, password } });
-  }, [email, nickname, password]);
+  // const onSubmit = useCallback(() => {
+  //   console.log(email, nickname, password);
+  //   dispatch({ type: SIGN_UP_REQUEST, data: { email, nickname, password } });
+  // }, [email, nickname, password]);
 
-  return (
-    <AppLayout>
-      <Head>
-        <title>Drink Come True - Sign Up</title>
-      </Head>
-      <Form onFinish={onSubmit}>
-        <div>
-          <label htmlFor="user-email">계정</label>
-          <br />
-          <input name="user-email" type="email " value={email} onChange={handleChangeEmail} />
-        </div>
+  // return (
+  //   <div className={`${style.formContainer} ${style.signUpContainer}`}>
+  //     <form onSubmit={handleSignUpForm}>
+  //       <h1>Create Account</h1>
+  //       <div className={style.socialContainer}>
+  //         <GoogleOutlined />
+  //       </div>
 
-        <div>
-          <label htmlFor="user=password">닉네임</label>
-          <br />
-          <input name="user=password" value={nickname} onChange={handleChangeNickname} />
-        </div>
+  //       <span>or use your email for registration</span>
 
-        <div>
-          <label htmlFor="user=password">비밀번호</label>
-          <br />
-          <input name="user=password" value={password} onChange={handleChangePassword} maxLength={13} />
-        </div>
-        <div style={{ marginTop: '15px' }}>
-          <Button type="primary" htmlType="submit" loading={signupLoading}>
-            가입하기
-          </Button>
-        </div>
-      </Form>
-    </AppLayout>
-  );
+  //       <br />
+  //       <input name="user-email" type="email" value={email} onChange={handleChangeEmail} placeholder="email" />
+
+  //       <input
+  //         name="user-nickname"
+  //         type="text"
+  //         value={nickname}
+  //         onChange={handleChangeNickname}
+  //         placeholder="nickname"
+  //       />
+
+  //       <input
+  //         name="user-password"
+  //         value={password}
+  //         onChange={handleChangePassword}
+  //         maxLength={13}
+  //         placeholder="password"
+  //       />
+
+  //       <div style={{ marginTop: '15px' }}>
+  //         <button>가입하기</button>
+  //       </div>
+  //     </form>
+  //   </div>
+  // );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async context => {
-  // context 안에 store가 들어있다.
-  const cookie = context.req ? context.req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (context.req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
-  }
-  context.store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  context.store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
-  context.store.dispatch(END);
-  await context.store.sagaTask.toPromise();
-});
+// export const getServerSideProps = wrapper.getServerSideProps(async context => {
+//   // context 안에 store가 들어있다.
+//   const cookie = context.req ? context.req.headers.cookie : '';
+//   axios.defaults.headers.Cookie = '';
+//   if (context.req && cookie) {
+//     axios.defaults.headers.Cookie = cookie;
+//   }
+//   context.store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+//   context.store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
+//   context.store.dispatch(END);
+//   await context.store.sagaTask.toPromise();
+// });
 
-export default signup;
+export default SignUp;
