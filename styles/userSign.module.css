@@ -6,7 +6,8 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 768px;
+  /* width: 768px; */
+  width: 90vw;
   max-width: 100%;
   min-height: 480px;
 }
@@ -24,7 +25,7 @@
   z-index: 2;
 }
 
-.container.rightPanel-active .signInContainer {
+.container.rightPanelActive .signInContainer {
   transform: translateX(100%);
 }
 
@@ -35,7 +36,7 @@
   z-index: 1;
 }
 
-.container.rightPanel-active .signUpContainer {
+.container.rightPanelActive .signUpContainer {
   transform: translateX(100%);
   opacity: 1;
   z-index: 5;
@@ -67,7 +68,7 @@
   z-index: 100;
 }
 
-.container.rightPanel-active .overlayContainer {
+.container.rightPanelActive .overlayContainer {
   transform: translateX(-100%);
 }
 
@@ -87,7 +88,7 @@
   transition: transform 0.6s ease-in-out;
 }
 
-.container.rightPanel-active .overlay {
+.container.rightPanelActive .overlay {
   transform: translateX(50%);
 }
 
