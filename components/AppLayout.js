@@ -1,10 +1,11 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, Input, Row, Col, Layout, Breadcrumb } from 'antd';
 import PropTypes from 'prop-types';
+import * as AT from '../actionType';
 
-import UserProfile from './UserProfile';
-import LoginForm from './LoginForm';
+// import UserProfile from './UserProfile';
+// import LoginForm from './LoginForm';
 import MiniProfile from './MiniProfile';
 import { useSelector } from 'react-redux';
 import useInput from '../hooks/useInput';
@@ -34,8 +35,17 @@ const AppLayout = ({ children }) => {
     }),
     [],
   );
-  const footerStyle = useMemo(() => ({ backgroundColor: 'black', textAlign: 'center' }), []);
-  const menuFontColor = useMemo(() => ({ color: 'white' }), []);
+  const footerStyle = useMemo(() => ({ backgroundColor: '#000000', textAlign: 'center', color: '#fff' }), []);
+  const menuFontColor = useMemo(
+    () => ({
+      // display: 'flex',
+      // flexDirection: 'row',
+      // justifyContent: 'space-between',
+
+      color: 'white',
+    }),
+    [],
+  );
 
   const onSearch = useCallback(() => {
     Router.push(`/hashtag/${searchInput}`);
@@ -58,8 +68,16 @@ const AppLayout = ({ children }) => {
     },
     {
       label: (
+        <Link href="/profile">
+          <span style={menuFontColor}>My Info</span>
+        </Link>
+      ),
+      key: 'profile',
+    },
+    {
+      label: (
         <Link href="/cycle">
-          <span style={menuFontColor}>음주 주기 체크</span>
+          <span style={menuFontColor}>Favorite Drink Check</span>
         </Link>
       ),
       key: 'cycle',
@@ -67,18 +85,18 @@ const AppLayout = ({ children }) => {
     {
       label: (
         <Link href="/community">
-          <span style={menuFontColor}>커뮤니티</span>
+          <span style={menuFontColor}>술 약속잡기</span>
         </Link>
       ),
       key: 'community',
     },
     {
       label: (
-        <Link href="/profile">
-          <span style={menuFontColor}>프로필</span>
+        <Link href="/drinktest">
+          <span style={menuFontColor}>음주 빈도 테스트</span>
         </Link>
       ),
-      key: 'profile',
+      key: 'drinktest',
     },
     path === 'Community' && {
       label: (
@@ -87,23 +105,24 @@ const AppLayout = ({ children }) => {
           onChange={onChangeSearchInput}
           onSearch={onSearch}
           enterButton
-          style={{ marginTop: '8px', background: 'green' }}
+          style={{ marginTop: '8px', width: '15vw' }}
         />
       ),
       key: 'mail',
     },
-    !(user || data) && {
-      label: (
-        <Link href="/usersign">
-          <span style={menuFontColor}>회원가입 / 로그인</span>
-        </Link>
-      ),
-      key: 'usersign',
-    },
-    (user || data) && {
-      label: <MiniProfile />,
-      key: 'miniprofile',
-    },
+    !user
+      ? {
+          label: (
+            <Link href="/usersign">
+              <span style={menuFontColor}>회원가입 / 로그인</span>
+            </Link>
+          ),
+          key: 'usersign',
+        }
+      : {
+          label: <MiniProfile />,
+          key: 'miniprofile',
+        },
   ];
 
   return (
@@ -124,17 +143,16 @@ const AppLayout = ({ children }) => {
             }}
           >
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-
             <Breadcrumb.Item>{path}</Breadcrumb.Item>
           </Breadcrumb>
 
           <SiteLayoutContent>
-            <Row gutter={25}>
+            <Row gutter={24}>
               {/* <Col xs={24} md={6}>
                 {user || data ? <UserProfile /> : <LoginForm />}
               </Col> */}
               <Col xs={24} md={4}></Col>
-              <Col xs={24} md={16}>
+              <Col xs={24} md={16} style={{ maxWidth: '50vw' }}>
                 {children}
               </Col>
               <Col xs={24} md={4}></Col>
@@ -142,7 +160,7 @@ const AppLayout = ({ children }) => {
           </SiteLayoutContent>
         </Content>
         <Footer style={footerStyle}>
-          <span style={menuFontColor}>자신의 술 습관을 아는 그날까지</span>
+          <span style={footerStyle}>자신의 술 습관을 아는 그날까지</span>
         </Footer>
       </Layout>
     </div>
