@@ -8,6 +8,7 @@ import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_REQUEST } from '../actionType';
 import GoogleLogInButton from '../components/GoogleLogInButton';
+import GoogleLogOutButton from '../components/GoogleLogOutButton';
 import { useSession } from 'next-auth/react';
 
 import wrapper from '../store/configureStore';
@@ -72,22 +73,29 @@ const usersign = () => {
   //     alert('이미 가입하셨습니다');
   //     Router.replace('/');
   //   }
-  // }, [user && user.id, signupDone]);
+  // }, [user && user.id, data, signupDone]);
 
-  const handleSignInForm = useCallback(() => {
-    dispatch({
-      type: AT.LOG_IN_REQUEST,
-      data: { email, password },
-    });
+  const handleSignInForm = useCallback(
+    e => {
+      e.preventDefault();
+      dispatch({
+        type: AT.LOG_IN_REQUEST,
+        data: { email, password },
+      });
 
-    Router.replace('/');
-  }, [email, password]);
+      Router.replace('/');
+    },
+    [email, password],
+  );
 
-  const handleSignUpForm = useCallback(() => {
-    console.log(email, nickname, password);
-    dispatch({ type: AT.SIGN_UP_REQUEST, data: { email, nickname, password } });
-    alert('회원가입이 완료되었습니다');
-  }, [email, nickname, password]);
+  const handleSignUpForm = useCallback(
+    e => {
+      e.preventDefault();
+      dispatch({ type: AT.SIGN_UP_REQUEST, data: { email, nickname, password } });
+      alert('회원가입이 완료되었습니다');
+    },
+    [email, nickname, password],
+  );
 
   return (
     <>
@@ -98,11 +106,9 @@ const usersign = () => {
         <div className={`${style.container}`} id="container">
           {/* ----------------------- 회원가입 html ------------------------- */}
           <div className={`${style.formContainer} ${style.signUpContainer}`}>
-            <form method="post" action="localhost:3000" onSubmit={handleSignUpForm}>
+            <form onSubmit={handleSignUpForm}>
               <h1>Create Account</h1>
-              <div className={style.socialContainer}>
-                <GoogleOutlined />
-              </div>
+              {/* <div className={style.socialContainer}><GoogleOutlined /></div> */}
 
               <span>or use your email for registration</span>
 
@@ -126,23 +132,21 @@ const usersign = () => {
               />
 
               <div style={{ marginTop: '15px' }}>
-                <button>가입하기</button>
+                <button type="submit">가입하기</button>
               </div>
             </form>
           </div>
 
           {/* ----------------------- 로그인 html ------------------------- */}
           <div className={`${style.formContainer} ${style.signInContainer}`}>
-            <form method="post" action="localhost:3000" onSubmit={handleSignInForm}>
+            <form onSubmit={handleSignInForm}>
               <h1>Sign in</h1>
-              <div className={style.socialContainer}>
-                <GoogleOutlined />
-              </div>
+              {/* <div className={style.socialContainer}><GoogleLogInButton /></div> */}
               <span>or use your account</span>
               <br />
               <input name="user-email" type="email" value={email} onChange={handleChangeEmail} required />
               <input name="user-password" type="password" value={password} onChange={handleChangePassword} required />
-              <button>Sign In</button>
+              <button type="submit">Sign In</button>
             </form>
           </div>
 
@@ -173,22 +177,9 @@ const usersign = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async context => {
-  // context 안에 store가 들어있다.
-  const cookie = context.req ? context.req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (context.req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
-  }
-  context.store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  context.store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
-  context.store.dispatch(END);
-  await context.store.sagaTask.toPromise();
-});
-
 const GlobalStyle = createGlobalStyle`
 body {
-  background: #f6f5f7;
+  background: 'black';
   display: flex;
   justify-content: center;
   align-items: center;
@@ -228,9 +219,9 @@ a {
 
 button {
   border-radius: 20px;
-  border: 1px solid #28a846;
-  background-color: #28a846;
-  color: #ffffff;
+  border: 1px solid white;
+  background-color: #000000;
+  color: #fff;
   font-size: 12px;
   font-weight: bold;
   padding: 12px 45px;
@@ -247,13 +238,17 @@ button:focus {
   outline: none;
 }
 
+button:hover {
+  cursor : pointer;
+}
+
 button.ghost {
   background-color: transparent;
   border-color: #ffffff;
 }
 
 form {
-  background-color: #ffffff;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -264,7 +259,7 @@ form {
 }
 
 input {
-  background-color: #eee;
+  // background-color: #000000;
   border: none;
   padding: 12px 15px;
   margin: 8px 0;
@@ -296,5 +291,20 @@ footer a {
   text-decoration: none;
 }
 `;
+
+// export const getServerSideProps = wrapper.getServerSideProps(async context => {
+//   // context 안에 store가 들어있다.
+//   console.log('getServerSideProps start');
+//   const cookie = context.req ? context.req.headers.cookie : '';
+//   axios.defaults.headers.Cookie = '';
+//   if (context.req && cookie) {
+//     axios.defaults.headers.Cookie = cookie;
+//   }
+//   context.store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+//   // context.store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
+//   context.store.dispatch(END);
+//   console.log('getServerSideProps end');
+//   await context.store.sagaTask.toPromise();
+// });
 
 export default usersign;
