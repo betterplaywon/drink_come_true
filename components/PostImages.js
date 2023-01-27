@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -48,10 +48,14 @@ const PostImages = ({ images }) => {
   return (
     <>
       <div>
-        <img style={{ width: '50%', display: 'inline-block' }} src={images[0].src} alt={images[0].src} />
+        <img
+          style={{ width: '25%', display: 'inline-block' }}
+          src={`http://localhost:3065/${images[0].src}`}
+          alt="communityImage"
+        />
         <div
           role="presentation"
-          style={{ display: 'inline-block', width: '50%', textAlign: 'center', verticalAlign: 'middle' }}
+          style={{ display: 'inline-block', width: '25%', textAlign: 'center', verticalAlign: 'middle' }}
           onClick={toggleZoom}
         >
           <PlusOutlined />
