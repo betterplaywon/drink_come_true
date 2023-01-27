@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 import AppLayout from '../components/AppLayout';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as AT from '../actionType';
 
 import wrapper from '../store/configureStore';

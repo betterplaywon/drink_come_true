@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import Router from 'next/router';
-import { Button, Radio } from 'antd';
+import { Button } from 'antd';
 
 const GoogleLogOutButton = () => {
   const { data } = useSession();

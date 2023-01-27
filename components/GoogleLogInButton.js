@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSession, signIn } from 'next-auth/react';
+import React from 'react';
+import { signIn } from 'next-auth/react';
 
 const GoogleLogInButton = () => {
   // const handleGoogleSignIn = () => {

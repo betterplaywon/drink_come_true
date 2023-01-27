@@ -4,8 +4,6 @@ import { Menu, Input, Row, Col, Layout, Breadcrumb } from 'antd';
 import PropTypes from 'prop-types';
 import * as AT from '../actionType';
 
-// import UserProfile from './UserProfile';
-// import LoginForm from './LoginForm';
 import MiniProfile from './MiniProfile';
 import { useSelector } from 'react-redux';
 import useInput from '../hooks/useInput';
@@ -69,7 +67,7 @@ const AppLayout = ({ children }) => {
     {
       label: (
         <Link href="/profile">
-          <span style={menuFontColor}>My Info</span>
+          <span style={menuFontColor}>내 정보</span>
         </Link>
       ),
       key: 'profile',
@@ -77,7 +75,7 @@ const AppLayout = ({ children }) => {
     {
       label: (
         <Link href="/cycle">
-          <span style={menuFontColor}>Favorite Drink Check</span>
+          <span style={menuFontColor}>주종 체크</span>
         </Link>
       ),
       key: 'cycle',
@@ -85,7 +83,7 @@ const AppLayout = ({ children }) => {
     {
       label: (
         <Link href="/community">
-          <span style={menuFontColor}>술 약속잡기</span>
+          <span style={menuFontColor}>음주 게시판</span>
         </Link>
       ),
       key: 'community',
@@ -148,9 +146,6 @@ const AppLayout = ({ children }) => {
 
           <SiteLayoutContent>
             <Row gutter={24}>
-              {/* <Col xs={24} md={6}>
-                {user || data ? <UserProfile /> : <LoginForm />}
-              </Col> */}
               <Col xs={24} md={4}></Col>
               <Col xs={24} md={16} style={{ maxWidth: '50vw' }}>
                 {children}
