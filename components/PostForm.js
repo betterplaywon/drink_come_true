@@ -61,7 +61,7 @@ const PostForm = () => {
       <TextArea
         value={text}
         onChange={handleText}
-        placeholder="오늘 술을 마시면서 생겼던 이야기가 있나요?"
+        placeholder="글을 작성하고 마음 맞는 친구들과 술약속을 잡아봐요!"
         maxLength={100}
       />
 
@@ -70,8 +70,7 @@ const PostForm = () => {
           <input type="file" name="image" multiple hidden ref={imageInput} onChange={onChangeImages} />
           <Button onClick={handleImageUpload}>이미지 업로드</Button>
           <Button
-            type="primary"
-            style={{ float: 'right', width: '25%' }}
+            style={{ float: 'right', width: '25%', background: '#28a846', color: 'white' }}
             htmlType="submit"
             onClick={handleSubmit}
             loading={addPostLoading}
