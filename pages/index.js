@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 import AppLayout from '../components/AppLayout';
+import Head from 'next/head';
 import { useSelector, useDispatch } from 'react-redux';
 
-import PostForm from '../components/PostForm';
-import PostCard from '../components/PostCard';
 import * as AT from '../actionType';
 import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';

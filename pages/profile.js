@@ -57,11 +57,6 @@ const profile = () => {
     setFollowersLimit(prev => prev + 3);
   }, []);
 
-  // if (followersError && followingsError) {
-  //   console.error(followersError && followingsError);
-  //   return <div>following or folllower error</div>;
-  // }
-
   if (!user || !data) {
     return <div>'LOADING'</div>;
   }

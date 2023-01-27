@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 import AppLayout from '../components/AppLayout';
 import { useSelector, useDispatch } from 'react-redux';
 

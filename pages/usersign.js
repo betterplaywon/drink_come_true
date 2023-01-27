@@ -1,26 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
-import Link from 'next/link';
 import AppLayout from '../components/AppLayout';
 
 import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_REQUEST } from '../actionType';
-import GoogleLogInButton from '../components/GoogleLogInButton';
-import GoogleLogOutButton from '../components/GoogleLogOutButton';
-import { useSession } from 'next-auth/react';
-
-import wrapper from '../store/configureStore';
-import axios from 'axios';
 import * as AT from '../actionType';
-import { END } from 'redux-saga';
 
 import style from '../styles/userSign.module.css';
 import styled, { createGlobalStyle } from 'styled-components';
-
-import { GoogleOutlined } from '@ant-design/icons';
-import { Form, Button } from 'antd';
 
 const usersign = () => {
   const [email, handleChangeEmail] = useInput('');
@@ -30,7 +19,6 @@ const usersign = () => {
   const dispatch = useDispatch();
   const { logInLoading, logInError, signupLoading, signupDone, signupError, user } = useSelector(state => state.user);
 
-  const { data } = useSession();
   const isClient = typeof document === 'object';
 
   useEffect(() => {
@@ -67,13 +55,6 @@ const usersign = () => {
       alert(logInError) || alert(signupError);
     }
   }, [logInError]);
-
-  // useEffect(() => {
-  //   if ((user && user.id) || data || signupDone) {
-  //     alert('이미 가입하셨습니다');
-  //     Router.replace('/');
-  //   }
-  // }, [user && user.id, data, signupDone]);
 
   const handleSignInForm = useCallback(
     e => {
@@ -113,7 +94,15 @@ const usersign = () => {
               <span>or use your email for registration</span>
 
               <br />
-              <input name="user-email" type="email" value={email} onChange={handleChangeEmail} placeholder="email" />
+              <input
+                name="user-email"
+                type="email"
+                value={email}
+                onChange={handleChangeEmail}
+                placeholder="email"
+                autocomplete="off"
+                required
+              />
 
               <input
                 name="user-nickname"
@@ -121,6 +110,8 @@ const usersign = () => {
                 value={nickname}
                 onChange={handleChangeNickname}
                 placeholder="nickname"
+                autocomplete="off"
+                required
               />
 
               <input
@@ -129,6 +120,8 @@ const usersign = () => {
                 onChange={handleChangePassword}
                 maxLength={13}
                 placeholder="password"
+                autocomplete="off"
+                required
               />
 
               <div style={{ marginTop: '15px' }}>
@@ -144,8 +137,22 @@ const usersign = () => {
               {/* <div className={style.socialContainer}><GoogleLogInButton /></div> */}
               <span>or use your account</span>
               <br />
-              <input name="user-email" type="email" value={email} onChange={handleChangeEmail} required />
-              <input name="user-password" type="password" value={password} onChange={handleChangePassword} required />
+              <input
+                name="user-email"
+                type="email"
+                value={email}
+                onChange={handleChangeEmail}
+                autocomplete="off"
+                required
+              />
+              <input
+                name="user-password"
+                type="password"
+                value={password}
+                onChange={handleChangePassword}
+                autocomplete="off"
+                required
+              />
               <button type="submit">Sign In</button>
             </form>
           </div>
@@ -259,8 +266,8 @@ form {
 }
 
 input {
-  // background-color: #000000;
-  border: none;
+  background-color: #fff;
+  border: 1px solid #000000;
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
@@ -291,20 +298,5 @@ footer a {
   text-decoration: none;
 }
 `;
-
-// export const getServerSideProps = wrapper.getServerSideProps(async context => {
-//   // context 안에 store가 들어있다.
-//   console.log('getServerSideProps start');
-//   const cookie = context.req ? context.req.headers.cookie : '';
-//   axios.defaults.headers.Cookie = '';
-//   if (context.req && cookie) {
-//     axios.defaults.headers.Cookie = cookie;
-//   }
-//   context.store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-//   // context.store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
-//   context.store.dispatch(END);
-//   console.log('getServerSideProps end');
-//   await context.store.sagaTask.toPromise();
-// });
 
 export default usersign;

@@ -4,7 +4,6 @@ import { HeartTwoTone, HeartOutlined, MessageOutlined, EllipsisOutlined } from '
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import useToggle from '../hooks/useToggle';
-import Link from 'next/link';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
