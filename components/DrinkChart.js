@@ -2,119 +2,146 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as AT from '../actionType';
 
+import wrapper from '../store/configureStore';
+import axios from 'axios';
+import { END } from 'redux-saga';
+import Router from 'next/router';
+
 import Chart from 'chart.js/auto';
-import { Line, Bar } from 'react-chartjs-2';
-import AppLayout from '../components/AppLayout';
-import { Avatar, Card, Button } from 'antd';
+import { Pie } from 'react-chartjs-2';
+import { Card, Row } from 'antd';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+dayjs.locale('ko');
 
 const DrinkChart = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector(state => state.user);
 
-  const UserData = [
-    {
-      id: 1,
-      // year: 2023,
-      month: 9,
-      userGain: 10,
-      userLost: 3,
-    },
-    {
-      id: 2,
-      // year: 2022,
-      month: 10,
-      userGain: 20,
-      userLost: 5,
-    },
-    {
-      id: 3,
-      // year: 2020,
-      month: 11,
-      userGain: 30,
-      userLost: 7,
-    },
-    {
-      id: 4,
-      // year: 2019,
-      month: 12,
-      userGain: 40,
-      userLost: 9,
-    },
-    {
-      id: 5,
-      // year: 2018,
-      month: 1,
-      userGain: 50,
-      userLost: 3,
-    },
-    {
-      id: 6,
-      // year: 2018,
-      month: 2,
-      userGain: 50,
-      userLost: 3,
-    },
-  ];
+  const { user } = useSelector(state => state.user);
+  const userContent = user?.Posts.map(c => c.content);
+
+  const test = userContent => {
+    const sojuResult = [];
+    const beerResult = [];
+    const whiskyResult = [];
+    const cocktailResult = [];
+    const highballResult = [];
+    const kaoliangWineResult = [];
+    const makgeolliResult = [];
+
+    for (let i = 0; i < userContent.length; i++) {
+      if (userContent[i].indexOf('소주' || '#소주') > -1) {
+        sojuResult.push(userContent[i]);
+      }
+      if (userContent[i].indexOf('위스키' || '#위스키') > -1) {
+        whiskyResult.push(userContent[i]);
+      }
+      if (userContent[i].indexOf('맥주' || '#맥주') > -1) {
+        beerResult.push(userContent[i]);
+      }
+      if (userContent[i].indexOf('칵테일' || '#칵테일') > -1) {
+        cocktailResult.push(userContent[i]);
+      }
+      if (userContent[i].indexOf('하이볼') > -1) {
+        highballResult.push(userContent[i]);
+      }
+      if (userContent[i].indexOf('고량주') > -1) {
+        kaoliangWineResult.push(userContent[i]);
+      }
+      if (userContent[i].indexOf('막걸리') > -1) {
+        makgeolliResult.push(userContent[i]);
+      }
+    }
+    return {
+      beerResult,
+      sojuResult,
+      whiskyResult,
+      cocktailResult,
+      highballResult,
+      kaoliangWineResult,
+      makgeolliResult,
+    };
+  };
+
+  const testArr = test(userContent);
 
   const state = {
-    labels: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+    labels: ['맥주', '소주', '위스키', '칵테일', '하이볼', '고량주', '막걸리'],
     datasets: [
       {
         label: '술을 얼마나 마셨는지 체크해보세요',
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
         borderWidth: 2,
-        data: [0, 1, 0, 0, 4, 2, 0],
+        data: [
+          testArr.beerResult.length,
+          testArr.sojuResult.length,
+          testArr.whiskyResult.length,
+          testArr.cocktailResult.length,
+          testArr.highballResult.length,
+          testArr.kaoliangWineResult.length,
+          testArr.makgeolliResult.length,
+        ],
+        lineTension: 0.5,
       },
     ],
   };
-
-  const state2 = {
-    labels: ['10월', '11월', '12월', '1월', '2월'],
-    datasets: [
-      {
-        label: '술을 얼마나 마셨는지 체크해보세요',
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 2,
-        data: [65, 59, 80, 81, 56],
-      },
-    ],
-  };
-
-  const [userData, setUserData] = useState({
-    labels: UserData.map(data => data.year),
-    datasets: [
-      {
-        label: '술, 얼마나 자주 마시는걸까',
-        data: UserData.map(data => data.userGain),
-        backgroundColor: ['rgba(35,161,18,1)', '#23a112', '#23a112', '#23a112', '#23a112'],
-        borderColor: 'white',
-        borderWidth: 2,
-      },
-    ],
-  });
 
   return (
-    <Card title="Default size card">
-      <div>
-        <Bar
-          data={state}
-          options={{
-            title: {
-              display: true,
-              text: 'Average Rainfall per month',
-              fontSize: 20,
-            },
-            legend: {
-              display: true,
-              position: 'right',
-            },
-          }}
-        />
-      </div>
-    </Card>
+    <div>
+      <Row gutter={24}>
+        <Card>
+          <p>어떤 술을 마셨는지 확인해볼까요?</p>
+        </Card>
+
+        <Card title="내가 제일 자주 마신 술은?">
+          <div>
+            <Pie
+              data={state}
+              options={{
+                title: {
+                  display: true,
+                  text: 'Average Rainfall per month',
+                  fontSize: 20,
+                },
+                legend: {
+                  display: true,
+                  position: 'right',
+                },
+              }}
+            />
+          </div>
+        </Card>
+      </Row>
+    </div>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(async context => {
+  // context 안에 store가 들어있다.
+  const cookie = context.req ? context.req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (context.req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  context.store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+  context.store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
+  context.store.dispatch(END);
+  await context.store.sagaTask.toPromise();
+});
 
 export default DrinkChart;
