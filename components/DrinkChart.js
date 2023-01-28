@@ -9,7 +9,7 @@ import Router from 'next/router';
 
 import Chart from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
-import { Card, Row } from 'antd';
+import { Card, Row, Col, Divider } from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
@@ -77,6 +77,7 @@ const DrinkChart = () => {
           'rgba(75, 192, 192, 0.2)',
           'rgba(153, 102, 255, 0.2)',
           'rgba(255, 159, 64, 0.2)',
+          'rgba(150, 75, 2, 0.2)',
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
@@ -85,6 +86,7 @@ const DrinkChart = () => {
           'rgba(75, 192, 192, 1)',
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)',
+          'rgba(150, 75, 2, 1)',
         ],
         borderWidth: 2,
         data: [
@@ -104,28 +106,32 @@ const DrinkChart = () => {
   return (
     <div>
       <Row gutter={24}>
-        <Card>
-          <p>어떤 술을 마셨는지 확인해볼까요?</p>
-        </Card>
-
-        <Card title="내가 제일 자주 마신 술은?">
+        <Col className="gutter-row">
           <div>
-            <Pie
-              data={state}
-              options={{
-                title: {
-                  display: true,
-                  text: 'Average Rainfall per month',
-                  fontSize: 20,
-                },
-                legend: {
-                  display: true,
-                  position: 'right',
-                },
-              }}
-            />
+            <p>어떤 술을 마셨는지 확인해볼까요?</p>
           </div>
-        </Card>
+        </Col>
+
+        <Col className="gutter-row">
+          <Card title="내가 제일 자주 마신 술은?">
+            <div>
+              <Pie
+                data={state}
+                options={{
+                  title: {
+                    display: true,
+                    text: 'Average Rainfall per month',
+                    fontSize: 20,
+                  },
+                  legend: {
+                    display: true,
+                    position: 'right',
+                  },
+                }}
+              />
+            </div>
+          </Card>
+        </Col>
       </Row>
     </div>
   );
