@@ -49,17 +49,17 @@ const PostCard = ({ post }) => {
       data: post.id,
     });
   }, []);
-
+  console.log(liked);
   return (
     <div style={{ marginBottom: '10px' }}>
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
-          liked ? (
-            <HeartTwoTone twoToneColor="#eb2f96" key="like" onClick={inActiveLiked} />
-          ) : (
-            <HeartOutlined key="like" onClick={activeLiked} />
-          ),
+          // liked ? (
+          //   <HeartTwoTone twoToneColor="#eb2f96" key="like" onClick={inActiveLiked} />
+          // ) : (
+          //   <HeartOutlined key="like" onClick={activeLiked} />
+          // ),
 
           <MessageOutlined key="comment" onClick={onToggleCommentFormOpen} />,
           <Popover
@@ -82,7 +82,7 @@ const PostCard = ({ post }) => {
         ]}
         extra={id && <FollowButton post={post} />}
       >
-        <div style={{ float: 'right' }}>{dayjs(post.createdAt).format('YYYY.MM.DD.dddd.HH:mm')}</div>
+        <div style={{ position: 'absolute', right: 20 }}>{dayjs(post.createdAt).format('YYYY.MM.DD')}</div>
         <Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
           title={post.User.nickname}
@@ -91,7 +91,7 @@ const PostCard = ({ post }) => {
       </Card>
 
       {isCommentFormOpen && (
-        <div>
+        <div style={{ background: '#fff', padding: '10px' }}>
           <CommentForm post={post} />
           <List
             itemLayout="horizontal"
