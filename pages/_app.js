@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import '../styles/userSign.module.css';
+import '../styles/homeComp.module.css';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import 'antd/dist/antd.css';
