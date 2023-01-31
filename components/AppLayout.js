@@ -125,7 +125,13 @@ const AppLayout = ({ children }) => {
 
   return (
     <div>
-      <Layout className="layout" style={{ minHeight: '100vh' }}>
+      <Layout
+        className="layout"
+        style={{
+          minHeight: '100vh',
+          background: '#fff',
+        }}
+      >
         <div className="logo" />
         <Menu mode="horizontal" defaultSelectedKeys={['2']} style={menuStyle} items={menuItems} />
 
@@ -146,11 +152,11 @@ const AppLayout = ({ children }) => {
 
           <SiteLayoutContent>
             <Row gutter={24}>
-              <Col xs={24} md={4}></Col>
+              <Col xs={24} md={5}></Col>
               <Col xs={24} md={16} style={{ maxWidth: '50vw' }}>
                 {children}
               </Col>
-              <Col xs={24} md={4}></Col>
+              {/* <Col xs={24} md={4}></Col> */}
             </Row>
           </SiteLayoutContent>
         </Content>
@@ -164,7 +170,10 @@ const AppLayout = ({ children }) => {
 const SiteLayoutContent = styled.div`
   min-height: 70vh;
   padding: 24px;
-  background: #fff;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://gscaltexmediahub.com/wp-content/uploads/2011/11/%EC%88%A0.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 AppLayout.propTypes = {
