@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { PlusOutlined } from '@ant-design/icons';
 
 import useToggle from '../hooks/useToggle';
-import ImagesZoom from './ImagesZoom';
+import ImagesSlider from './ImagesSlider';
 
 const PostImages = ({ images }) => {
-  const [showImagesZoom, toggleZoom] = useToggle(false);
+  const [showImagesSlider, toggleSlider] = useToggle(false);
 
   if (images.length === 1) {
     return (
@@ -16,9 +16,9 @@ const PostImages = ({ images }) => {
           role="presentation"
           src={`http://localhost:3065/${images[0].src}`}
           alt={images[0].src}
-          onClick={toggleZoom}
+          onClick={toggleSlider}
         />
-        {showImagesZoom && <ImagesZoom images={images} toggleZoom={toggleZoom} />}
+        {showImagesSlider && <ImagesSlider images={images} toggleSlider={toggleSlider} />}
       </>
     );
   }
@@ -31,16 +31,16 @@ const PostImages = ({ images }) => {
           role="presentation"
           src={`http://localhost:3065/${images[0].src}`}
           alt={`http://localhost:3065/${images[0].src}`}
-          onClick={toggleZoom}
+          onClick={toggleSlider}
         />
         <img
           style={{ width: '25%', display: 'inline-block' }}
           role="presentation"
           src={`http://localhost:3065/${images[1].src}`}
           alt={`http://localhost:3065/${images[1].src}`}
-          onClick={toggleZoom}
+          onClick={toggleSlider}
         />
-        {showImagesZoom && <ImagesZoom images={images} toggleZoom={toggleZoom} />}
+        {showImagesSlider && <ImagesSlider images={images} toggleSlider={toggleSlider} />}
       </>
     );
   }
@@ -56,14 +56,14 @@ const PostImages = ({ images }) => {
         <div
           role="presentation"
           style={{ display: 'inline-block', width: '25%', textAlign: 'center', verticalAlign: 'middle' }}
-          onClick={toggleZoom}
+          onClick={toggleSlider}
         >
           <PlusOutlined />
           <br />
           <span>{images.length - 1}개의 사진 더보기</span>
         </div>
       </div>
-      {showImagesZoom && <ImagesZoom images={images} toggleZoom={toggleZoom} />}
+      {showImagesSlider && <ImagesSlider images={images} toggleSlider={toggleSlider} />}
     </>
   );
 };

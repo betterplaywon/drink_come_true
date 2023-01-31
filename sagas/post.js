@@ -231,15 +231,15 @@ function* watchLoadPost() {
 }
 // ---------------------- 게시글 여러개 ----------------------
 function* watchLoadPosts() {
-  yield throttle(1000, AT.LOAD_POSTS_REQUEST, loadPosts);
+  yield throttle(500, AT.LOAD_POSTS_REQUEST, loadPosts);
 }
 // ---------------------- 게시글의 해시태그 ----------------------
 function* watchLoadHashtagPosts() {
-  yield throttle(1000, AT.LOAD_HASTAG_POSTS_REQUEST, loadHashtagPosts);
+  yield throttle(500, AT.LOAD_HASTAG_POSTS_REQUEST, loadHashtagPosts);
 }
 // ---------------------- 다른 유저의 게시글 ----------------------
 function* watchLoadUserPosts() {
-  yield throttle(1000, AT.LOAD_USER_POSTS_REQUEST, loadUserPosts);
+  yield throttle(500, AT.LOAD_USER_POSTS_REQUEST, loadUserPosts);
 }
 
 function* watchLikePost() {

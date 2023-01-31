@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import AppLayout from '../components/AppLayout';
 import Head from 'next/head';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,19 +8,33 @@ import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
+import HomeComp from '../components/HomeComp';
+
 const Home = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
   const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
+
+  const themeStyle = useMemo(
+    () => ({
+      fontSize: '45px',
+    }),
+    [],
+  );
+
+  const contentStyle = useMemo(
+    () => ({
+      fontSize: '25px',
+    }),
+    [],
+  );
 
   return (
     <AppLayout>
       <Head>
         <title> DRINK COME TRUE</title>
       </Head>
-      <div>메인 페이지</div>
-      <div>메인페이지 내용 2</div>
-      <div>메인페이지 내용 3</div>
+      <HomeComp />
     </AppLayout>
   );
 };
