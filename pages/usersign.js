@@ -100,7 +100,7 @@ const usersign = () => {
                 value={email}
                 onChange={handleChangeEmail}
                 placeholder="email"
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
 
