@@ -1,29 +1,34 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import Head from 'next/head';
-import Router from 'next/router';
-import Link from 'next/link';
+import React from 'react';
 import AppLayout from '../components/AppLayout';
+import { Menu, Input, Row, Col, Layout, Breadcrumb, Image, Button } from 'antd';
+import Link from 'next/link';
+import style from '../styles/drinkTestMain.module.css';
 
-import useInput from '../hooks/useInput';
-import { useDispatch, useSelector } from 'react-redux';
-import { LOG_IN_REQUEST } from '../actionType';
-import GoogleLogInButton from '../components/GoogleLogInButton';
-import GoogleLogOutButton from '../components/GoogleLogOutButton';
-import { useSession } from 'next-auth/react';
+const drinkTest = () => {
+  const isClient = typeof document === 'object';
 
-import wrapper from '../store/configureStore';
-import axios from 'axios';
-import * as AT from '../actionType';
-import { END } from 'redux-saga';
-
-import style from '../styles/userSign.module.css';
-import styled, { createGlobalStyle } from 'styled-components';
-
-import { GoogleOutlined } from '@ant-design/icons';
-import { Form, Button } from 'antd';
-
-const drinktest = () => {
-  return <div>음주 빈도 테스트</div>;
+  return (
+    <AppLayout>
+      <div className={style.container}>
+        <h2 className={`${style.pageSubtitle}`}>알콜 러버 테스트</h2>
+        <h1 className={`${style.pageTitle}`}>
+          내 안에 잠든
+          <br />
+          주당을 찾자
+        </h1>
+        <img
+          src="https://pbs.twimg.com/media/BAj8nUECYAEQc5x.jpg"
+          alt="캐릭터"
+          className={style.character}
+          style={{ display: 'block' }}
+        />
+        <Link href="/drinkTestQna">
+          <a className={`${style.btn} ${style.btnOrange}`}>TEST GO</a>
+        </Link>
+        <div className={`${style.btn} ${style.btnGreen} ${style.btnSmall} ${style.shareOrCopy}`}>주변에 알리기</div>
+      </div>
+    </AppLayout>
+  );
 };
 
-export default drinktest;
+export default drinkTest;

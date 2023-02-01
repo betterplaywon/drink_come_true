@@ -36,10 +36,6 @@ const AppLayout = ({ children }) => {
   const footerStyle = useMemo(() => ({ backgroundColor: '#000000', textAlign: 'center', color: '#fff' }), []);
   const menuFontColor = useMemo(
     () => ({
-      // display: 'flex',
-      // flexDirection: 'row',
-      // justifyContent: 'space-between',
-
       color: 'white',
     }),
     [],
@@ -54,6 +50,7 @@ const AppLayout = ({ children }) => {
   };
 
   const path = convertPathUpperCase(router.asPath.slice(1));
+  const drinkTestPath = 'DrinkTest' || 'DrinkTestQna' || 'DrinkTestResult';
 
   const menuItems = [
     {
@@ -90,8 +87,8 @@ const AppLayout = ({ children }) => {
     },
     {
       label: (
-        <Link href="/drinktest">
-          <span style={menuFontColor}>음주 빈도 테스트</span>
+        <Link href="/drinkTest">
+          <span style={menuFontColor}>음주 레벨 테스트</span>
         </Link>
       ),
       key: 'drinktest',
@@ -150,15 +147,23 @@ const AppLayout = ({ children }) => {
             <Breadcrumb.Item>{path}</Breadcrumb.Item>
           </Breadcrumb>
 
-          <SiteLayoutContent>
+          {path === drinkTestPath ? (
             <Row gutter={24}>
               <Col xs={24} md={5}></Col>
               <Col xs={24} md={16} style={{ maxWidth: '50vw' }}>
                 {children}
               </Col>
-              {/* <Col xs={24} md={4}></Col> */}
             </Row>
-          </SiteLayoutContent>
+          ) : (
+            <SiteLayoutContent>
+              <Row gutter={24}>
+                <Col xs={24} md={5}></Col>
+                <Col xs={24} md={16} style={{ maxWidth: '50vw' }}>
+                  {children}
+                </Col>
+              </Row>
+            </SiteLayoutContent>
+          )}
         </Content>
         <Footer style={footerStyle}>
           <span style={footerStyle}>자신의 술 습관을 아는 그날까지</span>
