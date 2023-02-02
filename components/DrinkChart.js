@@ -25,19 +25,19 @@ const DrinkChart = () => {
       const makgeolliResult = [];
 
       for (let i = 0; i < userContent.length; i++) {
-        if (userContent[i].indexOf('소주' || '#소주') > -1) {
+        if (userContent[i]?.indexOf('소주' || '#소주') > -1) {
           sojuResult.push(userContent[i]);
         }
-        if (userContent[i].indexOf('위스키' || '#위스키') > -1) {
+        if (userContent[i]?.indexOf('위스키' || '#위스키') > -1) {
           whiskyResult.push(userContent[i]);
         }
-        if (userContent[i].indexOf('맥주' || '#맥주') > -1) {
+        if (userContent[i]?.indexOf('맥주' || '#맥주') > -1) {
           beerResult.push(userContent[i]);
         }
-        if (userContent[i].indexOf('고량주') > -1) {
+        if (userContent[i]?.indexOf('고량주') > -1) {
           kaoliangWineResult.push(userContent[i]);
         }
-        if (userContent[i].indexOf('막걸리') > -1) {
+        if (userContent[i]?.indexOf('막걸리') > -1) {
           makgeolliResult.push(userContent[i]);
         }
       }
@@ -106,11 +106,11 @@ const DrinkChart = () => {
       }
     }
     return (
-      <div>
+      <>
         <span>{`${result[0][0]} 술자리가 `}</span>
         <span style={{ fontWeight: 'bold', fontSize: '19px' }}>{`${result[0][1]}번으로 `}</span>
         <span>가장 많네요!</span>
-      </div>
+      </>
     );
   };
 
