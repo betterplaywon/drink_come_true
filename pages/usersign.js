@@ -110,7 +110,7 @@ const usersign = () => {
                 value={nickname}
                 onChange={handleChangeNickname}
                 placeholder="nickname"
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
 
@@ -120,7 +120,7 @@ const usersign = () => {
                 onChange={handleChangePassword}
                 maxLength={13}
                 placeholder="password"
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
 
@@ -142,7 +142,7 @@ const usersign = () => {
                 type="email"
                 value={email}
                 onChange={handleChangeEmail}
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
               <input
@@ -150,7 +150,7 @@ const usersign = () => {
                 type="password"
                 value={password}
                 onChange={handleChangePassword}
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
               <button type="submit">Sign In</button>
