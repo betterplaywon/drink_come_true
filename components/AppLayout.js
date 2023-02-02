@@ -87,7 +87,7 @@ const AppLayout = ({ children }) => {
     },
     {
       label: (
-        <Link href="/drinkTest">
+        <Link href="/drinktest">
           <span style={menuFontColor}>음주 레벨 테스트</span>
         </Link>
       ),
