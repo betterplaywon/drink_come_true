@@ -49,7 +49,7 @@ const PostCard = ({ post }) => {
       data: post.id,
     });
   }, []);
-  console.log(liked);
+
   return (
     <div style={{ marginBottom: '10px' }}>
       <Card
