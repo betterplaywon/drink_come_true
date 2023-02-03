@@ -120,7 +120,11 @@ const DrinkChart = () => {
         <Col span={12}>
           <Card>
             <p>어떤 술을 가장 많이 마셨는지 확인해볼까요?</p>
-            <p style={{ marginBottom: '40px', color: 'lightGray' }}>작성한 게시글 데이터를 기반으로 한 그래프입니다</p>
+            <p style={{ marginBottom: '40px', color: 'lightGray' }}>
+              회원님이 작성한 게시글 데이터를
+              <br />
+              기반으로 한 그래프입니다
+            </p>
             <p>{qwerFunc()}</p>
           </Card>
         </Col>
