@@ -11,11 +11,14 @@ import Router from 'next/router';
 import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import wrapper from '../store/configureStore';
+import axios from 'axios';
+import { END } from 'redux-saga';
 
 const AppLayout = ({ children }) => {
   const { data, status } = useSession();
   const router = useRouter();
-  const { user } = useSelector(state => state.user);
+  const { user } = useSelector(state => state?.user);
   const { Search } = Input;
   const { Content, Footer } = Layout;
 
@@ -61,14 +64,14 @@ const AppLayout = ({ children }) => {
       ),
       key: 'home',
     },
-    {
-      label: (
-        <Link href="/profile">
-          <span style={menuFontColor}>내 정보</span>
-        </Link>
-      ),
-      key: 'profile',
-    },
+    // {
+    //   label: (
+    //     <Link href="/profile">
+    //       <span style={menuFontColor}>내 정보</span>
+    //     </Link>
+    //   ),
+    //   key: 'profile',
+    // },
     {
       label: (
         <Link href="/cycle">
@@ -119,6 +122,8 @@ const AppLayout = ({ children }) => {
           key: 'miniprofile',
         },
   ];
+
+  // console.log(user);
 
   return (
     <div>
