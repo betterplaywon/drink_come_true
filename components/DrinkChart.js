@@ -155,7 +155,6 @@ const DrinkChart = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async context => {
-  // context 안에 store가 들어있다.
   const cookie = context.req ? context.req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (context.req && cookie) {

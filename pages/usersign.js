@@ -44,7 +44,6 @@ const usersign = () => {
 
     return () => {
       signUpButton.addEventListener('click', () => {
-        console.log('클린업');
         container.classList.remove(`${style.rightPanelActive}`);
       });
     };
@@ -66,7 +65,7 @@ const usersign = () => {
 
       Router.replace('/');
     },
-    [email, password],
+    [email, password, logInLoading],
   );
 
   const handleSignUpForm = useCallback(
