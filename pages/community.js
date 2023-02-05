@@ -19,7 +19,9 @@ const community = () => {
 
   useEffect(() => {
     function onScroll() {
-      if (window.scrollY + document.documentElement.clientHeight === document.documentElement.scrollHeight) {
+      if (
+        Math.floor(window.scrollY + document.documentElement.clientHeight) === document.documentElement.scrollHeight
+      ) {
         if (isMorePosts && !loadPostLoading) {
           const endId = mainPosts[mainPosts.length - 1]?.id;
           dispatch({ type: AT.LOAD_POSTS_REQUEST, endId });
@@ -48,7 +50,6 @@ const community = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async context => {
-  // context 안에 store가 들어있다.
   const cookie = context.req ? context.req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (context.req && cookie) {

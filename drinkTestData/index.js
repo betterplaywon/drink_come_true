@@ -123,33 +123,62 @@ export const qnaList = [
       },
     ],
   },
+  {
+    number: '08',
+  },
 ];
 
 export const qnaResult = [
   {
     title: '술이 나를 부른다. 알콜 러버',
     character: 'image src',
-    results: [
-      <>술을 좋아하는 당신. 술을 마시고 많은 추억을 쌓는 것도 좋지만</>,
-      <>과한 음주는 몸에 좋지 않다는 점 알고있죠?</>,
-      <>폭음은 줄이면서 운동을 병행한다면 더 즐거운</>,
-      <>음주 라이프를 즐길 수 있을거에요</>,
+    results: (
+      <>
+        술을 좋아하는 당신.
+        <br />
+        술을 마시고 많은 추억을 쌓는 것도 좋지만
+        <br />
+        과한 음주는 몸에 좋지 않다는 점 알고있죠?
+        <br />
+        <br />
+        폭음은 줄이고 운동을 병행한다면
+        <br />더 즐거운 음주 라이프를 즐길 수 있을거에요
+      </>
+    ),
+    recommendFood: [
+      {
+        src: 'https://cdn-std-web-144-223.cdn-nhncommerce.com/lifestory1_godomall_com/data/goods/21/07/27/1000000003/1000000003_add3_079.jpg',
+        name: '숙취해소제',
+      },
+      { src: 'http://healnyou.com/web/product/big/201610/61_shop1_254418.jpg', name: '밀크시슬' },
     ],
-    recommendFood: ['헛깨나무', '부추', '마늘', '결명자'],
     // lectureImg: '/images/result_lecture1.png',
     // lectureUrl: 'https://bit.ly/3Wr0kt6',
   },
   {
     title: '술보단 다른 게 좋아',
     character: 'image src',
-    results: [
-      <>술로 피로해지지 않은 간으로 더 많은 활동이 가능하겠는걸요?</>,
-      <>음료를 마시며 사람들과 편안한 추억을 갖는 것도 좋지만</>,
-      <>술자리에서만 있는 일이 있기에 가끔은 술자리에 참여해</>,
-      <>취한 사람들을 보며 재밌는 기억을 갖는 것도 좋아요!</>,
+    results: (
+      <>
+        술로 피로해지지 않은 간으로
+        <br />
+        더 많은 활동이 가능하겠는걸요?
+        <br />
+        음료를 마시며 사람들과 편안한 추억을 갖는 것도 좋지만
+        <br />
+        <br />
+        술자리에서만 있는 일이 있기에 가끔은 술자리에 참여해
+        <br />
+        취한 사람들을 보며 재밌는 기억을 갖는 것도 좋아요!
+      </>
+    ),
+
+    recommendFood: [
+      { src: 'https://sitem.ssgcdn.com/30/84/04/item/1000398048430_i1_500.jpg', name: '하이볼' },
+      {
+        src: 'https://cdn.shopify.com/s/files/1/0606/0634/9563/products/D_NQ_NP_686135-MLA42165140694_062020-O.jpg?v=1635357512',
+        name: '화이트와인',
+      },
     ],
-    recommendFood: ['밀크씨슬', '모시조개', '올리브유', '양송이버섯'],
-    // lectureImg: '/images/result_lecture2.png',
-    // lectureUrl: 'https://bit.ly/3SZl1t9',
   },
 ];
