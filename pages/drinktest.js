@@ -9,8 +9,6 @@ import * as AT from '../actionType';
 import style from '../styles/drinkTestMain.module.css';
 
 const drinkTest = () => {
-  const isClient = typeof document === 'object';
-
   return (
     <AppLayout>
       <div className={style.container}>
@@ -29,7 +27,6 @@ const drinkTest = () => {
         <Link href="/drinkTestQna">
           <a className={`${style.btn} ${style.btnOrange}`}>TEST GO</a>
         </Link>
-        <div className={`${style.btn} ${style.btnGreen} ${style.btnSmall} ${style.shareOrCopy}`}>주변에 알리기</div>
       </div>
     </AppLayout>
   );

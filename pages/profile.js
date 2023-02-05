@@ -94,7 +94,6 @@ const profile = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async context => {
-  // context 안에 store가 들어있다.
   console.log('getServerSideProps start');
   const cookie = context.req ? context.req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
