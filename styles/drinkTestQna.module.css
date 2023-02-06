@@ -3,22 +3,24 @@
   height: 20px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   border-radius: 10px;
   background-color: #ffffff;
 }
 .progress .progressValue {
-  width: 10%;
+  /* width: 10%; */
   height: 20px;
   background-color: #2ec7a6;
   border-radius: 10px;
   transition: 0.2s;
 }
+
 .questionBox {
   max-width: 420px;
+  max-height: 600px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 60px;
   padding-left: 40px;
   padding-right: 40px;
@@ -34,13 +36,15 @@
   text-align: center;
   color: #2ec7a6;
 }
+
 .question {
   margin-bottom: 40px;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1.5;
   text-align: center;
 }
+
 .choice {
   border-radius: 120px;
   font-size: 22px;
@@ -71,10 +75,12 @@
   box-shadow: 0 14px 0 #dfe1e2;
   color: #444444;
 }
+
 .btnGray:active {
   box-shadow: 0 4px 0 #dfe1e2;
   transform: translateY(10px);
 }
+
 /* .questionBox .number {
   margin-bottom: 30px;
   font-weight: 900;
