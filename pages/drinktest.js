@@ -19,7 +19,7 @@ const drinkTest = () => {
           주당을 찾자
         </h1>
         <img
-          src="https://pbs.twimg.com/media/BAj8nUECYAEQc5x.jpg"
+          src="https://www.nongmin.com/-/raw/srv-nongmin/data2/content/image/2022/12/14/.cache/512/2022121401090069.jpg"
           alt="캐릭터"
           className={style.character}
           style={{ display: 'block' }}
