@@ -1,17 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import Router from 'next/router';
 import style from '../styles/homeComp.module.css';
 import styled from 'styled-components';
 
-import { Button } from 'antd';
-
 const HomeComp = () => {
-  //   const dispatch = useDispatch();
-  //   const { user } = useSelector(state => state.user);
-  //   const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
-
   const themeStyle = useMemo(
     () => ({
       fontSize: '28px',

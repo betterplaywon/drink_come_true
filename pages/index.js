@@ -11,24 +11,6 @@ import axios from 'axios';
 import HomeComp from '../components/HomeComp';
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const { user } = useSelector(state => state.user);
-  const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
-
-  const themeStyle = useMemo(
-    () => ({
-      fontSize: '45px',
-    }),
-    [],
-  );
-
-  const contentStyle = useMemo(
-    () => ({
-      fontSize: '25px',
-    }),
-    [],
-  );
-
   return (
     <AppLayout>
       <Head>
@@ -40,7 +22,6 @@ const Home = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async context => {
-  // context 안에 store가 들어있다.
   const cookie = context.req ? context.req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (context.req && cookie) {

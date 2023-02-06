@@ -19,7 +19,6 @@ const drinkTestResult = () => {
   const query = router.query.drinkTestResult;
   const isDrink = query[query.length - 1];
   const qnaResultTitle = qnaResult[isDrink].title;
-  const qnaResultCharacter = qnaResult[isDrink].character;
   const qnaResults = qnaResult[isDrink].results;
   const qnaRecommendFood = qnaResult[isDrink].recommendFood;
 
@@ -28,8 +27,6 @@ const drinkTestResult = () => {
       handleIsLoading();
     }, 500);
   }, []);
-
-  console.log(qnaResult, isDrink);
 
   return (
     <>
@@ -55,13 +52,11 @@ const drinkTestResult = () => {
             <div className={style.result}>
               <h3>이런 음식을 추천드려요!</h3>
               <div className={style.resultJobs}>
-                {qnaRecommendFood.map(m => (
-                  <>
-                    <div className={style.resultJob}>
-                      <img src={m.src} />
-                      <br />
-                    </div>
-                  </>
+                {qnaRecommendFood.map((m, idx) => (
+                  <div className={style.resultJob} key={idx}>
+                    <img src={m.src} />
+                    <p>{m.name}</p>
+                  </div>
                 ))}
               </div>
             </div>

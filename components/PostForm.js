@@ -80,7 +80,7 @@ const PostForm = () => {
         </label>
       </div>
 
-      <div>
+      <div style={{ background: '#fcfcfc61' }}>
         {imagePaths?.map((image, idx) => (
           <div key={image.id}>
             <img
