@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import AppLayout from '../components/AppLayout';
 import { Menu, Input, Row, Col, Layout, Breadcrumb, Image, Button } from 'antd';
 import Link from 'next/link';
@@ -12,53 +12,52 @@ import * as AT from '../actionType';
 import style from '../styles/drinkTestQna.module.css';
 
 const drinkTestQna = () => {
-  const [idx, handlePlus] = usePlus(0);
-  const questionNumber = qnaList[idx].number;
-  const question = qnaList[idx].question;
-  const answer = qnaList[idx].choices;
-  let drinkTendency = [];
+  const [idx, setIdx] = usePlus(0);
+  const [progressVal, setProgressVal] = useState(10);
+  const [drinkCount, setDrinkCount] = useState(0);
+  const [noDrinkCount, setNoDrinkCount] = useState(0);
 
-  const isClient = typeof document === 'object';
-
-  console.log(idx);
-
-  // useEffect(() => {
-  //   if (isClient) {
-  //     return false;
-  //   }
-  //   const progressValue = document.getElementsByClassName('progressValue');
-  //   progressValue.width = (idx + 1) * 10 + '%';
-
-  //   return () => {
-  //     progressValue.width = (idx + 1) * 10 + '%';
-  //   };
-  // }, [idx]);
+  const questionNumber = qnaList[idx]?.number;
+  const question = qnaList[idx]?.question;
+  const answer = qnaList[idx]?.choices;
 
   useEffect(() => {
-    // drinkTendency = drinkTendency + question.choices[choiceNumber].value;
+    setProgressVal(prev => prev + 12);
+  }, [idx]);
+
+  useEffect(() => {
     if (idx === qnaList.length - 1) {
-      Router.replace('/drinkTestResult');
+      if (drinkCount > noDrinkCount) Router.replace('/drinkTestResult=' + 0);
+      else Router.replace('/drinkTestResult=' + 1);
     }
   }, [idx]);
 
-  console.log(qnaList);
+  const selectDrink = useCallback(() => {
+    setIdx(prev => prev + 1);
+    setDrinkCount(prev => prev + 1);
+  }, []);
 
+  const selectNoDrink = useCallback(() => {
+    setIdx(prev => prev + 1);
+    setNoDrinkCount(prev => prev + 1);
+  }, []);
+  console.log(idx);
   return (
     <AppLayout>
       <div className={style.container}>
         <div className={style.progress}>
           {/* 게이지바 */}
-          <div className={style.progressValue}></div>
+          <div className={style.progressValue} id="progressValue" style={{ width: progressVal + '%' }}></div>
         </div>
 
         <div className={style.questionBox}>
           <div className={style.number}>{questionNumber}</div>
           <div className={style.question}>{question}</div>
-          <div className={`${style.btn} ${style.btnGray} ${style.choice}`} onClick={handlePlus}>
-            {answer[0].text}
+          <div className={`${style.btn} ${style.btnGray} ${style.choice}`} onClick={selectDrink}>
+            {answer && answer[0]?.text}
           </div>
-          <div className={`${style.btn} ${style.btnGray} ${style.choice}`} onClick={handlePlus}>
-            {answer[1].text}
+          <div className={`${style.btn} ${style.btnGray} ${style.choice}`} onClick={selectNoDrink}>
+            {answer && answer[1]?.text}
           </div>
         </div>
       </div>
