@@ -14,10 +14,13 @@ import styled, { createGlobalStyle } from 'styled-components';
 const usersign = () => {
   const [email, handleChangeEmail] = useInput('');
   const [password, handleChangePassword] = useInput('');
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
   const [nickname, handleChangeNickname] = useInput('');
   const [transition, setTransition] = useState(false);
+
   const dispatch = useDispatch();
-  const { logInLoading, logInError, signupLoading, signupDone, signupError, user } = useSelector(state => state.user);
+  const { logInLoading, logInError, signupError, user } = useSelector(state => state.user);
 
   const isClient = typeof document === 'object';
 
@@ -77,6 +80,14 @@ const usersign = () => {
     [email, nickname, password],
   );
 
+  const onChangePasswordCheck = useCallback(
+    e => {
+      setPasswordCheck(e.target.value);
+      setPasswordError(e.target.value !== password);
+    },
+    [password],
+  );
+
   return (
     <>
       <Head>{transition ? <title>Drink Come True - Sign Up</title> : <title>Drink Come True - Sign In</title>}</Head>
@@ -122,6 +133,18 @@ const usersign = () => {
                 autoComplete="off"
                 required
               />
+
+              <div>
+                <input
+                  name="user-password-check"
+                  type="password"
+                  placeholder="password-check"
+                  value={passwordCheck}
+                  required
+                  onChange={onChangePasswordCheck}
+                />
+                {passwordError && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
+              </div>
 
               <div style={{ marginTop: '15px' }}>
                 <button type="submit">가입하기</button>

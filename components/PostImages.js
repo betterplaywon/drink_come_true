@@ -14,7 +14,7 @@ const PostImages = ({ images }) => {
         <img
           style={{ width: '25%', display: 'inline-block' }}
           role="presentation"
-          src={`http://localhost:3065/${images[0].src}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/${images[0].src}`}
           alt={images[0].src}
           onClick={toggleSlider}
         />
@@ -29,15 +29,15 @@ const PostImages = ({ images }) => {
         <img
           style={{ width: '25%', display: 'inline-block' }}
           role="presentation"
-          src={`http://localhost:3065/${images[0].src}`}
-          alt={`http://localhost:3065/${images[0].src}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/${images[0].src}`}
+          alt={`${process.env.NEXT_PUBLIC_BASE_URL}/${images[0].src}`}
           onClick={toggleSlider}
         />
         <img
           style={{ width: '25%', display: 'inline-block' }}
           role="presentation"
-          src={`http://localhost:3065/${images[1].src}`}
-          alt={`http://localhost:3065/${images[1].src}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/${images[1].src}`}
+          alt={`${process.env.NEXT_PUBLIC_BASE_URL}/${images[1].src}`}
           onClick={toggleSlider}
         />
         {showImagesSlider && <ImagesSlider images={images} toggleSlider={toggleSlider} />}
@@ -50,7 +50,7 @@ const PostImages = ({ images }) => {
       <div>
         <img
           style={{ width: '25%', display: 'inline-block' }}
-          src={`http://localhost:3065/${images[0].src}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/${images[0].src}`}
           alt="communityImage"
         />
         <div

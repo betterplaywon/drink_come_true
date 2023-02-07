@@ -2,19 +2,17 @@ import React, { useMemo, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, Input, Row, Col, Layout, Breadcrumb } from 'antd';
 import PropTypes from 'prop-types';
-import * as AT from '../actionType';
 
 import MiniProfile from './MiniProfile';
 import { useSelector } from 'react-redux';
 import useInput from '../hooks/useInput';
 import Router from 'next/router';
-import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
 const AppLayout = ({ children }) => {
   const router = useRouter();
-  const { user } = useSelector(state => state?.user);
+  const { user } = useSelector(state => state.user);
   const { Search } = Input;
   const { Content, Footer } = Layout;
 

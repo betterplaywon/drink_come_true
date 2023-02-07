@@ -25,11 +25,11 @@ const profile = () => {
   const fetcher = url => axios.get(url, { withCredentials: true }).then(result => result.data);
 
   const { data: followersData, error: followersError } = useSWR(
-    `http://localhost:3065/user/followers?limit=${followersLimit}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/user/followers?limit=${followersLimit}`,
     fetcher,
   );
   const { data: followingsData, error: followingsError } = useSWR(
-    `http://localhost:3065/user/followings?limit=${followingsLimit}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/user/followings?limit=${followingsLimit}`,
     fetcher,
   );
 

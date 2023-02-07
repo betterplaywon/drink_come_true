@@ -18,7 +18,6 @@ const CommentForm = ({ post }) => {
   }, [addCommentDone]);
 
   const handleSubmitComment = useCallback(() => {
-    console.log(post.id, commentText); // id 사용해 게시글 아래에 댓글 달기
     dispatch({
       type: ADD_COMMENT_REQUEST,
       data: { content: commentText, postId: post.id, userId: id },
