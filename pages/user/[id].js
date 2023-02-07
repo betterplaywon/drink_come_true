@@ -22,7 +22,7 @@ const User = () => {
       if (window.scrollY + document.documentElement.clientHeight === document.documentElement.scrollHeight) {
         if (isMorePosts && !loadPostsLoading) {
           const endId = mainPosts[mainPosts.length - 1]?.id;
-          console.log(endId);
+
           dispatch({ type: AT.LOAD_USER_POSTS_REQUEST, data: id, endId: endId });
         }
       }

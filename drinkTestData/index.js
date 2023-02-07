@@ -123,9 +123,6 @@ export const qnaList = [
       },
     ],
   },
-  {
-    number: '08',
-  },
 ];
 
 export const qnaResult = [
@@ -152,8 +149,6 @@ export const qnaResult = [
       },
       { src: 'http://healnyou.com/web/product/big/201610/61_shop1_254418.jpg', name: '밀크시슬' },
     ],
-    // lectureImg: '/images/result_lecture1.png',
-    // lectureUrl: 'https://bit.ly/3Wr0kt6',
   },
   {
     title: '술보단 다른 게 좋아',

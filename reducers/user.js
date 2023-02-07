@@ -66,15 +66,15 @@ export const signupRequestAction = data => ({
   data,
 });
 
-const dummyUser = data => ({
-  ...data,
-  id: 1,
-  name: 'Mcgrady',
-  nickname: '삼성동그라가스',
-  Posts: [{ id: 1 }],
-  Followings: [{ nickname: '오늘의 술' }, { nickname: '혼술족' }, { nickname: '족발에 소주 딱임' }],
-  Followers: [{ nickname: '팔로워 첫번째' }, { nickname: '팔로워 두번째' }, { nickname: '팔로워 세번째' }],
-});
+// const dummyUser = data => ({
+//   ...data,
+//   id: 1,
+//   name: 'Mcgrady',
+//   nickname: '삼성동그라가스',
+//   Posts: [{ id: 1 }],
+//   Followings: [{ nickname: '오늘의 술' }, { nickname: '혼술족' }, { nickname: '족발에 소주 딱임' }],
+//   Followers: [{ nickname: '팔로워 첫번째' }, { nickname: '팔로워 두번째' }, { nickname: '팔로워 세번째' }],
+// });
 
 const reducer = (state = initialState, action) =>
   produce(state, draft => {
@@ -200,7 +200,7 @@ const reducer = (state = initialState, action) =>
       case AT.REMOVE_FOLLOWER_SUCCESS:
         draft.removeFollowerLoading = false;
         draft.removeFollowerDone = true;
-        draft.user.Followers = draft.user.Followers.filter(m => m.id !== action.data.UserId); // 여기 UserId 추적해보기. 흐름 이해 안되었음
+        draft.user.Followers = draft.user.Followers.filter(m => m.id !== action.data.UserId);
         break;
       case AT.REMOVE_FOLLOWER_FAILURE:
         draft.removeFollowerLoading = false;

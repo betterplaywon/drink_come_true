@@ -26,7 +26,7 @@ const drinkTestQna = () => {
   }, [idx]);
 
   useEffect(() => {
-    if (idx === qnaList.length - 1) {
+    if (idx === qnaList.length) {
       if (drinkCount > noDrinkCount) Router.replace('/drinkTestResult=' + 0);
       else Router.replace('/drinkTestResult=' + 1);
     }
@@ -41,7 +41,7 @@ const drinkTestQna = () => {
     setIdx(prev => prev + 1);
     setNoDrinkCount(prev => prev + 1);
   }, []);
-  console.log(idx);
+
   return (
     <AppLayout>
       <div className={style.container}>
