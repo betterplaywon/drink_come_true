@@ -27,8 +27,8 @@ const ImagesZoom = ({ images, toggleZoom }) => {
               <div>
                 <img
                   style={{ width: '50%', display: 'inline-block' }}
-                  src={`http://localhost:3065/${drinkImage.src}`}
-                  alt={`http://localhost:3065/${drinkImage.src}`}
+                  src={`${process.env.NEXT_PUBLIC_BASE_URL}/${drinkImage.src}`}
+                  alt={`${process.env.NEXT_PUBLIC_BASE_URL}/${drinkImage.src}`}
                 />
               </div>
             </SwiperSlide>
