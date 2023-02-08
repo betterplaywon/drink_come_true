@@ -8,18 +8,15 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 
-const ImagesZoom = ({ images, toggleZoom }) => {
+const ImagesSlider = ({ images }) => {
   return (
     <div>
       <Swiper
-        // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         slidesPerView={3}
         navigation={true}
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
-        onSwiper={swiper => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
       >
         {images.map((drinkImage, idx) => {
           return (
@@ -39,8 +36,8 @@ const ImagesZoom = ({ images, toggleZoom }) => {
   );
 };
 
-ImagesZoom.propTypes = {
+ImagesSlider.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   toggleZoom: PropTypes.func.isRequired,
 };
-export default ImagesZoom;
+export default ImagesSlider;
