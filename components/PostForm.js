@@ -80,11 +80,10 @@ const PostForm = () => {
         </label>
       </div>
 
-      <div style={{ background: '#fcfcfc61' }}>
+      <div style={{ background: '#fcfcfc61', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {imagePaths?.map((image, idx) => (
           <div key={image.id}>
             <img
-              // src={`http://localhost:3065/${image}`}
               src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`}
               alt="postImages"
               style={{ width: '25%', display: 'inline-block' }}

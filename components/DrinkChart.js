@@ -8,7 +8,7 @@ import { END } from 'redux-saga';
 
 import Chart from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
-import { Card, Row, Col, Divider } from 'antd';
+import { Card, Row, Col } from 'antd';
 
 const DrinkChart = () => {
   const dispatch = useDispatch();
@@ -95,6 +95,7 @@ const DrinkChart = () => {
 
   const compareMaxDrink = drinkData?.datasets[0].compareMaxDrink.map(v => v);
   const maxDrinkCount = compareMaxDrink.map(v => v[1]);
+  const isMaxDrinkCount = maxDrinkCount.filter(m => m);
 
   const qwerFunc = () => {
     let result = [];
@@ -105,11 +106,18 @@ const DrinkChart = () => {
         result.push(compareMaxDrink[i]);
       }
     }
+
     return (
       <>
-        <span>{`${result[0][0]} 술자리가 `}</span>
-        <span style={{ fontWeight: 'bold', fontSize: '19px' }}>{`${result[0][1]}번으로 `}</span>
-        <span>가장 많네요!</span>
+        {spreadMaxDrinkCount > 0 ? (
+          <>
+            <span>{`${result[0][0]} 술자리가 `}</span>
+            <span style={{ fontWeight: 'bold', fontSize: '19px' }}>{`${result[0][1]}번으로 `}</span>
+            <span>가장 많네요!</span>
+          </>
+        ) : (
+          <span style={{ fontWeight: 'bold', fontSize: '19px' }}>술 약속을 잡으신 적이 없네요!</span>
+        )}
       </>
     );
   };
@@ -120,34 +128,39 @@ const DrinkChart = () => {
         <Col span={12}>
           <Card>
             <p>어떤 술을 가장 많이 마셨는지 확인해볼까요?</p>
-            <p style={{ marginBottom: '40px', color: 'lightGray' }}>
-              회원님이 작성한 게시글 데이터를
-              <br />
-              기반으로 한 그래프입니다
+            <p style={{ marginBottom: '40px', color: '#d3d3d3' }}>
+              회원님이 작성한 게시글 데이터 중
+              <br />술 키워드를 기반으로 한 그래프입니다
             </p>
             <p>{qwerFunc()}</p>
           </Card>
         </Col>
 
         <Col span={12}>
-          <Card title="내가 제일 자주 마신 술은?">
-            <div>
-              <Pie
-                data={drinkData}
-                options={{
-                  title: {
-                    display: true,
-                    text: 'Average Rainfall per month',
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: 'right',
-                  },
-                }}
-              />
-            </div>
-          </Card>
+          {isMaxDrinkCount.length > 0 ? (
+            <Card title="내가 제일 자주 마신 술은?">
+              <div>
+                <Pie
+                  data={drinkData}
+                  options={{
+                    title: {
+                      display: true,
+                      text: 'Average Rainfall per month',
+                      fontSize: 20,
+                    },
+                    legend: {
+                      display: true,
+                      position: 'right',
+                    },
+                  }}
+                />
+              </div>
+            </Card>
+          ) : (
+            <Card>
+              <span>술 약속이 없어 그래프 표시가 되지 않네요!</span>
+            </Card>
+          )}
         </Col>
       </Row>
     </div>
