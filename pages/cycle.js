@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
-import AppLayout from '../components/AppLayout';
+import dynamic from 'next/dynamic';
+import Router from 'next/router';
 
 import { useSelector } from 'react-redux';
 import * as AT from '../actionType';
@@ -9,19 +10,25 @@ import wrapper from '../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
 
-import DrinkChart from '../components/DrinkChart';
-import { useSession } from 'next-auth/react';
+const AppLayout = dynamic(() => import('../components/AppLayout'));
+const DrinkChart = dynamic(() => import('../components/DrinkChart'));
 
 const cycle = () => {
   const { user } = useSelector(state => state.user);
-  const { data } = useSession();
+
+  useEffect(() => {
+    if (!user) {
+      alert('로그인 후 이용해주세요');
+      Router.push('/');
+    }
+  }, []);
 
   return (
     <>
       <Head>
         <title>Drink Come True - Drink Cycle</title>
       </Head>
-      <AppLayout>{user || data ? <DrinkChart /> : <p>'로그인 후 이용 가능합니다'</p>}</AppLayout>
+      <AppLayout>{user ? <DrinkChart /> : <p style={{ color: '#eee' }}>'로그인 후 이용 가능합니다'</p>}</AppLayout>
     </>
   );
 };

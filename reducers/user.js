@@ -1,5 +1,4 @@
 import produce from 'immer';
-
 import * as AT from '../actionType';
 
 export const initialState = {
@@ -65,16 +64,6 @@ export const signupRequestAction = data => ({
   type: AT.SIGN_UP_REQUEST,
   data,
 });
-
-// const dummyUser = data => ({
-//   ...data,
-//   id: 1,
-//   name: 'Mcgrady',
-//   nickname: '삼성동그라가스',
-//   Posts: [{ id: 1 }],
-//   Followings: [{ nickname: '오늘의 술' }, { nickname: '혼술족' }, { nickname: '족발에 소주 딱임' }],
-//   Followers: [{ nickname: '팔로워 첫번째' }, { nickname: '팔로워 두번째' }, { nickname: '팔로워 세번째' }],
-// });
 
 const reducer = (state = initialState, action) =>
   produce(state, draft => {

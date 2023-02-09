@@ -1,15 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
-import AppLayout from '../components/AppLayout';
+import dynamic from 'next/dynamic';
 
 import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOG_IN_REQUEST } from '../actionType';
 import * as AT from '../actionType';
 
 import style from '../styles/userSign.module.css';
 import styled, { createGlobalStyle } from 'styled-components';
+
+const AppLayout = dynamic(() => import('../components/AppLayout'));
 
 const usersign = () => {
   const [email, handleChangeEmail] = useInput('');

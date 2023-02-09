@@ -1,9 +1,11 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { PlusOutlined } from '@ant-design/icons';
 
 import useToggle from '../hooks/useToggle';
-import ImagesSlider from './ImagesSlider';
+
+const ImagesSlider = dynamic(() => import('./ImagesSlider'));
 
 const PostImages = ({ images }) => {
   const [showImagesSlider, toggleSlider] = useToggle(false);

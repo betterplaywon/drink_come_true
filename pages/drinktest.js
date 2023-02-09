@@ -1,12 +1,14 @@
 import React from 'react';
-import AppLayout from '../components/AppLayout';
-import { Menu, Input, Row, Col, Layout, Breadcrumb, Image, Button } from 'antd';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
 import wrapper from '../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
 import * as AT from '../actionType';
 import style from '../styles/drinkTestMain.module.css';
+
+const AppLayout = dynamic(() => import('../components/AppLayout'));
 
 const drinkTest = () => {
   return (

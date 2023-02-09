@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
-import AppLayout from '../components/AppLayout';
+import Router from 'next/router';
+import dynamic from 'next/dynamic';
 import { useSelector, useDispatch } from 'react-redux';
 
-import PostForm from '../components/PostForm';
-import PostCard from '../components/PostCard';
 import * as AT from '../actionType';
 import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import { useSession } from 'next-auth/react';
+
+const AppLayout = dynamic(() => import('../components/AppLayout'));
+const PostForm = dynamic(() => import('../components/PostForm'));
+const PostCard = dynamic(() => import('../components/PostCard'));
 
 const community = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
-  const { data } = useSession();
   const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
 
   useEffect(() => {
@@ -36,15 +37,20 @@ const community = () => {
     };
   }, [isMorePosts, loadPostLoading, mainPosts]);
 
+  useEffect(() => {
+    if (!user) {
+      alert('로그인 후 이용해주세요');
+      Router.push('/');
+    }
+  }, []);
+
   return (
     <AppLayout>
       <Head>
         <title>Drink Come True - Community</title>
       </Head>
       {user && <PostForm />}
-      {mainPosts.map(post => (
-        <PostCard key={post.id} post={post} />
-      ))}
+      {user && mainPosts.map(post => <PostCard key={post.id} post={post} />)}
     </AppLayout>
   );
 };

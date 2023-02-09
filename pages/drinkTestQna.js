@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import AppLayout from '../components/AppLayout';
-import { Menu, Input, Row, Col, Layout, Breadcrumb, Image, Button } from 'antd';
-import Link from 'next/link';
 import Router from 'next/Router';
+import dynamic from 'next/dynamic';
+
 import { qnaList } from '../drinkTestData';
 import usePlus from '../hooks/usePlus';
 import wrapper from '../store/configureStore';
@@ -10,6 +9,8 @@ import axios from 'axios';
 import { END } from 'redux-saga';
 import * as AT from '../actionType';
 import style from '../styles/drinkTestQna.module.css';
+
+const AppLayout = dynamic(() => import('../components/AppLayout'));
 
 const drinkTestQna = () => {
   const [idx, setIdx] = usePlus(0);

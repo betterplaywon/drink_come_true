@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import Link from 'next/link';
 import Router from 'next/router';
 import style from '../styles/homeComp.module.css';
 import styled from 'styled-components';

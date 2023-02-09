@@ -1,12 +1,15 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import * as AT from '../../actionType';
-import wrapper from '../../store/configureStore';
-import AppLayout from '../../components/AppLayout';
-import PostCard from '../../components/PostCard';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+import * as AT from '../../actionType';
+
+import wrapper from '../../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
+
+const AppLayout = dynamic(() => import('../../components/AppLayout'));
+const PostCard = dynamic(() => import('../../components/PostCard'));
 
 const Post = () => {
   const router = useRouter();

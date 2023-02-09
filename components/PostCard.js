@@ -1,18 +1,22 @@
-import React, { useState, useCallback } from 'react';
-import { Card, Button, Popover, List, Avatar, Comment, Space } from 'antd';
-import { HeartTwoTone, HeartOutlined, MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
-import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import dynamic from 'next/dynamic';
+import * as AT from '../actionType';
+import PropTypes from 'prop-types';
 import useToggle from '../hooks/useToggle';
+
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
 
-import PostImages from './PostImages';
-import CommentForm from './CommentForm';
-import PostCardContent from './PostCardContent';
-import * as AT from '../actionType';
+import { Card, Button, Popover, List, Avatar, Comment } from 'antd';
+import { MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
+
 import FollowButton from './FollowButton';
+
+const PostImages = dynamic(() => import('./PostImages'));
+const CommentForm = dynamic(() => import('./CommentForm'));
+const PostCardContent = dynamic(() => import('./PostCardContent'));
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();

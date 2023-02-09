@@ -1,9 +1,6 @@
-import { all, fork, takeLatest, delay, put, call, throttle } from 'redux-saga/effects';
+import { all, fork, takeLatest, put, call, throttle } from 'redux-saga/effects';
 import * as AT from '../actionType';
 import axios from 'axios';
-
-// import shortId from 'shortid';
-// import { generateDummyPost } from '../reducers/post';
 
 function addPostAPI(data) {
   return axios.post('/post', data);

@@ -3,13 +3,9 @@ import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AT from '../actionType';
 
-import GoogleLogOutButton from './GoogleLogOutButton';
-import { useSession } from 'next-auth/react';
-
 const MiniProfile = () => {
   const dispatch = useDispatch();
   const { user, logOutLoading } = useSelector(state => state.user);
-  const { data, status } = useSession();
 
   const handleLogout = useCallback(() => {
     dispatch({ type: AT.LOG_OUT_REQUEST });
