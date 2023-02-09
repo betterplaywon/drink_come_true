@@ -2,6 +2,8 @@
   "name": "drink_come_tue",
   "version": "0.1.0",
   "private": true,
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "dev": "next -p 3000",
     "build": "cross-env ANALYZE=true NODE_ENV=production next build",
