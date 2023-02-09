@@ -59,12 +59,12 @@ const User = () => {
               {anotherUser.Posts}
             </div>,
             <div key="following">
-              팔로잉
+              친구들
               <br />
               {anotherUser.Followings}
             </div>,
             <div key="follower">
-              팔로워
+              팬들
               <br />
               {anotherUser.Followers}
             </div>,
