@@ -1,16 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
-import dynamic from 'next/dynamic';
-
+import AppLayout from '../components/AppLayout';
 import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AT from '../actionType';
 
 import style from '../styles/userSign.module.css';
-import styled, { createGlobalStyle } from 'styled-components';
-
-const AppLayout = dynamic(() => import('../components/AppLayout'));
+import { createGlobalStyle } from 'styled-components';
 
 const usersign = () => {
   const [email, handleChangeEmail] = useInput('');
@@ -21,7 +18,7 @@ const usersign = () => {
   const [transition, setTransition] = useState(false);
 
   const dispatch = useDispatch();
-  const { logInLoading, logInError, signupError, user } = useSelector(state => state.user);
+  const { logInLoading, logInError, signupError } = useSelector(state => state.user);
 
   const isClient = typeof document === 'object';
 

@@ -18,7 +18,7 @@ const drinkTestResult = () => {
   const router = useRouter();
   const [isLoading, handleIsLoading] = useToggle(true);
   const query = router.query.drinkTestResult;
-  const isDrink = query[query.length - 1];
+  const isDrink = Number(query[query.length - 1]);
   const qnaResultTitle = qnaResult[isDrink].title;
   const qnaResults = qnaResult[isDrink].results;
   const qnaRecommendFood = qnaResult[isDrink].recommendFood;
@@ -28,7 +28,8 @@ const drinkTestResult = () => {
       handleIsLoading();
     }, 500);
   }, []);
-
+  console.log('query: ', query);
+  console.log('isDrink: ', isDrink);
   return (
     <>
       {isLoading ? (
