@@ -1,7 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Router from 'next/router';
 import PropTypes from 'prop-types';
 
 import MiniProfile from './MiniProfile';
@@ -39,7 +38,7 @@ const AppLayout = ({ children }) => {
   );
 
   const onSearch = useCallback(() => {
-    Router.push(`/hashtag/${searchInput}`);
+    router.push(`/hashtag/${searchInput}`);
   }, [searchInput]);
 
   const convertPathUpperCase = path => {
