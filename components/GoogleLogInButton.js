@@ -1,17 +1,23 @@
-import React from 'react';
-import { signIn } from 'next-auth/react';
+/**
+ * @deprecated
+ * 2023.02.09
+ * 사용하지 않는 컴포넌트
+ */
 
-const GoogleLogInButton = () => {
-  // const handleGoogleSignIn = () => {
-  //   signIn('goggle');
-  // };
+// import React from 'react';
+// import { signIn } from 'next-auth/react';
 
-  return (
-    <>
-      <p>Not signed in</p>
-      <button onClick={() => signIn('goggle')}>Sign in</button>
-    </>
-  );
-};
+// const GoogleLogInButton = () => {
+//   // const handleGoogleSignIn = () => {
+//   //   signIn('goggle');
+//   // };
 
-export default GoogleLogInButton;
+//   return (
+//     <>
+//       <p>Not signed in</p>
+//       <button onClick={() => signIn('goggle')}>Sign in</button>
+//     </>
+//   );
+// };
+
+// export default GoogleLogInButton;
