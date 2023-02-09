@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
-import dynamic from 'next/dynamic';
 import AppLayout from '../components/AppLayout';
 import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
