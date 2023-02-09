@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
-import Head from 'next/head';
-import AppLayout from '../../components/AppLayout';
+import dynamic from 'next/dynamic';
+
 import { useSelector, useDispatch } from 'react-redux';
 import PostCard from '../../components/PostCard';
 import * as AT from '../../actionType';
+
 import wrapper from '../../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+
+const AppLayout = dynamic(() => import('../../components/AppLayout'));
 
 const Tag = () => {
   const dispatch = useDispatch();
