@@ -1,18 +1,11 @@
 import React, { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import * as AT from '../actionType';
-
-import wrapper from '../store/configureStore';
-import axios from 'axios';
-import { END } from 'redux-saga';
+import { useSelector } from 'react-redux';
 
 import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
 import { Card, Row, Col } from 'antd';
 
 const DrinkChart = () => {
-  const dispatch = useDispatch();
-
   const { user } = useSelector(state => state.user);
   const userContent = user?.Posts.map(c => c.content);
 
@@ -167,17 +160,5 @@ const DrinkChart = () => {
     </div>
   );
 };
-
-export const getServerSideProps = wrapper.getServerSideProps(async context => {
-  const cookie = context.req ? context.req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (context.req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
-  }
-  context.store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  context.store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
-  context.store.dispatch(END);
-  await context.store.sagaTask.toPromise();
-});
 
 export default DrinkChart;
