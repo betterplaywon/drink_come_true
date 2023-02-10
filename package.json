@@ -1,14 +1,12 @@
 {
   "name": "drink_come_tue",
   "version": "0.1.0",
-  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": " next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "next -p 3000",
+    "build": "cross-env ANALYZE=true NODE_ENV=production next build",
+    "start": "cross-env NODE_ENV=production next start -p 3000",
     "vercel-deploy": "next build && next export",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore ."
@@ -46,8 +44,9 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^8.29.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "^13.1.6",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",

@@ -66,16 +66,16 @@ const drinkTestQna = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async context => {
-  const cookie = context.req ? context.req.headers.cookie : '';
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
+  const cookie = req ? req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
-  if (context.req && cookie) {
+  if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  context.store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  context.store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
-  context.store.dispatch(END);
-  await context.store.sagaTask.toPromise();
+  store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+  store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
 });
 
 export default drinkTestQna;

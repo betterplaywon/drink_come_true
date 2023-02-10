@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import dynamic from 'next/dynamic';
+import MessageOutlined from '@ant-design/icons/MessageOutlined';
+import EllipsisOutlined from '@ant-design/icons/EllipsisOutlined';
 import * as AT from '../actionType';
 import PropTypes from 'prop-types';
 import useToggle from '../hooks/useToggle';
@@ -10,8 +12,6 @@ import 'dayjs/locale/ko';
 dayjs.locale('ko');
 
 import { Card, Button, Popover, List, Avatar, Comment } from 'antd';
-import { MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
-
 import FollowButton from './FollowButton';
 
 const PostImages = dynamic(() => import('./PostImages'));
@@ -59,12 +59,6 @@ const PostCard = ({ post }) => {
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
-          // liked ? (
-          //   <HeartTwoTone twoToneColor="#eb2f96" key="like" onClick={inActiveLiked} />
-          // ) : (
-          //   <HeartOutlined key="like" onClick={activeLiked} />
-          // ),
-
           <MessageOutlined key="comment" onClick={onToggleCommentFormOpen} />,
           <Popover
             key="more"
