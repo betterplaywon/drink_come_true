@@ -6,8 +6,8 @@ import wrapper from '../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
 
-import Chart from 'chart.js/auto';
-import { Pie } from 'react-chartjs-2';
+import 'chart.js/auto';
+import { Chart } from 'react-chartjs-2';
 import { Card, Row, Col } from 'antd';
 
 const DrinkChart = () => {
@@ -140,7 +140,8 @@ const DrinkChart = () => {
           {isMaxDrinkCount.length > 0 ? (
             <Card title="내가 제일 자주 마신 술은?">
               <div>
-                <Pie
+                <Chart
+                  type="pie"
                   data={drinkData}
                   options={{
                     title: {
