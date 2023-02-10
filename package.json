@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
+    "@babel/eslint-parser": "^7.19.1",
     "@next/bundle-analyzer": "^13.1.1",
     "@ronchalant/react-loading-overlay": "^1.1.0",
     "antd": "^4.24.5",
