@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Router from 'next/Router';
+import Router from 'next/router';
 import dynamic from 'next/dynamic';
 
 import { qnaList } from '../drinkTestData';
