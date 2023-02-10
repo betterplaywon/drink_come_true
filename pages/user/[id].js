@@ -46,8 +46,8 @@ const User = () => {
           <meta name="description" content={`${anotherUser.nickname}님의 게시글`} />
           <meta property="og:title" content={`${anotherUser.nickname}님의 게시글`} />
           <meta property="og:description" content={`${anotherUser.nickname}님의 게시글`} />
-          <meta property="og:image" content="" />
-          <meta property="og:url" content={`https://drinkcometrue.com/user/${id}`} />
+          {/* <meta property="og:image" content="" />
+          <meta property="og:url" content={`https://drinkcometrue.com/user/${id}`} /> */}
         </Head>
       )}
       {anotherUser && anotherUser.id !== user.id ? (
