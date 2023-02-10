@@ -1,6 +1,7 @@
 import React from 'react';
 import AppLayout from '../components/AppLayout';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as AT from '../actionType';
@@ -8,7 +9,7 @@ import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import HomeComp from '../components/HomeComp';
+const HomeComp = dynamic(() => import('../components/HomeComp'));
 
 const Home = () => {
   return (
