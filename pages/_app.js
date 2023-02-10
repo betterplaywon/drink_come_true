@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import '../styles/userSign.module.css';
-import '../styles/homeComp.module.css';
+import '../styles/homeCompAnimation.module.css';
 import '../styles/drinkTestMain.module.css';
 import '../styles/drinkTestQna.module.css';
 import '../styles/drinkTestResult.module.css';

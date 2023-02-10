@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import Router from 'next/router';
-import style from '../styles/homeComp.module.css';
 import styled from 'styled-components';
+
+import style from '../styles/homeCompAnimation.module.css';
 
 const HomeComp = () => {
   const themeStyle = useMemo(
