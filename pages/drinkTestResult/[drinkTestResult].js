@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
-import { qnaResult } from '../drinkTestData';
+import { qnaResult } from '../../drinkTestData';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-import wrapper from '../store/configureStore';
+import wrapper from '../../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
-import * as AT from '../actionType';
-import LoadingComp from '../components/LoadingComp';
-import useToggle from '../hooks/useToggle';
-import style from '../styles/drinkTestResult.module.css';
+import * as AT from '../../actionType';
+import LoadingComp from '../../components/LoadingComp';
+import useToggle from '../../hooks/useToggle';
+import style from '../../styles/drinkTestResult.module.css';
 
-const AppLayout = dynamic(() => import('../components/AppLayout'));
+const AppLayout = dynamic(() => import('../../components/AppLayout'));
 
 const drinkTestResult = () => {
   const router = useRouter();
@@ -28,8 +28,7 @@ const drinkTestResult = () => {
       handleIsLoading();
     }, 500);
   }, []);
-  console.log('query: ', query);
-  console.log('isDrink: ', isDrink);
+
   return (
     <>
       {isLoading ? (

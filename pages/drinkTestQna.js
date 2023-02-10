@@ -28,8 +28,8 @@ const drinkTestQna = () => {
 
   useEffect(() => {
     if (idx === qnaList.length) {
-      if (drinkCount > noDrinkCount) Router.replace('/drinkTestResult=' + 0);
-      else Router.replace('/drinkTestResult=' + 1);
+      if (drinkCount > noDrinkCount) Router.push(`/drinkTestResult/0`);
+      else Router.push(`/drinkTestResult/1`);
     }
   }, [idx]);
 
