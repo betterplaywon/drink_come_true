@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { List, Card, Button } from 'antd';
 import PropTypes from 'prop-types';
-import { StopOutlined } from '@ant-design/icons';
+import StopOutlined from '@ant-design/icons/StopOutlined';
 import { useDispatch } from 'react-redux';
 import * as AT from '../actionType';
 
