@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
-import dynamic from 'next/dynamic';
 import { useSelector, useDispatch } from 'react-redux';
+
+import AppLayout from '../components/AppLayout';
+import PostCard from '../components/PostCard';
+import PostForm from '../components/PostForm';
 
 import * as AT from '../actionType';
 import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
-
-const AppLayout = dynamic(() => import('../components/AppLayout'));
-const PostForm = dynamic(() => import('../components/PostForm'));
-const PostCard = dynamic(() => import('../components/PostCard'));
 
 const community = () => {
   const dispatch = useDispatch();

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import Router from 'next/router';
 
+import AppLayout from '../components/AppLayout';
 import { useSelector } from 'react-redux';
 import * as AT from '../actionType';
 
@@ -10,7 +11,6 @@ import wrapper from '../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
 
-const AppLayout = dynamic(() => import('../components/AppLayout'));
 const DrinkChart = dynamic(() => import('../components/DrinkChart'));
 
 const cycle = () => {

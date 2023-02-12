@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { qnaResult } from '../../drinkTestData';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
 
+import AppLayout from '../../components/AppLayout';
 import wrapper from '../../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
@@ -11,8 +11,6 @@ import * as AT from '../../actionType';
 import LoadingComp from '../../components/LoadingComp';
 import useToggle from '../../hooks/useToggle';
 import style from '../../styles/drinkTestResult.module.css';
-
-const AppLayout = dynamic(() => import('../../components/AppLayout'));
 
 const drinkTestResult = () => {
   const router = useRouter();
