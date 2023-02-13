@@ -18,6 +18,11 @@ const community = () => {
   const { mainPosts, isMorePosts, loadPostLoading } = useSelector(state => state.post);
 
   useEffect(() => {
+    dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+    dispatch({ type: AT.LOAD_POSTS_REQUEST });
+  }, []);
+
+  useEffect(() => {
     function onScroll() {
       if (
         Math.floor(window.scrollY + document.documentElement.clientHeight) === document.documentElement.scrollHeight
@@ -54,15 +59,15 @@ const community = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
-  const cookie = req ? req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
-  }
-  store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
-  store.dispatch(END);
-  await store.sagaTask.toPromise();
-});
+// export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
+//   const cookie = req ? req.headers.cookie : '';
+//   axios.defaults.headers.Cookie = '';
+//   if (req && cookie) {
+//     axios.defaults.headers.Cookie = cookie;
+//   }
+//   store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+//   store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
+//   store.dispatch(END);
+//   await store.sagaTask.toPromise();
+// });
 export default community;

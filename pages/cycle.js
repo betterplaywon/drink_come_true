@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Router from 'next/router';
 
 import AppLayout from '../components/AppLayout';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as AT from '../actionType';
 
 import wrapper from '../store/configureStore';
@@ -14,6 +14,7 @@ import { END } from 'redux-saga';
 const DrinkChart = dynamic(() => import('../components/DrinkChart'));
 
 const cycle = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
 
   useEffect(() => {
