@@ -25,50 +25,79 @@
 
 ♻️ : 코드 리팩토링
 
-🍺 : 술 취해서 쓴 코드
-
 <br/>
 
 ## 📂 파일 구조
 ```bash
-📦.next
+📦actionType
+ ┗ 📜index.js
 📦components
+ ┣ 📂ImagesSlider
+ ┃ ┗ 📜index.js
  ┣ 📜AppLayout.js
  ┣ 📜CommentForm.js
- ┣ 📜FollowList.js
- ┣ 📜LoginForm.js
+ ┣ 📜DrinkChart.js
+ ┣ 📜FollowButton.js
+ ┣ 📜GoogleLogInButton.js
+ ┣ 📜GoogleLogOutButton.js
+ ┣ 📜HomeComp.js
+ ┣ 📜LoadingComp.js
+ ┣ 📜MiniProfile.js
  ┣ 📜NicknameForm.js
  ┣ 📜PostCard.js
+ ┣ 📜PostCardContent.js
  ┣ 📜PostForm.js
- ┣ 📜PostImages.js
- ┗ 📜UserProfile.js
+ ┗ 📜PostImages.js
+ 📦drinkTestData
+ ┗ 📜index.js
 📦hooks
  ┣ 📜useInput.js
+ ┣ 📜usePlus.js
  ┗ 📜useToggle.js
 📦pages
  ┣ 📂api
+ ┃ ┣ 📂auth
+ ┃ ┃ ┗ 📜[...nextauth].js
  ┃ ┗ 📜hello.js
+ ┣ 📂drinkTestResult
+ ┃ ┗ 📜[drinkTestResult].js
+ ┣ 📂hashtag
+ ┃ ┗ 📜[tag].js
+ ┣ 📂post
+ ┃ ┗ 📜[id].js
+ ┣ 📂user
+ ┃ ┗ 📜[id].js
  ┣ 📜_app.js
+ ┣ 📜_document.js
+ ┣ 📜community.js
+ ┣ 📜cycle.js
+ ┣ 📜drinkTestQna.js
+ ┣ 📜drinktest.js
  ┣ 📜index.js
- ┣ 📜profile.js
- ┗ 📜signup.js
+ ┗ 📜usersign.js
 📦reducers
+ ┣ 📜index.js
+ ┣ 📜post.js
+ ┗ 📜user.js
+📦sagas
  ┣ 📜index.js
  ┣ 📜post.js
  ┗ 📜user.js
 📦store
  ┗ 📜configureStore.js
 📦styles
- ┣ 📜Home.module.css
- ┗ 📜globals.css
+ ┣ 📜drinkTestMain.module.css
+ ┣ 📜drinkTestQna.module.css
+ ┣ 📜drinkTestResult.module.css
+ ┣ 📜globals.css
+ ┣ 📜homeCompAnimation.module.css
+ ┗ 📜userSign.module.css
 📦.eslintrc
 📦.gitignore      
 📦.prettierrc             
 📦next.config.js      
-📦package-lock.json
 📦package.json     
-📦README.md
-📦yarn.lock     
+📦README.md  
  ```
 
 ## 기능
