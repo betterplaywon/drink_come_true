@@ -17,11 +17,10 @@ const drinkTestResult = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isLoading, handleIsLoading] = useToggle(true);
-  const query = router.query.drinkTestResult;
-  const isDrink = Number(query[query.length - 1]);
-  const qnaResultTitle = qnaResult[isDrink].title;
-  const qnaResults = qnaResult[isDrink].results;
-  const qnaRecommendFood = qnaResult[isDrink].recommendFood;
+  const query = Number(router.query.drinkTestResult);
+  const qnaResultTitle = qnaResult[query]?.title;
+  const qnaResults = qnaResult[query]?.results;
+  const qnaRecommendFood = qnaResult[query]?.recommendFood;
 
   useEffect(() => {
     dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
@@ -52,9 +51,7 @@ const drinkTestResult = () => {
               alt="캐릭터"
               className={style.character}
             />
-            <div className={style.result}>
-              <div className={style.resultBox}>{qnaResults}</div>
-            </div>
+            <div className={style.result}>{<div className={style.resultBox}>{qnaResults}</div>}</div>
             <div className={style.result}>
               <h3>이런 음식을 추천드려요!</h3>
               <div className={style.resultJobs}>
