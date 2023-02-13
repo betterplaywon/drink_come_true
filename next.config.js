@@ -10,11 +10,15 @@ module.exports = withBundleAnalyzer({
   webpack(config, { webpack }) {
     const prod = process.env.NODE.ENV === 'production';
 
-    return {
+    const newConfig = {
       ...config,
       mode: prod ? 'production' : 'development',
       devtool: prod ? 'hidden-source-map' : 'eval',
       plugins: [...config.plugins, new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/ko$/)],
     };
+    if (prod) {
+      newConfig.devtool = 'hidden-source-map';
+    }
+    return newConfig;
   },
 });
