@@ -11,15 +11,22 @@ import * as AT from '../../actionType';
 import LoadingComp from '../../components/LoadingComp';
 import useToggle from '../../hooks/useToggle';
 import style from '../../styles/drinkTestResult.module.css';
+import { useDispatch } from 'react-redux';
 
 const drinkTestResult = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [isLoading, handleIsLoading] = useToggle(true);
   const query = router.query.drinkTestResult;
   const isDrink = Number(query[query.length - 1]);
   const qnaResultTitle = qnaResult[isDrink].title;
   const qnaResults = qnaResult[isDrink].results;
   const qnaRecommendFood = qnaResult[isDrink].recommendFood;
+
+  useEffect(() => {
+    dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+    dispatch({ type: AT.LOAD_POSTS_REQUEST });
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -70,16 +77,16 @@ const drinkTestResult = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
-  const cookie = req ? req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
-  }
-  store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
-  store.dispatch(END);
-  await store.sagaTask.toPromise();
-});
+// export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
+//   const cookie = req ? req.headers.cookie : '';
+//   axios.defaults.headers.Cookie = '';
+//   if (req && cookie) {
+//     axios.defaults.headers.Cookie = cookie;
+//   }
+//   store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+//   store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
+//   store.dispatch(END);
+//   await store.sagaTask.toPromise();
+// });
 
 export default drinkTestResult;
