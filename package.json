@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "cross-env ANALYZE=true NODE_ENV=production next build",
-    "start": "cross-env NODE_ENV=production next start -p 3000",
-    "vercel-deploy": "next build && next export",
-    "format": "prettier --check --ignore-path .gitignore .",
-    "format:fix": "prettier --write --ignore-path .gitignore ."
+    "start": "cross-env NODE_ENV=production next start -p 3000"
   },
   "author": "betterplaywon",
   "license": "MIT",
