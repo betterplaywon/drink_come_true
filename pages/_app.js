@@ -9,7 +9,7 @@ import Head from 'next/head';
 import 'antd/dist/antd.css';
 import wrapper from '../store/configureStore';
 
-function DrinkComeTrue({ Component, pageProps }) {
+function DrinkComeTrue({ Component }) {
   return (
     <>
       <Head>
@@ -17,7 +17,7 @@ function DrinkComeTrue({ Component, pageProps }) {
         <title>DrinkComeTrue</title>
       </Head>
 
-      <Component {...pageProps} />
+      <Component />
     </>
   );
 }
@@ -25,5 +25,9 @@ function DrinkComeTrue({ Component, pageProps }) {
 DrinkComeTrue.prototypes = {
   Component: PropTypes.elementType.isRequired,
 };
+
+export function reportWebVitals(metric) {
+  console.log(metric);
+}
 
 export default wrapper.withRedux(DrinkComeTrue);
