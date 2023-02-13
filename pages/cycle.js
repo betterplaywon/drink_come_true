@@ -18,10 +18,6 @@ const cycle = () => {
   const { user } = useSelector(state => state.user);
 
   useEffect(() => {
-    dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  }, []);
-
-  useEffect(() => {
     if (!user) {
       alert('로그인 후 이용해주세요');
       Router.push('/');
@@ -38,15 +34,15 @@ const cycle = () => {
   );
 };
 
-// export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
-//   const cookie = req ? req.headers.cookie : '';
-//   axios.defaults.headers.Cookie = '';
-//   if (req && cookie) {
-//     axios.defaults.headers.Cookie = cookie;
-//   }
-//   store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-//   store.dispatch(END);
-//   await store.sagaTask.toPromise();
-// });
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
+  const cookie = req ? req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
+});
 
 export default cycle;
