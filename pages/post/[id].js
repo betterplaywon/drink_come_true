@@ -29,14 +29,14 @@ const Post = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req, params }) => {
   const cookie = req ? req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
   store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-  store.dispatch({ type: AT.LOAD_POSTS_REQUEST, data: store.params.id });
+  store.dispatch({ type: AT.LOAD_POSTS_REQUEST, data: params.id });
   store.dispatch(END);
   await store.sagaTask.toPromise();
   return { props: {} };
