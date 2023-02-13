@@ -23,11 +23,6 @@ const drinkTestQna = () => {
   const answer = qnaList[idx]?.choices;
 
   useEffect(() => {
-    dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-    dispatch({ type: AT.LOAD_POSTS_REQUEST });
-  }, []);
-
-  useEffect(() => {
     setProgressVal(prev => prev + 12);
   }, [idx]);
 
@@ -71,16 +66,16 @@ const drinkTestQna = () => {
   );
 };
 
-// export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
-//   const cookie = req ? req.headers.cookie : '';
-//   axios.defaults.headers.Cookie = '';
-//   if (req && cookie) {
-//     axios.defaults.headers.Cookie = cookie;
-//   }
-//   store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
-//   store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
-//   store.dispatch(END);
-//   await store.sagaTask.toPromise();
-// });
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
+  const cookie = req ? req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  store.dispatch({ type: AT.LOAD_MY_INFO_REQUEST });
+  store.dispatch({ type: AT.LOAD_POSTS_REQUEST });
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
+});
 
 export default drinkTestQna;
