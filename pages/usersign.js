@@ -18,7 +18,7 @@ const usersign = () => {
   const [transition, setTransition] = useState(false);
 
   const dispatch = useDispatch();
-  const { logInLoading, logInError, signupError } = useSelector(state => state.user);
+  const { logInLoading, logInError, signupError } = useSelector((state) => state.user);
 
   const isClient = typeof document === 'object';
 
@@ -57,7 +57,7 @@ const usersign = () => {
   }, [logInError]);
 
   const handleSignInForm = useCallback(
-    e => {
+    (e) => {
       e.preventDefault();
       dispatch({
         type: AT.LOG_IN_REQUEST,
@@ -70,7 +70,7 @@ const usersign = () => {
   );
 
   const handleSignUpForm = useCallback(
-    e => {
+    (e) => {
       e.preventDefault();
       dispatch({ type: AT.SIGN_UP_REQUEST, data: { email, nickname, password } });
       alert('회원가입이 완료되었습니다');
@@ -79,7 +79,7 @@ const usersign = () => {
   );
 
   const onChangePasswordCheck = useCallback(
-    e => {
+    (e) => {
       setPasswordCheck(e.target.value);
       setPasswordError(e.target.value !== password);
     },
@@ -92,12 +92,11 @@ const usersign = () => {
 
       <AppLayout>
         <GlobalStyle />
-        <div className={`${style.container}`} id="container">
+        <section className={`${style.container}`} id="container">
           {/* ----------------------- 회원가입 html ------------------------- */}
-          <div className={`${style.formContainer} ${style.signUpContainer}`}>
+          <article className={`${style.formContainer} ${style.signUpContainer}`}>
             <form onSubmit={handleSignUpForm}>
               <h1>Create Account</h1>
-              {/* <div className={style.socialContainer}><GoogleOutlined /></div> */}
 
               <span>or use your email for registration</span>
 
@@ -148,10 +147,10 @@ const usersign = () => {
                 <button type="submit">가입하기</button>
               </div>
             </form>
-          </div>
+          </article>
 
           {/* ----------------------- 로그인 html ------------------------- */}
-          <div className={`${style.formContainer} ${style.signInContainer}`}>
+          <article className={`${style.formContainer} ${style.signInContainer}`}>
             <form onSubmit={handleSignInForm}>
               <h1>Sign in</h1>
               {/* <div className={style.socialContainer}><GoogleLogInButton /></div> */}
@@ -175,10 +174,10 @@ const usersign = () => {
               />
               <button type="submit">Sign In</button>
             </form>
-          </div>
+          </article>
 
           {/* ----------------------- 반대편 화면 ------------------------- */}
-          <div className={style.overlayContainer}>
+          <article className={style.overlayContainer}>
             <div className={style.overlay}>
               <div className={`${style.overlayPanel} ${style.overlayLeft}`}>
                 <h1 style={{ color: 'white' }}>Sign In!</h1>
@@ -197,8 +196,8 @@ const usersign = () => {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
+          </article>
+        </section>
       </AppLayout>
     </>
   );

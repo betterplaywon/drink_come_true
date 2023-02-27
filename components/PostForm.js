@@ -10,7 +10,7 @@ const PostForm = () => {
   const [text, handleText, setText] = useInput('');
 
   const { TextArea } = Input;
-  const { imagePaths, addPostLoading, addPostDone } = useSelector(state => state.post);
+  const { imagePaths, addPostLoading, addPostDone } = useSelector((state) => state.post);
 
   useEffect(() => {
     if (addPostDone) {
@@ -20,7 +20,7 @@ const PostForm = () => {
 
   const handleSubmit = useCallback(() => {
     const formData = new FormData();
-    imagePaths.forEach(m => {
+    imagePaths.forEach((m) => {
       formData.append('image', m);
     });
     formData.append('content', text);
@@ -31,9 +31,9 @@ const PostForm = () => {
     });
   }, [text, imagePaths]);
 
-  const onChangeImages = useCallback(e => {
+  const onChangeImages = useCallback((e) => {
     const imageFormData = new FormData();
-    [].forEach.call(e.target.files, f => {
+    [].forEach.call(e.target.files, (f) => {
       imageFormData.append('image', f);
     });
     dispatch({
@@ -47,7 +47,7 @@ const PostForm = () => {
   }, [imageInput.current]);
 
   const onRemoveImages = useCallback(
-    imageIdx => () => {
+    (imageIdx) => () => {
       dispatch({
         type: AT.IMAGE_REMOVE,
         data: imageIdx,
@@ -65,7 +65,7 @@ const PostForm = () => {
         maxLength={100}
       />
 
-      <div>
+      <section>
         <label>
           <input type="file" name="image" multiple hidden ref={imageInput} onChange={onChangeImages} />
           <Button onClick={handleImageUpload}>이미지 업로드</Button>
@@ -78,11 +78,11 @@ const PostForm = () => {
             작성
           </Button>
         </label>
-      </div>
+      </section>
 
-      <div style={{ background: '#fcfcfc61', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <section style={{ background: '#fcfcfc61', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {imagePaths?.map((image, idx) => (
-          <div key={image.id}>
+          <article key={image.id}>
             <img
               src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`}
               alt="postImages"
@@ -92,9 +92,9 @@ const PostForm = () => {
             <div>
               <Button onClick={onRemoveImages(idx)}>사진 제거</Button>
             </div>
-          </div>
+          </article>
         ))}
-      </div>
+      </section>
     </Form>
   );
 };

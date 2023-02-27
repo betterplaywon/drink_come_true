@@ -14,13 +14,13 @@ const drinkTest = () => {
 
   return (
     <AppLayout>
-      <div className={style.container}>
-        <h2 className={`${style.pageSubtitle}`}>알콜 러버 테스트</h2>
-        <h1 className={`${style.pageTitle}`}>
+      <section className={style.container}>
+        <h1 className={`${style.pageSubtitle}`}>알콜 러버 테스트</h1>
+        <h2 className={`${style.pageTitle}`}>
           내 안에 잠든
           <br />
           주당을 찾자
-        </h1>
+        </h2>
         <img
           src="https://www.nongmin.com/-/raw/srv-nongmin/data2/content/image/2022/12/14/.cache/512/2022121401090069.jpg"
           alt="캐릭터"
@@ -30,12 +30,12 @@ const drinkTest = () => {
         <Link href="/drinkTestQna">
           <a className={`${style.btn} ${style.btnOrange}`}>TEST GO</a>
         </Link>
-      </div>
+      </section>
     </AppLayout>
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
   const cookie = req ? req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (req && cookie) {

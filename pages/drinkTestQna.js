@@ -23,7 +23,7 @@ const drinkTestQna = () => {
   const answer = qnaList[idx]?.choices;
 
   useEffect(() => {
-    setProgressVal(prev => prev + 12);
+    setProgressVal((prev) => prev + 12);
   }, [idx]);
 
   useEffect(() => {
@@ -34,39 +34,39 @@ const drinkTestQna = () => {
   }, [idx]);
 
   const selectDrink = useCallback(() => {
-    setIdx(prev => prev + 1);
-    setDrinkCount(prev => prev + 1);
+    setIdx((prev) => prev + 1);
+    setDrinkCount((prev) => prev + 1);
   }, []);
 
   const selectNoDrink = useCallback(() => {
-    setIdx(prev => prev + 1);
-    setNoDrinkCount(prev => prev + 1);
+    setIdx((prev) => prev + 1);
+    setNoDrinkCount((prev) => prev + 1);
   }, []);
 
   return (
     <AppLayout>
-      <div className={style.container}>
-        <div className={style.progress}>
+      <section className={style.container}>
+        <article className={style.progress}>
           {/* 게이지바 */}
           <div className={style.progressValue} id="progressValue" style={{ width: progressVal + '%' }}></div>
-        </div>
+        </article>
 
-        <div className={style.questionBox}>
-          <div className={style.number}>{questionNumber}</div>
-          <div className={style.question}>{question}</div>
+        <article className={style.questionBox}>
+          <p className={style.number}>{questionNumber}</p>
+          <p className={style.question}>{question}</p>
           <div className={`${style.btn} ${style.btnGray} ${style.choice}`} onClick={selectDrink}>
             {answer && answer[0]?.text}
           </div>
           <div className={`${style.btn} ${style.btnGray} ${style.choice}`} onClick={selectNoDrink}>
             {answer && answer[1]?.text}
           </div>
-        </div>
-      </div>
+        </article>
+      </section>
     </AppLayout>
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ req }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
   const cookie = req ? req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (req && cookie) {
