@@ -7,9 +7,9 @@ import { ADD_COMMENT_REQUEST } from '../actionType';
 
 const CommentForm = ({ post }) => {
   const dispatch = useDispatch();
-  const { addCommentLoading, addCommentDone } = useSelector(state => state.post);
+  const { addCommentLoading, addCommentDone } = useSelector((state) => state.post);
   const [commentText, handleCommentText, setCommentText] = useInput('');
-  const id = useSelector(state => state.user.user?.id);
+  const id = useSelector((state) => state.user.user?.id);
 
   useEffect(() => {
     if (addCommentDone) {

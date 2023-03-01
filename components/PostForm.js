@@ -84,7 +84,7 @@ const PostForm = () => {
         {imagePaths?.map((image, idx) => (
           <article key={image.id}>
             <img
-              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`}
+              src={`http://localhost:3065/${image}`}
               alt="postImages"
               style={{ width: '25%', display: 'inline-block' }}
             />
