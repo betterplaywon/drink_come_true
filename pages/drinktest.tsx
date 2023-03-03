@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 import AppLayout from '../components/AppLayout';
-import { useDispatch } from 'react-redux';
 import wrapper from '../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
@@ -10,8 +9,6 @@ import * as AT from '../actionType';
 import style from '../styles/drinkTestMain.module.css';
 
 const drinkTest = () => {
-  const dispatch = useDispatch();
-
   return (
     <AppLayout>
       <section className={style.container}>

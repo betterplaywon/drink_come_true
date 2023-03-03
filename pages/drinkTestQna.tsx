@@ -14,9 +14,9 @@ import { useDispatch } from 'react-redux';
 const drinkTestQna = () => {
   const dispatch = useDispatch();
   const [idx, setIdx] = usePlus(0);
-  const [progressVal, setProgressVal] = useState(10);
-  const [drinkCount, setDrinkCount] = useState(0);
-  const [noDrinkCount, setNoDrinkCount] = useState(0);
+  const [progressVal, setProgressVal] = useState<number>(10);
+  const [drinkCount, setDrinkCount] = useState<number>(0);
+  const [noDrinkCount, setNoDrinkCount] = useState<number>(0);
 
   const questionNumber = qnaList[idx]?.number;
   const question = qnaList[idx]?.question;

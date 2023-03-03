@@ -2,7 +2,41 @@ import produce from 'immer';
 import * as AT from '../actionType';
 
 export const initialState = {
-  mainPosts: [],
+  mainPosts: [
+    // {
+    //   id: 1,
+    //   User: {
+    //     id: 1,
+    //     nickname: 'kang',
+    //   },
+    //   content: '첫글',
+    //   Images: [
+    //     {
+    //       src: 'https://bookthumb-phinf.pstatic.net/cover/137/995/13799585.jpg?udate=20180726',
+    //     },
+    //     {
+    //       src: 'https://gimg.gilbut.co.kr/book/BN001958/rn_view_BN001958.jpg',
+    //     },
+    //     {
+    //       src: 'https://gimg.gilbut.co.kr/book/BN001998/rn_view_BN001998.jpg',
+    //     },
+    //   ],
+    //   Comments: [
+    //     {
+    //       User: {
+    //         nickname: '1등 아니면 던짐',
+    //       },
+    //       content: '1등',
+    //     },
+    //     {
+    //       User: {
+    //         nickname: '방배동 소주왕',
+    //       },
+    //       content: '한 잔 하셔야죠',
+    //     },
+    //   ],
+    // },
+  ],
   singlePost: null,
   imagePaths: [],
 
@@ -28,31 +62,23 @@ export const initialState = {
   addCommentDone: false,
   addCommentError: null,
 
-  likePostLoading: false,
-  likePostDone: false,
-  likePostError: null,
-
-  unlikePostLoading: false,
-  unlikePostDone: false,
-  unlikePostError: null,
-
   imageUploadLoading: false,
   imageUploadDone: false,
   imageUploadError: null,
 };
 
-export const addPost = data => ({
+export const addPost = (data) => ({
   type: AT.ADD_POST_REQUEST,
   data,
 });
 
-export const addComment = data => ({
+export const addComment = (data) => ({
   type: AT.ADD_COMMENT_REQUEST,
   data,
 });
 
 const reducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case AT.ADD_POST_REQUEST:
         draft.addPostLoading = true;
@@ -112,7 +138,7 @@ const reducer = (state = initialState, action) =>
         draft.removePostError = null;
         break;
       case AT.REMOVE_POST_SUCCESS:
-        draft.mainPosts = draft.mainPosts.filter(f => f.id !== action.data.PostId);
+        draft.mainPosts = draft.mainPosts.filter((f) => f.id !== action.data.PostId);
         draft.removePostLoading = false;
         draft.removePostDone = true;
         break;
@@ -126,7 +152,7 @@ const reducer = (state = initialState, action) =>
         draft.addCommentError = null;
         break;
       case AT.ADD_COMMENT_SUCCESS: {
-        const post = draft.mainPosts.find(x => x.id === action.data.PostId);
+        const post = draft.mainPosts.find((x) => x.id === action.data.PostId);
         post.Comments.unshift(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
@@ -145,7 +171,7 @@ const reducer = (state = initialState, action) =>
       case AT.LIKE_POST_SUCCESS: {
         draft.likePostLoading = false;
         draft.likePostDone = true;
-        const post = draft.mainPosts.find(m => m.id === action.data.PostId);
+        const post = draft.mainPosts.find((m) => m.id === action.data.PostId);
         post.Likers.push({ id: action.data.UserId });
         break;
       }
@@ -161,8 +187,8 @@ const reducer = (state = initialState, action) =>
       case AT.UNLIKE_POST_SUCCESS: {
         draft.unlikePostLoading = false;
         draft.unlikePostDone = true;
-        const post = draft.mainPosts.find(m => m.id === action.data.PostId);
-        post.likers = post.Likers.filter(m => m.id !== action.data.UserId);
+        const post = draft.mainPosts.find((m) => m.id === action.data.PostId);
+        post.likers = post.Likers.filter((m) => m.id !== action.data.UserId);
         break;
       }
       case AT.UNLIKE_POST_FAILURE:
