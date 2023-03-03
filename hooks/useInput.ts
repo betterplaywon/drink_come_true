@@ -1,0 +1,12 @@
+import { useState, useCallback, SetStateAction, Dispatch } from 'react';
+
+type ReturnType<T> = [T, (e: boolean) => void, Dispatch<SetStateAction<T>>];
+export default <T extends string>(initValue: T): ReturnType<T> => {
+  const [userInfo, setUserInfo] = useState(initValue);
+
+  const handleUserInfo = useCallback((e) => {
+    setUserInfo(e.target.value);
+  }, []);
+
+  return [userInfo, handleUserInfo, setUserInfo];
+};

@@ -5,9 +5,12 @@ import AppLayout from '../components/AppLayout';
 import useInput from '../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AT from '../actionType';
+import { signupRequestAction } from '../reducers/user';
 
 import style from '../styles/userSign.module.css';
 import { createGlobalStyle } from 'styled-components';
+
+import User from '../interface/user';
 
 const usersign = () => {
   const [email, handleChangeEmail] = useInput('');
@@ -15,7 +18,7 @@ const usersign = () => {
   const [passwordCheck, setPasswordCheck] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [nickname, handleChangeNickname] = useInput('');
-  const [transition, setTransition] = useState(false);
+  const [transition, setTransition] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const { logInLoading, logInError, signupError } = useSelector((state) => state.user);
@@ -52,9 +55,9 @@ const usersign = () => {
 
   useEffect(() => {
     if (logInError || signupError) {
-      alert(logInError) || alert(signupError);
+      alert(signupError);
     }
-  }, [logInError]);
+  }, [logInError, signupError]);
 
   const handleSignInForm = useCallback(
     (e) => {
