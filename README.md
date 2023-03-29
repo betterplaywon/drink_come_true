@@ -24,12 +24,6 @@
 
 <br/>
 
-- env 처리로 인해 서버 연결이 안된다면:
-
-`http://localhost:3065` 로 연결.
-
-<br/>
-
 - 시연 영상:
 
 `https://www.youtube.com/watch?v=PHhNNh2B--Y`
